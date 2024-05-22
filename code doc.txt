@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Server=(local);uid=sa;pwd=12345;database=JewelryShop;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -o Models -c AppDbContext --force
