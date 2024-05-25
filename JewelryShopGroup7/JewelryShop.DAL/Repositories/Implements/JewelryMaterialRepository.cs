@@ -17,6 +17,11 @@ namespace JewelryShop.DAL.Repositories.Implement
             _dbContext = dbContext;
         }
 
+        public async Task<JewelryMaterial> GetFirstOrDefaultAsync(Expression<Func<JewelryMaterial, bool>> predicate)
+        {
+            return await Task.FromResult(_dbContext.JewelryMaterials.FirstOrDefault(predicate));
+        }
+
         public async Task<Guid> AddAsync(JewelryMaterial entity)
         {
             await _dbContext.AddAsync(entity);

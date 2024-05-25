@@ -1,4 +1,5 @@
-﻿using JewelryShop.DTO.DTOs;
+﻿using JewelryShop.BusinessLayer.Helpers;
+using JewelryShop.DTO.DTOs;
 using PhotoboothBranchService.Domain.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace JewelryShop.BusinessLayer.Interfaces
 {
     public interface IAccountService : IService<AccountDTO>
     {
+        public Task<ResponseResult<AccountDTO>> GetAccountByEmailAndPasswordAsync(LoginDTO loginDTO);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace JewelryShop.DTO.DTOs;
 
@@ -26,4 +27,14 @@ public partial class AccountDTO
     public List<OrderDTO> Orders { get; } = new List<OrderDTO>();
 
     //public virtual RoleDTO? Role { get; set; }
+}
+
+public class LoginDTO
+{
+    [Required(ErrorMessage = "Email can not empty")]
+    [EmailAddress(ErrorMessage = "Email is invalid")]
+    public string? Email { get; set; }
+
+    [Required(ErrorMessage = "Password can not emtpy")]
+    public string? Password { get; set; }
 }

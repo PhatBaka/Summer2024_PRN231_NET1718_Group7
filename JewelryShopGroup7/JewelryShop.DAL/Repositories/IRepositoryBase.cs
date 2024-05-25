@@ -9,4 +9,5 @@ public interface IRepositoryBase<TEntity>
     Task<Guid> AddAsync(TEntity entity);
     Task RemoveAsync(TEntity entity);
     Task UpdateAsync(TEntity entity);
+    Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 }

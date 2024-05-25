@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interface;
@@ -36,6 +37,36 @@ namespace JewelryShop.BusinessLayer.Services
                 {
                     await _accountRepository.RemoveAsync(account);
                 }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<ResponseResult<AccountDTO>> GetAccountByEmailAndPasswordAsync(LoginDTO loginDTO)
+        {
+            AccountDTO result;
+            try
+            {
+                result = _mapper.Map<AccountDTO>(_accountRepository.GetFirstOrDefaultAsync(x => x.Email.Trim().Equals(loginDTO.Email)
+                                                                                && x.Password.Equals(loginDTO.Password)).Result);
+
+                if (result == null)
+                {
+                    return new ResponseResult<AccountDTO>()
+                    {
+                        Message = Constraints.NOT_FOUND_INFO,
+                        Result = false
+                    };
+                }
+
+                return new ResponseResult<AccountDTO>()
+                {
+                    Message = Constraints.FOUND_INFO,
+                    Result = true,
+                    Value = result
+                };
             }
             catch
             {

@@ -45,5 +45,10 @@ namespace JewelryShop.DAL.Repositories.Implement
             _dbContext.Update(entity);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<Order> GetFirstOrDefaultAsync(Expression<Func<Order, bool>> predicate)
+        {
+            return await Task.FromResult(_dbContext.Orders.FirstOrDefault(predicate));
+        }
     }
 }

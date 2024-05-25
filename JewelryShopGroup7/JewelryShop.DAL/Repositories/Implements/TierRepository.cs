@@ -33,6 +33,11 @@ namespace JewelryShop.DAL.Repositories.Implements
             return await Task.FromResult(_dbContext.Tiers.Where(predicate));
         }
 
+        public async Task<Tier> GetFirstOrDefaultAsync(Expression<Func<Tier, bool>> predicate)
+        {
+            return await Task.FromResult(_dbContext.Tiers.FirstOrDefault(predicate));
+        }
+
         public async Task RemoveAsync(Tier entity)
         {
             _dbContext.Remove(entity);

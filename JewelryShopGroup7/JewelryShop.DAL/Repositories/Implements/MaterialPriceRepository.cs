@@ -1,5 +1,6 @@
 ﻿using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,11 @@ namespace JewelryShop.DAL.Repositories.Implements
         }
 
         public Task<IQueryable<MaterialPrice>> GetAsync(Expression<Func<MaterialPrice, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MaterialPrice> GetFirstOrDefaultAsync(Expression<Func<MaterialPrice, bool>> predicate)
         {
             throw new NotImplementedException();
         }

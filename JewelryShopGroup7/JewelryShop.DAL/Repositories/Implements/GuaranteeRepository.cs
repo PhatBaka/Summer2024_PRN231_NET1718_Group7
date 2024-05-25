@@ -25,6 +25,10 @@ namespace JewelryShop.DAL.Repositories.Implement
             return entity.GuaranteeId;
         }
 
+        public async Task<Guarantee> GetFirstOrDefaultAsync(Expression<Func<Guarantee, bool>> predicate)
+        {
+            return await Task.FromResult(_dbContext.Guarantees.FirstOrDefault(predicate));
+        }
         public async Task<IQueryable<Guarantee>> GetAllAsync()
         {
             return await Task.FromResult(_dbContext.Guarantees.AsQueryable());

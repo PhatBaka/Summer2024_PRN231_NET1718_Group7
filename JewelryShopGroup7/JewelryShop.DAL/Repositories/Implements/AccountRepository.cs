@@ -1,6 +1,7 @@
 ﻿using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interface;
 using JewelryShop.DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -32,6 +33,11 @@ namespace JewelryShop.DAL.Repositories.Implements
         public async Task<IQueryable<Account>> GetAsync(Expression<Func<Account, bool>> predicate)
         {
             return await Task.FromResult(_dbContext.Accounts.Where(predicate));
+        }
+
+        public async Task<Account> GetFirstOrDefaultAsync(Expression<Func<Account, bool>> predicate)
+        {
+            return await Task.FromResult(_dbContext.Accounts.FirstOrDefault(predicate));
         }
 
         public async Task RemoveAsync(Account entity)
