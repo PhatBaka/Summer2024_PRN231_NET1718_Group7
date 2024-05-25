@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace JewelryShop.DAL.Models;
 
@@ -48,7 +49,16 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<Tier> Tiers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(local);uid=sa;pwd=12345;database=JewelryShop;TrustServerCertificate=True");
+    {
+        // optionsBuilder.UseSqlServer("Server=(local);uid=sa;pwd=sa;database=JewelryShop;TrustServerCertificate=True");
+        optionsBuilder.UseLazyLoadingProxies();
+        var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+        IConfigurationRoot configuration = builder.Build();
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("JewelryShop"));
+    }
+        
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

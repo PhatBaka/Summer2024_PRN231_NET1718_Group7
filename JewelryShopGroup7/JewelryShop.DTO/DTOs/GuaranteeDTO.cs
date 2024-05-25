@@ -19,7 +19,7 @@ public partial class GuaranteeDTO
 
     public string? Confirm { get; set; }
 
-    public AccountDTO? Account { get; set; }
+    //public AccountDTO? Account { get; set; }
 
-    public OrderDetailDTO? OrderDetail { get; set; }
+    //public OrderDetailDTO? OrderDetail { get; set; }
 }

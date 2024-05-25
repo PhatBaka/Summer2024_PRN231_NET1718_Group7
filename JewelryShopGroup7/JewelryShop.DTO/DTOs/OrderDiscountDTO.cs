@@ -11,7 +11,7 @@ public partial class OrderDiscountDTO
     public Guid? StoreDiscountId { get; set; }
     public Guid? OfferId { get; set; }
     public Guid? TierId { get; set; }
-    public OfferDTO? Offer { get; set; }
-    public OrderDTO? Order { get; set; }
-    public TierDTO? Tier { get; set; }
+    //public OfferDTO? Offer { get; set; }
+    //public OrderDTO? Order { get; set; }
+    //public TierDTO? Tier { get; set; }
 }

@@ -17,9 +17,9 @@ public partial class OfferDTO
 
     public Guid? ApprovedById { get; set; }
 
-    public AccountDTO? ApprovedBy { get; set; }
+    //public AccountDTO? ApprovedBy { get; set; }
 
-    public AccountDTO? CreatedBy { get; set; }
+    //public AccountDTO? CreatedBy { get; set; }
 
     public List<OrderDiscountDTO> OrderDiscounts { get; } = new List<OrderDiscountDTO>();
 }

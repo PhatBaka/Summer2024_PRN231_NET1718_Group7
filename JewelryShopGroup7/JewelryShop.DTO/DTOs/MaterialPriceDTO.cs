@@ -13,5 +13,5 @@ public partial class MaterialPriceDTO
 
     public decimal? Price { get; set; }
 
-    public virtual MaterialDTO? Material { get; set; }
+    //public virtual MaterialDTO? Material { get; set; }
 }

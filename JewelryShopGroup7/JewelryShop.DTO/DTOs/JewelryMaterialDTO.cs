@@ -11,7 +11,7 @@ public partial class JewelryMaterialDTO
 
     public decimal? Weight { get; set; }
 
-    public JewelryDTO Jewelry { get; set; } = null!;
+    //public JewelryDTO Jewelry { get; set; } = null!;
 
-    public MaterialDTO Material { get; set; } = null!;
+    //public MaterialDTO Material { get; set; } = null!;
 }

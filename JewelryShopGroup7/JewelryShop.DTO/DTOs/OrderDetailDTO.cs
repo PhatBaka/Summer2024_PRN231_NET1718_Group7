@@ -15,7 +15,7 @@ public partial class OrderDetailDTO
 
     public List<GuaranteeDTO> Guarantees { get; } = new List<GuaranteeDTO>();
 
-    public JewelryDTO? Jewelry { get; set; }
+    //public JewelryDTO? Jewelry { get; set; }
 
-    public OrderDTO? Order { get; set; }
+    //public OrderDTO? Order { get; set; }
 }

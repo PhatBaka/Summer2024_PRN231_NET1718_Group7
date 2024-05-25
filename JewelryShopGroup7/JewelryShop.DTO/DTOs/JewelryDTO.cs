@@ -19,6 +19,6 @@ public partial class JewelryDTO
 
     public List<JewelryMaterialDTO> JewelryMaterials { get; } = new List<JewelryMaterialDTO>();
 
-    public  JewelryTypeDTO? JewelryTypeNavigation { get; set; }
+    //public  JewelryTypeDTO? JewelryTypeNavigation { get; set; }
 
 }

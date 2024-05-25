@@ -25,5 +25,5 @@ public partial class AccountDTO
 
     public List<OrderDTO> Orders { get; } = new List<OrderDTO>();
 
-    public virtual RoleDTO? Role { get; set; }
+    //public virtual RoleDTO? Role { get; set; }
 }

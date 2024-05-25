@@ -25,13 +25,13 @@ public partial class OrderDTO
 
     public Guid? CustomerId { get; set; }
 
-    public AccountDTO? Account { get; set; }
+    //public AccountDTO? Account { get; set; }
 
-    public CustomerDTO? Customer { get; set; }
+    //public CustomerDTO? Customer { get; set; }
 
     public  List<OrderDetailDTO> OrderDetails { get; } = new List<OrderDetailDTO>();
 
-    public OrderDiscountDTO? OrderDiscount { get; set; }
+    //public OrderDiscountDTO? OrderDiscount { get; set; }
 
-    public OrderTypeDTO? OrderType { get; set; }
+    //public OrderTypeDTO? OrderType { get; set; }
 }
