@@ -56,7 +56,7 @@ public partial class AppDbContext : DbContext
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         IConfigurationRoot configuration = builder.Build();
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("JewelryShop"));
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("JewelryShop"), b => b.MigrationsAssembly("JewelryShop.DAL"));
     }
         
 
