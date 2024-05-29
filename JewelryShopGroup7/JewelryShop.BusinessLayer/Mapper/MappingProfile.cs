@@ -16,7 +16,6 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Account, AccountDTO>().ReverseMap();
             CreateMap<Customer, CustomerDTO>().ReverseMap();
             CreateMap<Guarantee, GuaranteeDTO>().ReverseMap();
-            CreateMap<Jewelry, JewelryDTO>().ReverseMap();
             CreateMap<JewelryMaterial, JewelryMaterialDTO>().ReverseMap();
             CreateMap<JewelryType, JewelryTypeDTO>().ReverseMap();
             CreateMap<Material, MaterialDTO>().ReverseMap();
@@ -29,6 +28,18 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Role, RoleDTO>().ReverseMap();
             CreateMap<StoreDiscount, StoreDiscountDTO>().ReverseMap();
             CreateMap<Tier, TierDTO>().ReverseMap();
+
+            #region Jewelry
+            CreateMap<Jewelry, JewelryDTO>().ReverseMap();
+            CreateMap<JewelryDTO, CreateJewelryDTO>().ReverseMap();
+            CreateMap<JewelryDTO, UpdateJewelryDTO>().ReverseMap();
+            #endregion
+
+            #region Image
+            CreateMap<Image, ImageDTO>().ReverseMap();
+            CreateMap<ImageDTO, CreateImageDTO>().ReverseMap();
+            CreateMap<ImageDTO, UpdateImageDTO>().ReverseMap();
+            #endregion
         }
     }
 }

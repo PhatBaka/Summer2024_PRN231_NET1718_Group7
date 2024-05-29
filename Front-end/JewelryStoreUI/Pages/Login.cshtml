@@ -2,45 +2,33 @@
 @model JewelryStoreUI.Pages.LoginModel
 @{
     ViewData["Title"] = "Login";
+    Layout = "_Layout";
 }
 
-<h1>Login</h1>
+<section id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="footer_1 clearfix">
+				<div class="col-sm-6">
+					<a class="navbar-brand" href="index.html">
+						<i class="fa fa-diamond"></i> <span class="col">Jewe</span>lry
+					</a>
+					<form method="post">
+						<div class="footer_1i1 clearfix">
+							<h1 class="col_3">LOGIN</h1>
+							<input class="form-control" asp-for="LoginDTO.Email" placeholder="Email address" type="text">
+							<input class="form-control" asp-for="LoginDTO.Password" placeholder="Password" type="password">
+							<h5><input class="button" type="submit" value="LOGIN" /></h5>
+						</div>
+					</form>
+					@if (@Model.ResponseResult.Message != null)
+					{
+						<h5 class="col_3">@Model.ResponseResult.Message</h5>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-<h4>StoreAccount</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="LoginDTO.Email" class="control-label"></label>
-                <input asp-for="LoginDTO.Email" class="form-control" />
-                <span asp-validation-for="LoginDTO.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LoginDTO.Password" class="control-label"></label>
-                <input type="password" asp-for="LoginDTO.Password" class="form-control" />
-                <span asp-validation-for="LoginDTO.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-@if(Model.ResponseResult != null)
-{
-    <p>@Model.ResponseResult.Message</p>
-}
-
-@if (ViewData["Error"] != null)
-{
-    <p>@ViewData["Error"]</p>
-}
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

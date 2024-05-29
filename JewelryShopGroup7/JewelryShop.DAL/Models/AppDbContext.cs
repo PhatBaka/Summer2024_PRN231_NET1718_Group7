@@ -48,6 +48,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Tier> Tiers { get; set; }
 
+    public virtual DbSet<Image> Images { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         // optionsBuilder.UseSqlServer("Server=(local);uid=sa;pwd=sa;database=JewelryShop;TrustServerCertificate=True");

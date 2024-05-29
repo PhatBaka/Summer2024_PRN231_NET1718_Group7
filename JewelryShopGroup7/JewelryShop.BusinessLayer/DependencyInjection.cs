@@ -27,6 +27,7 @@ public static class DependencyInjection
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IStoreDiscountService, StoreDiscountService>();
         services.AddScoped<ITierService, TierService>();
+        services.AddScoped<IImageService, ImageService>();
 
         //Mapper
         services.AddAutoMapper(typeof(MappingProfile));

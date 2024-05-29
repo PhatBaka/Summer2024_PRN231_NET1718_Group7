@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using AutoMapper;
 
 namespace JewelryShop.API.Controllers
 {
@@ -12,8 +13,10 @@ namespace JewelryShop.API.Controllers
     public class JewelryController : ControllerBase
     {
         private readonly IJewelryService _jewelryService;
+        private readonly IMapper _mapper;
 
-        public JewelryController(IJewelryService jewelryService)
+        public JewelryController(IJewelryService jewelryService,
+                                    IMapper mapper)
         {
             _jewelryService = jewelryService;
         }
@@ -34,9 +37,9 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] JewelryDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateJewelryDTO createJewelryDTO)
         {
-            var id = await _jewelryService.CreateAsync(createModel);
+            var id = await _jewelryService.CreateAsync(_mapper.Map<JewelryDTO>(createJewelryDTO));
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
