@@ -1,4 +1,24 @@
 ﻿@page
 @model JewelryStoreUI.Pages.Materials.CreateModel
 @{
+	Layout = "_ManagerLayout";
 }
+<section id="contact_top">
+	<div class="container">
+		<div class="row">
+			<div class="">
+				<div class="col-sm">
+					<form method="post" enctype="multipart/form-data">
+						<div class="detail_14 clearfix">
+							<h2 class="mgt">Get in touch</h2>
+							<input type="text" class="form-control" asp-for="AddMaterialDTO.Name" placeholder="Name*">
+							<textarea class="form-control form_1" asp-for="AddMaterialDTO.Description" placeholder="Description"></textarea>
+							<input type="file" id="image-input" asp-for="AddMaterialDTO.ImageData" accept="image/*" placeholder="Image">
+							<h4><button asp-page-handler="AddMaterial" type="submit" class="button">Send Message</button></h4>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
