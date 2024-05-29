@@ -1,4 +1,46 @@
 ﻿@page
 @model JewelryStoreUI.Pages.Materials.IndexModel
 @{
+	Layout = "_ManagerLayout";
 }
+<section id="example_h">
+	<div class="container">
+		<div class="row">
+			<div class="feature_1 text-center clearfix">
+				<div class="col-sm-12">
+					<h1 class="mgt">Material Price Page</h1>
+					<hr>
+				</div>
+			</div>
+			
+					@foreach(var material in Model.Materials)
+					{
+				<div class="example_h_1 clearfix">
+					<div class="col-sm">
+						<div class="example_h_1l text-center clearfix">
+							<div >
+								<h3 style="display: inline">Material: </h3>
+								<h3 style ="display: inline">@material.Name</h3>
+							</div>
+							<div>
+								<p style="display: inline">Description: </p>
+								<p style="display: inline">@material.Description</p>
+							</div>
+							<hr>
+							@foreach(var price in material.MaterialPrices)
+							{
+								<div>
+									<p style="display: inline">Price: </p>
+									<p style="display: inline">@price.Price</p>
+								</div>
+							}
+							
+						</div>
+					</div>
+				</div>
+					}
+		</div>
+	</div>
+
+
+</section>

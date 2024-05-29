@@ -12,34 +12,45 @@ namespace JewelryShop.DAL.Repositories.Implements
 {
     public class MaterialPriceRepository : IMaterialPriceRepository
     {
-        public Task<Guid> AddAsync(MaterialPrice entity)
+        private readonly AppDbContext _dbContext;
+
+        public MaterialPriceRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<IQueryable<MaterialPrice>> GetAllAsync()
+        public async Task<Guid> AddAsync(MaterialPrice entity)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity.MaterialPriceId;
         }
 
-        public Task<IQueryable<MaterialPrice>> GetAsync(Expression<Func<MaterialPrice, bool>> predicate)
+        public async Task<IQueryable<MaterialPrice>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_dbContext.MaterialPrices.AsQueryable());
         }
 
-        public Task<MaterialPrice> GetFirstOrDefaultAsync(Expression<Func<MaterialPrice, bool>> predicate)
+        public async Task<IQueryable<MaterialPrice>> GetAsync(Expression<Func<MaterialPrice, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_dbContext.MaterialPrices.Where(predicate).AsQueryable());
         }
 
-        public Task RemoveAsync(MaterialPrice entity)
+        public async Task RemoveAsync(MaterialPrice entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(MaterialPrice entity)
+        public async Task UpdateAsync(MaterialPrice entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<MaterialPrice> GetFirstOrDefaultAsync(Expression<Func<MaterialPrice, bool>> predicate)
+        {
+            return await Task.FromResult(_dbContext.MaterialPrices.FirstOrDefault(predicate));
         }
     }
 }
