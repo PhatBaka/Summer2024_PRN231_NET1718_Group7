@@ -1,4 +1,28 @@
 ﻿@page
 @model JewelryStoreUI.Pages.Promotions.CreateModel
 @{
+    Layout = "_ManagerLayout";
 }
+
+<section id="contact_top">
+    <div class="container">
+        <div class="row">
+            <div class="">
+                <div class="col-sm">
+                    <form method="post">
+                        <div class="detail_14 clearfix">
+                            <h2 class="mgt">Add Store Discount</h2>
+                            <input type="text" class="form-control" asp-for="StoreDiscountDTO.DiscountCode" placeholder="Discount Code*">
+                            <input type="number" class="form-control" asp-for="StoreDiscountDTO.DiscountAmount" placeholder="Discount Amount*" step="0.01">
+                            <input type="date" class="form-control" asp-for="StoreDiscountDTO.StartDate" placeholder="Start Date*">
+                            <input type="date" class="form-control" asp-for="StoreDiscountDTO.EndDate" placeholder="End Date*">
+                            <input type="number" class="form-control" asp-for="StoreDiscountDTO.RemainingUsage" placeholder="Remaining Usage*" step="1">
+                            <h4><button asp-page-handler="AddStoreDiscount" type="submit" class="button">Add Discount</button></h4>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
