@@ -18,6 +18,8 @@ public partial class AccountDTO
 
     public Guid? RoleId { get; set; }
 
+    public string Role1 { get; set; }
+
     public List<GuaranteeDTO> Guarantees { get; } = new List<GuaranteeDTO>();
 
     public List<OfferDTO> OfferApprovedBies { get; } = new List<OfferDTO>();
@@ -26,7 +28,6 @@ public partial class AccountDTO
 
     public List<OrderDTO> Orders { get; } = new List<OrderDTO>();
 
-    //public virtual RoleDTO? Role { get; set; }
 }
 
 public class LoginDTO

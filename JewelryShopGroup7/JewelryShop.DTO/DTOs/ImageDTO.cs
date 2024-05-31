@@ -23,4 +23,9 @@ namespace JewelryShop.DTO.DTOs
 	{
 		public IFormFile ImageData { get; set; }
 	}
+
+	public class GetImageDTO
+	{
+		public Guid ImageId { get; set; }
+	}
 }

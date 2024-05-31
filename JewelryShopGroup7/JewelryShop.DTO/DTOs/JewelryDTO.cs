@@ -21,15 +21,19 @@ public partial class JewelryDTO
 
 	public int? GuaranteeDuration { get; set; }
 
-	public virtual ICollection<JewelryMaterialDTO> JewelryMaterials { get; set; } = new List<JewelryMaterialDTO>();
+	public string? TypeName { get; set; }
 
 	// public virtual JewelryType? JewelryTypeNavigation { get; set; }
 
 	public Guid ImageId { get; set; }
 
-	public virtual ImageDTO Image { get; set; }
+	//public virtual ImageDTO Image { get; set; }
 
-	// public virtual ICollection<OrderDetailDTO> OrderDetails { get; set; } = new List<OrderDetailDTO>();
+	// public byte[] ImageData { get; set; }
+
+	public virtual ICollection<JewelryMaterialDTO> JewelryMaterials { get; set; } = new List<JewelryMaterialDTO>();
+
+	public virtual ICollection<OrderDetailDTO> OrderDetails { get; set; } = new List<OrderDetailDTO>();
 }
 
 public partial class CreateJewelryDTO

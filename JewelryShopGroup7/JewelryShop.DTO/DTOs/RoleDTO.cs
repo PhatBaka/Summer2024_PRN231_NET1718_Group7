@@ -9,5 +9,5 @@ public partial class RoleDTO
 
     public string? Role1 { get; set; }
 
-    public List<AccountDTO>? Accounts { get; } = new List<AccountDTO> { };
+    // public List<AccountDTO>? Accounts { get; } = new List<AccountDTO> { };
 }

@@ -13,7 +13,9 @@ namespace JewelryShop.BusinessLayer.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<Account, AccountDTO>().ReverseMap();
+            CreateMap<Account, AccountDTO>()
+                .ForMember(x => x.Role1, opt => opt.MapFrom(dest => dest.Role.Role1))
+                .ReverseMap(); ;
             CreateMap<Customer, CustomerDTO>().ReverseMap();
             CreateMap<Guarantee, GuaranteeDTO>().ReverseMap();
             CreateMap<JewelryMaterial, JewelryMaterialDTO>().ReverseMap();
@@ -30,14 +32,17 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Tier, TierDTO>().ReverseMap();
 
             #region Jewelry
-            CreateMap<Jewelry, JewelryDTO>().ReverseMap();
-            CreateMap<JewelryDTO, CreateJewelryDTO>().ReverseMap();
+            CreateMap<Jewelry, JewelryDTO>()
+                .ForMember(x => x.TypeName, opt => opt.MapFrom(dest => dest.JewelryTypeNavigation.TypeName))
+                //.ForMember(x => x.ImageData, opt => opt.MapFrom(dest => dest.Image.ImageData))
+                .ReverseMap();
+			CreateMap<JewelryDTO, CreateJewelryDTO>().ReverseMap();
             CreateMap<JewelryDTO, UpdateJewelryDTO>().ReverseMap();
             #endregion
 
             #region Image
             CreateMap<Image, ImageDTO>().ReverseMap();
-            CreateMap<ImageDTO, CreateImageDTO>().ReverseMap();
+			CreateMap<ImageDTO, CreateImageDTO>().ReverseMap();
             CreateMap<ImageDTO, UpdateImageDTO>().ReverseMap();
             #endregion
         }

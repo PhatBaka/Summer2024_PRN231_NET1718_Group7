@@ -9,5 +9,5 @@ public partial class JewelryTypeDTO
 
     public string? TypeName { get; set; }
 
-    public List<JewelryDTO> Jewelries { get; } = new List<JewelryDTO>();
+    // public List<JewelryDTO> Jewelries { get; } = new List<JewelryDTO>();
 }

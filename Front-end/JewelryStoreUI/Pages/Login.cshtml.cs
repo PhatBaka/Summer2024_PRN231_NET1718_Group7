@@ -15,10 +15,11 @@ namespace JewelryStoreUI.Pages
         public ResponseResult<dynamic> ResponseResult { get; set; }
         private string url = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
 
-        private void LoadData()
+
+		private void LoadData()
         {
 			url += "Auth/Login";
-			ResponseResult = new ResponseResult<dynamic>();
+            ResponseResult = new();
 		}
 
         public void OnGet()
@@ -38,10 +39,14 @@ namespace JewelryStoreUI.Pages
                 var response = await client.PostAsync(url, data);
                 var result = await response.Content.ReadAsStringAsync();
 
-                dynamic responseResult = JsonConvert.DeserializeObject(result);
-                ResponseResult.Result = responseResult.result;
-                ResponseResult.Message = responseResult.message;
-                ResponseResult.Data = JsonConvert.SerializeObject(responseResult.data);
+				ResponseResult = JsonConvert.DeserializeObject<ResponseResult<dynamic>>(result);
+            }
+            if (ResponseResult.Result == true)
+            {
+                if (ResponseResult.Data.role1 == "MANAGER")
+                {
+                    return RedirectToPage("ManagerDashboard");
+                }
             }
             return Page();
         }

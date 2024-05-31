@@ -46,13 +46,13 @@ namespace JewelryShop.BusinessLayer.Services
 
         public async Task<ResponseResult<AccountDTO>> GetAccountByEmailAndPasswordAsync(LoginDTO loginDTO)
         {
-            AccountDTO result;
+            AccountDTO data;
             try
             {
-                result = _mapper.Map<AccountDTO>(_accountRepository.GetFirstOrDefaultAsync(x => x.Email.Trim().Equals(loginDTO.Email)
+                data = _mapper.Map<AccountDTO>(_accountRepository.GetFirstOrDefaultAsync(x => x.Email.Trim().Equals(loginDTO.Email)
                                                                                 && x.Password.Equals(loginDTO.Password)).Result);
 
-                if (result == null)
+                if (data == null)
                 {
                     return new ResponseResult<AccountDTO>()
                     {
@@ -65,7 +65,7 @@ namespace JewelryShop.BusinessLayer.Services
                 {
                     Message = Constraints.FOUND_INFO,
                     Result = true,
-                    Value = result
+                    Data = data
                 };
             }
             catch
