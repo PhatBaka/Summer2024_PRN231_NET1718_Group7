@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JewelryShop.BusinessLayer",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JewelryShop.DTO", "JewelryShop.DTO\JewelryShop.DTO.csproj", "{E83EC217-E7CD-46BE-B903-95D27E04455A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JewelryShop.Api", "JewelryShop.Api\JewelryShop.Api.csproj", "{0C9044CD-36EA-4845-AA99-E3A7A8430BAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JewelryShop.Api", "JewelryShop.Api\JewelryShop.Api.csproj", "{0C9044CD-36EA-4845-AA99-E3A7A8430BAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JewelryShop.OData.Api", "JewelryShop.OData.Api\JewelryShop.OData.Api.csproj", "{0A2A47A9-1780-4261-8D05-F4ADCE9A8D73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0C9044CD-36EA-4845-AA99-E3A7A8430BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C9044CD-36EA-4845-AA99-E3A7A8430BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C9044CD-36EA-4845-AA99-E3A7A8430BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A2A47A9-1780-4261-8D05-F4ADCE9A8D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A2A47A9-1780-4261-8D05-F4ADCE9A8D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A2A47A9-1780-4261-8D05-F4ADCE9A8D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A2A47A9-1780-4261-8D05-F4ADCE9A8D73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
