@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using AutoMapper;
+using JewelryShop.DTO.Enums;
 
 namespace JewelryShop.API.Controllers
 {
@@ -13,12 +14,16 @@ namespace JewelryShop.API.Controllers
     public class JewelryController : ControllerBase
     {
         private readonly IJewelryService _jewelryService;
+        private readonly IJewelryMaterialService _jewelryMaterialService;
         private readonly IMapper _mapper;
 
         public JewelryController(IJewelryService jewelryService,
+                                    IJewelryMaterialService jewelryMaterialService,
                                     IMapper mapper)
         {
+            _jewelryMaterialService = jewelryMaterialService;
             _jewelryService = jewelryService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -39,7 +44,18 @@ namespace JewelryShop.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateJewelryDTO createJewelryDTO)
         {
+            createJewelryDTO.Status = ObjectStatus.ACTIVE.ToString();
             var id = await _jewelryService.CreateAsync(_mapper.Map<JewelryDTO>(createJewelryDTO));
+            foreach (var material in createJewelryDTO.CreateJewelryMeterialDTOs)
+            {
+                JewelryMaterialDTO jewelryMaterialDTO = new JewelryMaterialDTO()
+                {
+                    JewelryId = id,
+                    MaterialId = material.MaterialId,
+                    Weight = material.Weight
+                };
+                await _jewelryMaterialService.CreateAsync(jewelryMaterialDTO);
+            }
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 

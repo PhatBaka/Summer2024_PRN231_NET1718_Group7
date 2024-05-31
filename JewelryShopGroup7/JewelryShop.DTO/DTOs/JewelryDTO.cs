@@ -32,12 +32,13 @@ public partial class JewelryDTO
 	// public virtual ICollection<OrderDetailDTO> OrderDetails { get; set; } = new List<OrderDetailDTO>();
 }
 
-public class CreateJewelryDTO
+public partial class CreateJewelryDTO
 {
 	public decimal? ManufacturingFees { get; set; }
 
 	public Guid? JewelryType { get; set; }
 
+	[JsonIgnore]
 	public string? Status { get; set; }
 
 	public string? Barcode { get; set; }
@@ -45,6 +46,8 @@ public class CreateJewelryDTO
 	public int? GuaranteeDuration { get; set; }
 
 	public Guid ImageId { get; set; }
+
+	public List<CreateJewelryMeterialDTO> CreateJewelryMeterialDTOs { get; set; }
 }
 
 public class UpdateJewelryDTO

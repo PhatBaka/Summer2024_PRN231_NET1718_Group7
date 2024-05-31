@@ -7,7 +7,7 @@ namespace JewelryShop.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : Controller
+    public class AuthController : ControllerBase
     {
         private readonly IAccountService _accountService;
 

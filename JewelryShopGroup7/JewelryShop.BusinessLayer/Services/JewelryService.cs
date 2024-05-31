@@ -13,11 +13,15 @@ namespace JewelryShop.BusinessLayer.Services
     public class JewelryService : IJewelryService
     {
         private readonly IJewelryRepository _jewelryRepository;
+        private readonly IJewelryMaterialRepository _jewelryMaterialRepository;
         private readonly IMapper _mapper;
 
-        public JewelryService(IJewelryRepository jewelryRepository, IMapper mapper)
+        public JewelryService(IJewelryRepository jewelryRepository
+                                , IJewelryMaterialRepository jewelryMaterialRepository
+                                , IMapper mapper)
         {
             _jewelryRepository = jewelryRepository;
+            _jewelryMaterialRepository = jewelryMaterialRepository;
             _mapper = mapper;
         }
 

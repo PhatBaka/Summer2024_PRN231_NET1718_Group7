@@ -15,3 +15,10 @@ public partial class JewelryMaterialDTO
 
     //public MaterialDTO Material { get; set; } = null!;
 }
+
+public class CreateJewelryMeterialDTO
+{
+	public Guid? MaterialId { get; set; }
+
+	public decimal? Weight { get; set; }
+}
