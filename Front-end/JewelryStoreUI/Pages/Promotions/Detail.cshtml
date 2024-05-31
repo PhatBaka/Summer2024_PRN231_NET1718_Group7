@@ -1,4 +1,38 @@
-﻿@page
-@model JewelryStoreUI.Pages.Promotions.DetailModel
+﻿@page "{id:guid}"
+@model JewelryStoreUI.Pages.Promotions.DetailsModel
 @{
+    Layout = "_ManagerLayout";
 }
+
+<section id="store_discount_details">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="mgt">Store Discount Details</h1>
+                <hr>
+                <div class="details clearfix">
+                    <div>
+                        <h3>Discount Code: </h3>
+                        <p>@Model.StoreDiscount.DiscountCode</p>
+                    </div>
+                    <div>
+                        <h3>Discount Amount: </h3>
+                        <p>@Model.StoreDiscount.DiscountAmount</p>
+                    </div>
+                    <div>
+                        <h3>Start Date: </h3>
+                        <p>@Model.StoreDiscount.StartDate?.ToString("MM/dd/yyyy")</p>
+                    </div>
+                    <div>
+                        <h3>End Date: </h3>
+                        <p>@Model.StoreDiscount.EndDate?.ToString("MM/dd/yyyy")</p>
+                    </div>
+                    <div>
+                        <h3>Remaining Usage: </h3>
+                        <p>@Model.StoreDiscount.RemainingUsage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
