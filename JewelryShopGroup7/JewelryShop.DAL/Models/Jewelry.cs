@@ -8,6 +8,10 @@ public partial class Jewelry
 {
     public Guid JewelryId { get; set; }
 
+    [Required]
+    [StringLength(100)]
+    public string JewelryName { get; set; }
+
     public decimal? ManufacturingFees { get; set; }
 
     public Guid? JewelryType { get; set; }
