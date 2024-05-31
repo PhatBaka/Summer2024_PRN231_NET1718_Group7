@@ -28,7 +28,7 @@ namespace JewelryShop.BusinessLayer.Services
 		{
 			Image image = new()
 			{
-				ImageData = await FileHelper.ConvertToByteArrayAsync(createModel.ImageData)
+				ImageData = await FileHelper.ConvertToByteArrayAsync(createModel.ImageFile)
 			};
 			return await _imageRepository.AddAsync(image);
 		}

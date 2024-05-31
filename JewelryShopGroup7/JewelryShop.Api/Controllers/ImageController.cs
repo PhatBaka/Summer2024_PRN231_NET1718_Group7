@@ -20,14 +20,14 @@ namespace JewelryShop.Api.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<JewelryDTO>>> GetAllAsync()
+		public async Task<ActionResult<IEnumerable<ImageDTO>>> GetAllAsync()
 		{
 			var result = await _imageService.GetAllAsync();
 			return Ok(result);
 		}
 
 		[HttpGet("{id}", Name = "GetByIdAsync")]
-		public async Task<ActionResult<JewelryDTO>> GetByIdAsync(Guid id)
+		public async Task<ActionResult<ImageDTO>> GetByIdAsync(Guid id)
 		{
 			var result = await _imageService.GetByIdAsync(id);
 			if (result == null) return NotFound();
