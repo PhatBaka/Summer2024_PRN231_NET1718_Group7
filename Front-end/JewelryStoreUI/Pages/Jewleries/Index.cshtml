@@ -1,7 +1,7 @@
 ﻿@page
 @model JewelryStoreUI.Pages.Jewleries.IndexModel
 @{
-    Layout = "_ManagerLayout";
+    Layout = "_StaffLayout";
 }
 
 <section id="center" class="center_shop">
@@ -15,7 +15,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="center_shop_tr text-right clearfix">
-						<h6 class="col_2">You are here: <a href="#">Home</a> / Product</h6>
+						<h6 class="col_2">You are here: <a href="#">Home</a> / Jewelry</h6>
 					</div>
 				</div>
 			</div>
@@ -188,124 +188,60 @@
 							</div>
 						</div>
 						<div class="collcet_1r clearfix">
-							<div class="col-sm-4 space_left">
-								<div class="feature_2im clearfix">
-									<div class="feature_2im1 clearfix">
-										<a href="detail.html"><img src="img/14.jpg" class="iw" alt="abc"></a>
-									</div>
-									<div class="feature_2im2 clearfix">
-										<h6 class="mgt"><a class="bg_1" href="detail.html">Featured</a></h6>
-										<h6 class="pull-right mgt"><a class="bg_4" href="detail.html">Sale</a></h6>
-									</div>
-									<div class="feature_2im4 clearfix">
-										<div class="col-sm-6 space_left">
-											<h6><a class="bg_3" href="detail.html">Popular</a></h6>
+							@* code from hear*@
+							@foreach (var result in Model.ResponseResult)
+							{
+								<div class="col-sm-4 space_left">
+									<div class="feature_2im clearfix">
+										<div class="feature_2im1 clearfix">
+											<a href="detail.html">
+												<img src="data:image/png;base64, @result.Base64" alt="Red dot" style="width: 260.9px; height: 260px;" />
+											</a>
 										</div>
-										<div class="col-sm-6 feature_2im4r space_right">
-											<ul>
-												<li>
-													<a href="detail.html"><i class="fa fa-shopping-cart"></i></a>
-												</li>
-												<li><a href="detail.html"><i class="fa fa-rocket"></i></a></li>
-												<li><a href="detail.html"><i class="fa fa-heart-o"></i></a></li>
-											</ul>
+										<div class="feature_2im2 clearfix">
+											<h6 class="mgt"><a class="bg_1" href="detail.html">Featured</a></h6>
+											<h6 class="pull-right mgt"><a class="bg_4" href="detail.html">Sale</a></h6>
 										</div>
-									</div>
-								</div>
-								<div class="item_last text-center clearfix">
-									<h4><a href="detail.html">Nibh Elementum</a></h4>
-									<h6>
-										<span class="span_1 col_1 bold">$14.64</span>
-										<span class="col_2 span_2">$16.30</span>
-										<span>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-										</span>
-									</h6>
-								</div>
-							</div>
-							<div class="col-sm-4 space_left">
-								<div class="feature_2im clearfix">
-									<div class="feature_2im1 clearfix">
-										<a href="detail.html"><img src="img/15.png" class="iw" alt="abc"></a>
-									</div>
-									<div class="feature_2im2 clearfix">
-										<h6 class="mgt"><a class="bg_1" href="detail.html">Featured</a></h6>
-										<h6 class="pull-right mgt"><a class="bg_2" href="detail.html">Hot</a></h6>
-									</div>
-									<div class="feature_2im4 clearfix">
-										<div class="col-sm-6 space_left">
-											<h6><a class="bg_3" href="detail.html">Popular</a></h6>
-										</div>
-										<div class="col-sm-6 feature_2im4r space_right">
-											<ul>
-												<li>
-													<a href="detail.html"><i class="fa fa-shopping-cart"></i></a>
-												</li>
-												<li><a href="detail.html"><i class="fa fa-rocket"></i></a></li>
-												<li><a href="detail.html"><i class="fa fa-heart-o"></i></a></li>
-											</ul>
+										<div class="feature_2im4 clearfix">
+											<div class="col-sm-6 space_left">
+												<h6><a class="bg_3" href="detail.html">Popular</a></h6>
+											</div>
+											<div class="col-sm-6 feature_2im4r space_right" >
+												<ul>
+													<li>
+														@if (HttpContext.Session.GetString("ROLE") == "STAFF")
+														{
+															<form id="addToCartForm" method="post">
+																<input type="hidden" name="handler" value="AddToCart" />
+																<input type="hidden" name="itemId" value="@result.Data.jewelryId" />
+																<!-- Use JavaScript to submit the form when anchor tag is clicked -->
+																<a href="#" onclick="document.getElementById('addToCartForm').submit(); return false;"><i class="fa fa-shopping-cart"></i></a>
+															</form>
+														}
+													</li>
+													<li><a href="detail.html"><i class="fa fa-rocket"></i></a></li>
+													<li><a href="detail.html"><i class="fa fa-heart-o"></i></a></li>
+												</ul>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="item_last text-center clearfix">
-									<h4><a href="detail.html">Vestibulum Lacinia</a></h4>
-									<h6>
-										<span class="span_1 col_1 bold">$14.64</span>
-										<span class="col_2 span_2">$16.30</span>
-										<span>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-										</span>
-									</h6>
-								</div>
-							</div>
-							<div class="col-sm-4 space_left">
-								<div class="feature_2im clearfix">
-									<div class="feature_2im1 clearfix">
-										<a href="detail.html"><img src="img/8.jpg" class="iw" alt="abc"></a>
-									</div>
-									<div class="feature_2im2 clearfix">
-										<h6 class="mgt"><a class="bg_1" href="detail.html">Featured</a></h6>
-										<h6 class="pull-right mgt"><a class="bg_4" href="detail.html">Sale</a></h6>
-									</div>
-									<div class="feature_2im4 clearfix">
-										<div class="col-sm-6 space_left">
-											<h6><a class="bg_3" href="detail.html">Popular</a></h6>
-										</div>
-										<div class="col-sm-6 feature_2im4r space_right">
-											<ul>
-												<li>
-													<a href="detail.html"><i class="fa fa-shopping-cart"></i></a>
-												</li>
-												<li><a href="detail.html"><i class="fa fa-rocket"></i></a></li>
-												<li><a href="detail.html"><i class="fa fa-heart-o"></i></a></li>
-											</ul>
-										</div>
+									<div class="item_last text-center clearfix">
+										<h4><a href="detail.html">@result.Data.jewelryName</a></h4>
+										<h6>
+											<span class="span_1 col_1 bold">$14.64</span>
+											<span class="col_2 span_2">$16.30</span>
+											<span>
+												<i class="fa fa-star-o"></i>
+												<i class="fa fa-star-o"></i>
+												<i class="fa fa-star-o"></i>
+												<i class="fa fa-star-o"></i>
+												<i class="fa fa-star-o"></i>
+											</span>
+										</h6>
 									</div>
 								</div>
-								<div class="item_last text-center clearfix">
-									<h4><a href="detail.html">Nibh Elementum</a></h4>
-									<h6>
-										<span class="span_1 col_1 bold">$14.64</span>
-										<span class="col_2 span_2">$16.30</span>
-										<span>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-											<i class="fa fa-star-o"></i>
-										</span>
-									</h6>
-								</div>
-							</div>
-						</div>
+							}
+						 </div> 
 						<div class="product_1_last text-center clearfix">
 							<div class="col-sm-12">
 								<ul>
@@ -326,3 +262,11 @@
 		</div>
 	</div>
 </section>
+
+<script>
+	function submitAddToCartForm() {
+		document.getElementById('addToCartForm').submit();
+		return false;
+	}
+	}
+</script>

@@ -43,9 +43,14 @@ namespace JewelryStoreUI.Pages
             }
             if (ResponseResult.Result == true)
             {
+                HttpContext.Session.SetString("ROLE", (string) ResponseResult.Data.role1);
                 if (ResponseResult.Data.role1 == "MANAGER")
                 {
                     return RedirectToPage("ManagerDashboard");
+                }
+                else if (ResponseResult.Data.role1 == "STAFF")
+                {
+                    return RedirectToPage("StaffDashboard");
                 }
             }
             return Page();

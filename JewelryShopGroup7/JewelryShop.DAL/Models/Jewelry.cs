@@ -22,9 +22,12 @@ public partial class Jewelry
 
     public int? GuaranteeDuration { get; set; }
 
-	public virtual JewelryType? JewelryTypeNavigation { get; set; }
+    public virtual JewelryType? JewelryTypeNavigation { get; set; }
 
-	public Guid ImageId { get; set; }
+    public Guid ImageId { get; set; }
+
+    [Required]
+    public int Quantity { get; set; }
 
 	public virtual Image Image { get; set; }
 

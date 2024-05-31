@@ -13,6 +13,8 @@ public partial class JewelryDTO
 
 	public decimal? ManufacturingFees { get; set; }
 
+	public string JewelryName { get; set; }
+
 	public Guid? JewelryType { get; set; }
 
 	public string? Status { get; set; }
