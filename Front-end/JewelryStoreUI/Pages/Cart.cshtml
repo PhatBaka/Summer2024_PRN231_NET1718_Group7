@@ -36,7 +36,7 @@
 				</form>
 
 				<div class="col-sm-6">
-					<h5 class="text-right mgt"><a href="#">Continue Shopping</a></h5>
+					<h5 class="text-right mgt"><a asp-page="/Jewleries/Index">Continue Shopping</a></h5>
 				</div>
 			</div>
 			<div class="cart_3 clearfix">
@@ -61,7 +61,7 @@
 									</h5>
 									<h5 class="normal">RED / XS</h5>
 									<h6>Vendor</h6>
-									<h4>$175.00</h4>
+									<h4>$@item.Data.sellPrice</h4>
 									<h5>Quantity</h5>
 								</div>
 								<div class="cart_3l1i2 clearfix">
@@ -88,7 +88,7 @@
 				<div class="col-sm-4">
 					<div class="cart_3r clearfix">
 						<h5 class="mgt head_1">SUBTOTAL</h5>
-						<h3 class="text-center">$1,347.00</h3>
+						<h3 class="text-center">$@Model.TotalPrice</h3>
 						<hr>
 						<h6>Additional comments</h6>
 						<textarea class="form-control"></textarea>

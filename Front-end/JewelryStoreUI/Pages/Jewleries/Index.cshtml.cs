@@ -17,12 +17,10 @@ namespace JewelryStoreUI.Pages.Jewleries
 		private string url = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
 		private string jewelryUrl;
 		private string imageUrl;
-		private HttpClient httpClient;
 
 		public IndexModel(IHttpContextAccessor httpContextAccessor)
 		{
 			_httpContextAccessor = httpContextAccessor;
-			httpClient = new HttpClient();
 			jewelryUrl = url + "Jewelry";
 			imageUrl = url + "Image/";
 			ResponseResult = new List<JewelryDTO>();
@@ -30,7 +28,7 @@ namespace JewelryStoreUI.Pages.Jewleries
 
 		public async Task OnGetAsync()
 		{
-			using (var client = httpClient)
+			using (var client = new HttpClient())
 			{
 				var response = await client.GetAsync(jewelryUrl);
 				var result = await response.Content.ReadAsStringAsync();
@@ -46,11 +44,11 @@ namespace JewelryStoreUI.Pages.Jewleries
 			}
 		}
 
-		public async Task<string> GetImageAsync(dynamic jewelryId)
+		public async Task<string> GetImageAsync(dynamic imageId)
 		{
-			using (var client = httpClient)
+			using (var client = new HttpClient())
 			{
-				var response = await client.GetAsync($"{imageUrl}{jewelryId}");
+				var response = await client.GetAsync($"{imageUrl}{imageId}");
 				var result = await response.Content.ReadAsStringAsync();
 				var entity = JsonConvert.DeserializeObject<dynamic>(result);
 				byte[] imageData = Convert.FromBase64String((string)entity.imageData);

@@ -45,6 +45,14 @@ namespace JewelryShop.BusinessLayer.Mapper
 			CreateMap<ImageDTO, CreateImageDTO>().ReverseMap();
             CreateMap<ImageDTO, UpdateImageDTO>().ReverseMap();
             #endregion
-        }
-    }
+
+            #region Order
+            CreateMap<OrderDTO, CreateOrderDTO>().ReverseMap();
+			#endregion
+
+			#region OrderDetail
+			CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
+			#endregion
+		}
+	}
 }

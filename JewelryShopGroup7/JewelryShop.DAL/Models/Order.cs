@@ -17,7 +17,9 @@ public partial class Order
 
     public string? Status { get; set; }
 
-    public Guid? OrderTypeId { get; set; }
+    //public Guid? OrderTypeId { get; set; }
+
+    public string OrderType { get; set; }
 
     public Guid? OrderDiscountId { get; set; }
 
@@ -33,5 +35,5 @@ public partial class Order
 
     public virtual OrderDiscount? OrderDiscount { get; set; }
 
-    public virtual OrderType? OrderType { get; set; }
+    //public virtual OrderType? OrderType { get; set; }
 }

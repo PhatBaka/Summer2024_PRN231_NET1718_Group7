@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using AutoMapper;
+using JewelryShop.DAL.Models;
 
 namespace JewelryShop.API.Controllers
 {
@@ -11,11 +13,20 @@ namespace JewelryShop.API.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        private readonly IOrderDetailService _orderDetailService;
         private readonly IOrderService _orderService;
+        private readonly IJewelryService _jewelryService;
+        private readonly IMapper _mapper;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService,
+                                IJewelryService jewelryService,
+                                IOrderDetailService orderDetailService,
+                                IMapper mapper)
         {
+            _orderDetailService = orderDetailService;
             _orderService = orderService;
+            _jewelryService = jewelryService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,9 +45,17 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] OrderDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderDTO createModel)
         {
-            var id = await _orderService.CreateAsync(createModel);
+            foreach (var item in createModel.OrderDetails)
+            {
+                var entity = await _jewelryService.GetByIdAsync((Guid) item.JewelryId);
+                createModel.TotalPrice += entity.SellPrice;
+            }
+            // discount o day
+            createModel.FinalPrice = createModel.TotalPrice;
+            createModel.OrderDate = DateTime.Now;
+            var id = await _orderService.CreateAsync(_mapper.Map<OrderDTO>(createModel));
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 

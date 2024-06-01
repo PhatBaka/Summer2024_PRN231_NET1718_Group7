@@ -19,6 +19,8 @@ namespace JewelryStoreUI.Pages
 		private string jewelryUrl;
 		private string imageUrl;
 
+		public decimal TotalPrice = 0;
+
 		public CartModel(IHttpContextAccessor httpContextAccessor)
 		{
 			_httpContextAccessor = httpContextAccessor;
@@ -43,6 +45,7 @@ namespace JewelryStoreUI.Pages
 					cart.Data = entity;
 					cart.Base64 = await GetImageAsync(entity.imageId);
 				}
+				TotalPrice += (decimal) cart.Data.sellPrice;
 				Carts2.Add(cart);
 			}
 		}

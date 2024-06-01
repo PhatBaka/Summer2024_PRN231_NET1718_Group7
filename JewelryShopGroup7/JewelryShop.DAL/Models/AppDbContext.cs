@@ -242,7 +242,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.FinalPrice).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.OrderDate).HasColumnType("date");
             entity.Property(e => e.OrderDiscountId).HasColumnName("OrderDiscountID");
-            entity.Property(e => e.OrderTypeId).HasColumnName("OrderTypeID");
+            //entity.Property(e => e.OrderTypeId).HasColumnName("OrderTypeID");
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
 
@@ -258,9 +258,9 @@ public partial class AppDbContext : DbContext
                 .HasForeignKey(d => d.OrderDiscountId)
                 .HasConstraintName("FK__Order__OrderDisc__5441852A");
 
-            entity.HasOne(d => d.OrderType).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.OrderTypeId)
-                .HasConstraintName("FK__Order__OrderType__534D60F1");
+            //entity.HasOne(d => d.OrderType).WithMany(p => p.Orders)
+            //    .HasForeignKey(d => d.OrderTypeId)
+            //    .HasConstraintName("FK__Order__OrderType__534D60F1");
         });
 
         modelBuilder.Entity<OrderDetail>(entity =>

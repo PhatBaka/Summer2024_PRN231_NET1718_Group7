@@ -23,8 +23,6 @@ public partial class JewelryDTO
 
 	public decimal? GuaranteeDuration { get; set; }
 
-	public virtual JewelryTypeDTO? JewelryTypeNavigation { get; set; }
-
 	public Guid ImageId { get; set; }
 
 	public int Quantity { get; set; }
