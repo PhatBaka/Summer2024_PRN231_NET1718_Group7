@@ -91,8 +91,12 @@
 						<h3 class="text-center">$@Model.TotalPrice</h3>
 						<hr>
 						<h6>Additional comments</h6>
-						<textarea class="form-control"></textarea>
-						<h5 class="text-center"><a class="button" href="checkout.html">PROCEED TO CHECKOUT</a></h5>
+						<form method="post">
+							<textarea class="form-control"></textarea>
+							<h5 class="text-center">
+								<button type="submit" name="action" value="checkout" class="button">PROCEED TO CHECKOUT</button>
+							</h5>
+						</form>
 						<br>
 						<h5>GET SHIPPING ESTIMATES</h5>
 						<hr>

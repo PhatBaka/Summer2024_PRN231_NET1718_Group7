@@ -1,8 +1,13 @@
 using JewelryStoreUI.Pages.DTOs.Cart;
+using JewelryStoreUI.Pages.Helpers;
+using JewelryStoreUI.Pages.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using System;
 using System.Net.Http;
+using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace JewelryStoreUI.Pages
 {
@@ -18,6 +23,7 @@ namespace JewelryStoreUI.Pages
 		private string baseUrl = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
 		private string jewelryUrl;
 		private string imageUrl;
+		private string orderUrl;
 
 		public decimal TotalPrice = 0;
 
@@ -29,6 +35,7 @@ namespace JewelryStoreUI.Pages
 			_httpClient = new HttpClient();
 			jewelryUrl = $"{baseUrl}Jewelry/";
 			imageUrl = $"{baseUrl}Image/";
+			orderUrl = $"{baseUrl}Order";
 		}
 
 		public async Task OnGet()
@@ -99,6 +106,41 @@ namespace JewelryStoreUI.Pages
 				byte[] imageData = Convert.FromBase64String((string)entity.imageData);
 				return Convert.ToBase64String(imageData);
 			}
+		}
+
+		public async Task<IActionResult> OnPostAsync(string action)
+		{
+			IList<dynamic> OrderDetail = new List<dynamic>();
+			foreach(var cart in GetCartItems())
+			{
+				OrderDetail.Add(new
+				{
+					JewelryId = cart.JewelryId,
+					Quantity = cart.Quantity
+				});
+			}
+			if (action == "checkout")
+			{
+				dynamic request = new
+				{
+					Status = 0,
+					OrderType = 0,
+					CustomerId = "84F4AFAF-2314-47FC-BD96-B4A4B8B7E399",
+					OrderDetails = OrderDetail,
+					AccountId = "BFFDC64B-B6D7-487A-A56E-D4C1AFDA8EF6"
+				};
+				var json = JsonConvert.SerializeObject(request);
+				var data = new StringContent(json, Encoding.UTF8, "application/json");
+				using (var client = new HttpClient())
+				{
+
+					var response = await client.PostAsync(orderUrl, data);
+					var result = await response.Content.ReadAsStringAsync();
+					
+				}
+				return RedirectToPage("CheckoutSuccess");
+			}
+			return Page();
 		}
 	}
 }
