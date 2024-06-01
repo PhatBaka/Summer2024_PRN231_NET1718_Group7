@@ -47,9 +47,14 @@ namespace JewelryShop.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderDTO createModel)
         {
+            createModel.TotalPrice = 0;
             foreach (var item in createModel.OrderDetails)
             {
                 var entity = await _jewelryService.GetByIdAsync((Guid) item.JewelryId);
+                var orderDetail = createModel.OrderDetails.First(x => x.JewelryId == entity.JewelryId);
+                orderDetail.UnitPrice = entity.UnitPrice;
+                orderDetail.TotalPrice = entity.UnitPrice * orderDetail.Quantity;
+                orderDetail.FinalPrice = orderDetail.TotalPrice;
                 createModel.TotalPrice += entity.SellPrice;
             }
             // discount o day

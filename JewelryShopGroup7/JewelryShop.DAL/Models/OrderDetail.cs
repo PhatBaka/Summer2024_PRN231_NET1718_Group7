@@ -12,7 +12,18 @@ public partial class OrderDetail
 
     public Guid? JewelryId { get; set; }
 
-    public decimal? SubTotalPrice { get; set; }
+    // public decimal? SubTotalPrice { get; set; }
+
+    public decimal UnitPrice { get; set; }
+
+    public decimal TotalPrice { get; set; }
+
+
+    public decimal? DiscountPrice { get; set; }
+
+    public decimal FinalPrice { get; set; }
+
+    public decimal DiscountValue { get; set; }
 
     [Required]
     public int Quantity { get; set; }

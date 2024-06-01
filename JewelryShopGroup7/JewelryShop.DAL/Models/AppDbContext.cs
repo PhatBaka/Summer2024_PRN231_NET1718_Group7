@@ -274,7 +274,7 @@ public partial class AppDbContext : DbContext
                 .HasColumnName("OrderDetailID");
             entity.Property(e => e.JewelryId).HasColumnName("JewelryID");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
-            entity.Property(e => e.SubTotalPrice).HasColumnType("decimal(18, 2)");
+            //entity.Property(e => e.SubTotalPrice).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Jewelry).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.JewelryId)
