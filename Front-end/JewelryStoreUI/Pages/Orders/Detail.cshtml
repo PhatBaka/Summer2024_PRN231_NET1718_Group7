@@ -1,4 +1,29 @@
 ﻿@page
 @model JewelryStoreUI.Pages.Orders.DetailModel
 @{
+    Layout = "_StaffLayout";
 }
+
+<h4>Order Details</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order Detail ID</th>
+            <th>Jewelry ID</th>
+            <th>Quantity</th>
+            <th>SubTotal Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.Order.orderDetails)
+        {
+            <tr>
+
+                <td>@detail.jewelryId</td>
+                <td>@detail.quantity</td>
+                <td>@detail.subTotalPrice ?? "N/A")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
