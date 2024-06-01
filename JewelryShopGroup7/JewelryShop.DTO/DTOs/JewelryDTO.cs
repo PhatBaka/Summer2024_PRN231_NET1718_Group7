@@ -11,9 +11,9 @@ public partial class JewelryDTO
 {
 	public Guid JewelryId { get; set; }
 
-	public decimal? ManufacturingFees { get; set; }
-
 	public string JewelryName { get; set; }
+
+	public decimal? ManufacturingFees { get; set; }
 
 	public Guid? JewelryType { get; set; }
 
@@ -21,17 +21,23 @@ public partial class JewelryDTO
 
 	public string? Barcode { get; set; }
 
-	public int? GuaranteeDuration { get; set; }
+	public decimal? GuaranteeDuration { get; set; }
 
-	public string? TypeName { get; set; }
-
-	// public virtual JewelryType? JewelryTypeNavigation { get; set; }
+	public virtual JewelryTypeDTO? JewelryTypeNavigation { get; set; }
 
 	public Guid ImageId { get; set; }
 
-	//public virtual ImageDTO Image { get; set; }
+	public int Quantity { get; set; }
 
-	// public byte[] ImageData { get; set; }
+	public decimal TotalWeight { get; set; }
+
+	public decimal UnitPrice { get; set; }
+
+	public decimal MarkupPercentage { get; set; }
+
+	public string TypeName { get; set; }
+
+	public decimal SellPrice { get; set; }
 
 	public virtual ICollection<JewelryMaterialDTO> JewelryMaterials { get; set; } = new List<JewelryMaterialDTO>();
 
@@ -40,18 +46,32 @@ public partial class JewelryDTO
 
 public partial class CreateJewelryDTO
 {
+	public string JewelryName { get; set; }
+
 	public decimal? ManufacturingFees { get; set; }
 
 	public Guid? JewelryType { get; set; }
 
-	[JsonIgnore]
 	public string? Status { get; set; }
 
 	public string? Barcode { get; set; }
 
-	public int? GuaranteeDuration { get; set; }
+	public decimal? GuaranteeDuration { get; set; }
 
 	public Guid ImageId { get; set; }
+
+	public int Quantity { get; set; }
+
+	[JsonIgnore]
+	public decimal TotalWeight { get; set; }
+
+	[JsonIgnore]
+	public decimal UnitPrice { get; set; }
+
+	[JsonIgnore]
+	public decimal SellPrice { get; set; }
+
+	public decimal MarkupPercentage { get; set; }
 
 	public List<CreateJewelryMeterialDTO> CreateJewelryMeterialDTOs { get; set; }
 }

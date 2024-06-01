@@ -11,6 +11,12 @@ public partial class Material
 
     public string? Description { get; set; }
 
+	public DateTime? Date { get; set; }
+
+	public string UnitType { get; set; }
+
+	public decimal Price { get; set; }
+
 	public Guid ImageId { get; set; }
 
 	public virtual Image Image { get; set; }

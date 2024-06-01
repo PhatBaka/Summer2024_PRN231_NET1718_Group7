@@ -15,19 +15,22 @@ namespace JewelryShop.BusinessLayer.Services
     {
         private readonly IJewelryRepository _jewelryRepository;
         private readonly IJewelryMaterialRepository _jewelryMaterialRepository;
+        private readonly IMaterialRepository _materialRepository;
         private readonly IMapper _mapper;
 
         public JewelryService(IJewelryRepository jewelryRepository
                                 , IJewelryMaterialRepository jewelryMaterialRepository
+                                , IMaterialRepository materialRepository
                                 , IMapper mapper)
         {
+            _materialRepository = materialRepository;
             _jewelryRepository = jewelryRepository;
             _jewelryMaterialRepository = jewelryMaterialRepository;
             _mapper = mapper;
         }
 
         public async Task<Guid> CreateAsync(JewelryDTO createModel)
-        {
+        {       
             Jewelry jewelry = _mapper.Map<Jewelry>(createModel);
             return await _jewelryRepository.AddAsync(jewelry);
         }

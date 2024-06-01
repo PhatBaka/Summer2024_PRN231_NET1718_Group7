@@ -11,6 +11,10 @@ public partial class JewelryMaterial
 
     public decimal? Weight { get; set; }
 
+    public decimal Price { get; set; }
+
+    public DateTime ImportTime { get; set; }
+
     public virtual Jewelry Jewelry { get; set; } = null!;
 
     public virtual Material Material { get; set; } = null!;

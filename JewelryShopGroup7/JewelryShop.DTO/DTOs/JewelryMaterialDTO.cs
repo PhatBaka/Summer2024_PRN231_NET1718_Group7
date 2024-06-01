@@ -1,24 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace JewelryShop.DTO.DTOs;
 
 public partial class JewelryMaterialDTO
 {
-    public Guid? JewelryId { get; set; }
+	public Guid JewelryId { get; set; }
 
-    public Guid? MaterialId { get; set; }
+	public Guid MaterialId { get; set; }
 
-    public decimal? Weight { get; set; }
+	public decimal Weight { get; set; }
 
-    //public JewelryDTO Jewelry { get; set; } = null!;
+	public decimal Price { get; set; }
 
-    //public MaterialDTO Material { get; set; } = null!;
+	public DateTime ImportTime { get; set; }
+
+	//public virtual Jewelry Jewelry { get; set; } = null!;
+
+	//public virtual Material Material { get; set; } = null!;
 }
 
 public class CreateJewelryMeterialDTO
 {
 	public Guid? MaterialId { get; set; }
 
-	public decimal? Weight { get; set; }
+	[JsonIgnore]
+	public decimal Price { get; set; }
+
+	[JsonIgnore]
+	public DateTime ImportTime { get; set; }
+
+	public decimal Weight { get; set; }
 }

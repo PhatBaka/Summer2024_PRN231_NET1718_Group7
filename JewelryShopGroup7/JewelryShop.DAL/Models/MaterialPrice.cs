@@ -13,5 +13,7 @@ public partial class MaterialPrice
 
     public decimal? Price { get; set; }
 
+    public string UnitType { get; set; }
+
     public virtual Material? Material { get; set; }
 }

@@ -20,7 +20,7 @@ public partial class Jewelry
 
     public string? Barcode { get; set; }
 
-    public int? GuaranteeDuration { get; set; }
+    public decimal? GuaranteeDuration { get; set; }
 
     public virtual JewelryType? JewelryTypeNavigation { get; set; }
 
@@ -29,7 +29,20 @@ public partial class Jewelry
     [Required]
     public int Quantity { get; set; }
 
+    [Required]
+    public decimal TotalWeight { get; set; }
+
+    [Required]
+    public decimal UnitPrice { get; set; }
+
+    [Required]
+    public double MarkupPercentage { get; set; }
+
+    [Required]
+    public decimal SellPrice { get; set; }
+
 	public virtual Image Image { get; set; }
+
 
 	public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
 

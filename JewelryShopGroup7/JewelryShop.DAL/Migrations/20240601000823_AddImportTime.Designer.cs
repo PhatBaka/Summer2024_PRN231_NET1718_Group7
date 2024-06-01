@@ -4,6 +4,7 @@ using JewelryShop.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryShop.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240601000823_AddImportTime")]
+    partial class AddImportTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,8 +159,8 @@ namespace JewelryShop.DAL.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<decimal?>("GuaranteeDuration")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("GuaranteeDuration")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("ImageId")
                         .HasColumnType("uniqueidentifier");
@@ -179,18 +182,15 @@ namespace JewelryShop.DAL.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SellPrice")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("Status")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("TotalWeight")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("TotalWeight")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("UnitPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("JewelryId")
                         .HasName("PK__Jewelry__807031F553A60101");
@@ -215,8 +215,8 @@ namespace JewelryShop.DAL.Migrations
                     b.Property<DateTime>("ImportTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<decimal?>("Weight")
                         .HasColumnType("decimal(18, 2)");
@@ -255,9 +255,6 @@ namespace JewelryShop.DAL.Migrations
                         .HasColumnName("MaterialID")
                         .HasDefaultValueSql("(newid())");
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -267,13 +264,6 @@ namespace JewelryShop.DAL.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UnitType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MaterialId")
                         .HasName("PK__Material__C506131735D61340");
@@ -300,10 +290,6 @@ namespace JewelryShop.DAL.Migrations
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18, 2)");
-
-                    b.Property<string>("UnitType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MaterialPriceId")
                         .HasName("PK__Material__59B706AE2621B949");
