@@ -1,4 +1,76 @@
 ﻿@page
 @model JewelryStoreUI.Pages.Jewleries.CreateModel
 @{
+    Layout = "_StaffLayout";
 }
+
+<section id="center" class="center_shop">
+    <div class="container">
+        <div class="row">
+            <div class="center_shop_t clearfix">
+                <div class="col-sm-6">
+                    <div class="center_shop_tl clearfix">
+                        <h4 class="mgt">Create</h4>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="center_shop_tr text-right clearfix">
+                        <h6 class="col_2">You are here: <a href="#">Home</a> / Create</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="checkout" class="clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="checkout_1 clearfix">
+                <div class="col-sm-12">
+                    <div class="checkout_1l1 clearfix">
+                        <div class="col-sm-3 space_left">
+                            <h5>Jewelry Name <span class="col_1">*</span></h5>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <h5>Guarantee Duration <span class="col_1">*</span></h5>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <h5>Manufacturer Fee <span class="col_1">*</span></h5>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <h5>Quantity <span class="col_1">*</span></h5>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <h5>Markup Percentage <span class="col_1">*</span></h5>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <h5>Jewelry Type <span class="col_1">*</span></h5>
+                            <select class="form-control">
+                                <option>Ring</option>
+                                <option>Bracelet</option>
+                                <option>Earrings</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <h5>Image <span class="col_1">*</span></h5>
+                            <form method="post" enctype="multipart/form-data" asp-page="/Upload">
+                                <input style="margin: 10px" type="file" name="uploadedFile" />
+                            </form>
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h5><a class="button" asp-page="/Jewleries/Create">CREATE</a></h5>
+    </div>
+</section>
+
