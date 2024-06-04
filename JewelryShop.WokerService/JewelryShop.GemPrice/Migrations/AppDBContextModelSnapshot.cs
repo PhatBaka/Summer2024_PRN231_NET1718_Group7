@@ -62,6 +62,33 @@ namespace JewelryShop.GemPrice.Migrations
 
                     b.ToTable("Gem");
                 });
+
+            modelBuilder.Entity("JewelryShop.GemPrice.Models.Metal", b =>
+                {
+                    b.Property<int>("MetalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MetalId"));
+
+                    b.Property<string>("MetalType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<double>("Purity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("MetalId");
+
+                    b.ToTable("Metal");
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -2,8 +2,8 @@
 
 namespace JewelryShop.GemPrice.Repositories.Interfaces
 {
-    public interface IGemRepo
+    public interface IMetalRepo
     {
-        public Task<IEnumerable<Gem>> GetGems();
+        public Task<IEnumerable<Metal>> GetMetals();
     }
 }

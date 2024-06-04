@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc(options =>
 {
-	options.SuppressAsyncSuffixInActionNames = false;
+    options.SuppressAsyncSuffixInActionNames = false;
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -18,13 +18,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<AppDBContext>();
 builder.Services.AddScoped(typeof(IGenericDAO<>), typeof(GenericDAO<>));
 builder.Services.AddScoped<IGemRepo, GemRepo>();
-
+builder.Services.AddScoped<IMetalRepo, MetalRepo>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 // Configure the HTTP request pipeline.

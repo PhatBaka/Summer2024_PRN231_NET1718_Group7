@@ -4,21 +4,20 @@ using JewelryShop.GemPrice.Repositories.Interfaces;
 
 namespace JewelryShop.GemPrice.Repositories.Impls
 {
-    public class GemRepo : IGemRepo
+    public class MetalRepo : IMetalRepo
     {
-        private readonly IGenericDAO<Gem> genericDAO;
+        private readonly IGenericDAO<Metal> genericDAO;
 
-        public GemRepo(IGenericDAO<Gem> genericDAO)
+        public MetalRepo(IGenericDAO<Metal> genericDAO)
         {
             this.genericDAO = genericDAO;
         }
 
-        public async Task<IEnumerable<Gem>> GetGems()
+        public async Task<IEnumerable<Metal>> GetMetals()
         {
             try
             {
-                var result = await genericDAO.GetAllAsync();
-                return result;
+                return await genericDAO.GetAllAsync();
             }
             catch (Exception ex)
             {

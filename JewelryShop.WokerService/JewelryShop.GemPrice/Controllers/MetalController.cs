@@ -6,19 +6,19 @@ namespace JewelryShop.GemPrice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GemController : ControllerBase
+    public class MetalController : ControllerBase
     {
-        private readonly IGemRepo gemRepo;
+        private readonly IMetalRepo metalRepo;
 
-        public GemController(IGemRepo gemRepo)
+        public MetalController(IMetalRepo metalRepo)
         {
-            this.gemRepo = gemRepo;
+            this.metalRepo = metalRepo;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Gem>>> GettAllAsync()
+        public async Task<ActionResult<IEnumerable<Metal>>> GettAllAsync()
         {
-            var result = await gemRepo.GetGems();
+            var result = await metalRepo.GetMetals();
             return Ok(result);
         }
     }
