@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace JewelryShop.DAL.Models;
 
@@ -41,10 +39,10 @@ public partial class Jewelry
     [Required]
     public decimal SellPrice { get; set; }
 
-	public virtual Image Image { get; set; }
+    public virtual Image Image { get; set; }
 
 
-	public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
+    public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 }

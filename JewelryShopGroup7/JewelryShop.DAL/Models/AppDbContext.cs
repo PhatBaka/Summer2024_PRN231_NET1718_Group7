@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using JewelryShop.DAL.Helpers;
+﻿using JewelryShop.DAL.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

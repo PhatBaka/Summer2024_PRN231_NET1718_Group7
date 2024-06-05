@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using JewelryShop.DAL.Models;
 using JewelryShop.DTO.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JewelryShop.BusinessLayer.Mapper
 {
@@ -36,23 +31,23 @@ namespace JewelryShop.BusinessLayer.Mapper
                 .ForMember(x => x.TypeName, opt => opt.MapFrom(dest => dest.JewelryTypeNavigation.TypeName))
                 //.ForMember(x => x.ImageData, opt => opt.MapFrom(dest => dest.Image.ImageData))
                 .ReverseMap();
-			CreateMap<JewelryDTO, CreateJewelryDTO>().ReverseMap();
+            CreateMap<JewelryDTO, CreateJewelryDTO>().ReverseMap();
             CreateMap<JewelryDTO, UpdateJewelryDTO>().ReverseMap();
             #endregion
 
             #region Image
             CreateMap<Image, ImageDTO>().ReverseMap();
-			CreateMap<ImageDTO, CreateImageDTO>().ReverseMap();
+            CreateMap<ImageDTO, CreateImageDTO>().ReverseMap();
             CreateMap<ImageDTO, UpdateImageDTO>().ReverseMap();
             #endregion
 
             #region Order
             CreateMap<OrderDTO, CreateOrderDTO>().ReverseMap();
-			#endregion
+            #endregion
 
-			#region OrderDetail
-			CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
-			#endregion
-		}
-	}
+            #region OrderDetail
+            CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
+            #endregion
+        }
+    }
 }

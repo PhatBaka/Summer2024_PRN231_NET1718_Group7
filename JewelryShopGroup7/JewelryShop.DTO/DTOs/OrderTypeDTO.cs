@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace JewelryShop.DTO.DTOs;
+﻿namespace JewelryShop.DTO.DTOs;
 
 public partial class OrderTypeDTO
 {

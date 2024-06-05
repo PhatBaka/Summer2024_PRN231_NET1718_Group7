@@ -1,13 +1,8 @@
 using AutoMapper;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
-using JewelryShop.DAL.Repositories.Interface;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace JewelryShop.BusinessLayer.Services
 {

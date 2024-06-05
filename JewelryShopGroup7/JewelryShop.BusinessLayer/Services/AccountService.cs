@@ -4,11 +4,6 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -91,9 +86,10 @@ namespace JewelryShop.BusinessLayer.Services
             var account = (await _accountRepository.GetAsync(a => a.AccountId == id)).FirstOrDefault();
             if (account != null)
             {
-                var updateAccount = _mapper.Map(updateModel,account);
+                var updateAccount = _mapper.Map(updateModel, account);
                 await _accountRepository.UpdateAsync(updateAccount);
-            } else
+            }
+            else
             {
                 throw new KeyNotFoundException("Account not found.");
             }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace JewelryShop.DAL.Models;
+﻿namespace JewelryShop.DAL.Models;
 
 public partial class Guarantee
 {

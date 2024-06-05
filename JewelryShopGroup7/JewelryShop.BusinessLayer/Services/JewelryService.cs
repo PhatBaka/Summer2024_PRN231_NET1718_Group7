@@ -3,11 +3,6 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -30,7 +25,7 @@ namespace JewelryShop.BusinessLayer.Services
         }
 
         public async Task<Guid> CreateAsync(JewelryDTO createModel)
-        {       
+        {
             Jewelry jewelry = _mapper.Map<Jewelry>(createModel);
             return await _jewelryRepository.AddAsync(jewelry);
         }

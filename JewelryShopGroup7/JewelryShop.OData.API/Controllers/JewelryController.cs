@@ -1,13 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using AutoMapper;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
-using AutoMapper;
 using JewelryShop.DTO.Enums;
-using JewelryShop.DAL.Repositories.Interface;
-using JewelryShop.DAL.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 
 namespace JewelryShop.OData.Api.Controllers

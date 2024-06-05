@@ -4,7 +4,6 @@ using JewelryShop.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Protocols;
 using System.ComponentModel.Design;
 
 namespace JewelryShop.DAL;

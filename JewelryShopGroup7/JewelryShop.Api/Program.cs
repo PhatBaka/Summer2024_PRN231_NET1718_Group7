@@ -1,6 +1,6 @@
-using CleanArchitecture.Application;
+using JewelryShop.BusinessLayer;
 using JewelryShop.BusinessLayer.BackgroundServices;
-using PhotoboothBranchService.Domain.Common.Interfaces;
+using JewelryShop.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc(options =>
 {
-	options.SuppressAsyncSuffixInActionNames = false;
+    options.SuppressAsyncSuffixInActionNames = false;
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

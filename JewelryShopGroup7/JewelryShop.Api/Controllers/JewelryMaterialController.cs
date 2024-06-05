@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.API.Controllers
 {
@@ -28,7 +25,7 @@ namespace JewelryShop.API.Controllers
         [HttpGet("{jewelryId}/{materialId}")]
         public async Task<ActionResult<JewelryMaterialDTO>> GetByIdAsync(Guid jewelryId, Guid materialId)
         {
-            var result = await _jewelryMaterialService.GetByIdAsync(jewelryId,materialId);
+            var result = await _jewelryMaterialService.GetByIdAsync(jewelryId, materialId);
             if (result == null) return NotFound();
             return Ok(result);
         }
@@ -45,7 +42,7 @@ namespace JewelryShop.API.Controllers
         {
             try
             {
-                await _jewelryMaterialService.UpdateAsync(jewelryId,materialId, updateModel);
+                await _jewelryMaterialService.UpdateAsync(jewelryId, materialId, updateModel);
                 return NoContent();
             }
             catch (KeyNotFoundException)
@@ -59,7 +56,7 @@ namespace JewelryShop.API.Controllers
         {
             try
             {
-                await _jewelryMaterialService.DeleteAsync(jewelryId,materialId);
+                await _jewelryMaterialService.DeleteAsync(jewelryId, materialId);
                 return NoContent();
             }
             catch (KeyNotFoundException)

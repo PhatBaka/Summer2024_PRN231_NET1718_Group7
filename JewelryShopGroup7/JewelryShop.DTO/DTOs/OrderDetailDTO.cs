@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace JewelryShop.DTO.DTOs;
@@ -36,10 +34,10 @@ public partial class OrderDetailDTO
     // public virtual Order? Order { get; set; }
 }
 
-public class CreateOrderDetailDTO 
+public class CreateOrderDetailDTO
 {
-	public Guid? JewelryId { get; set; }
-	public int Quantity { get; set; }
+    public Guid? JewelryId { get; set; }
+    public int Quantity { get; set; }
     [JsonIgnore]
     public decimal TotalPrice { get; set; }
     [JsonIgnore]

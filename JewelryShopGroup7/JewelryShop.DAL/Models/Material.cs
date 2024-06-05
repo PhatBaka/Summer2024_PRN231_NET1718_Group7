@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace JewelryShop.DAL.Models;
+﻿namespace JewelryShop.DAL.Models;
 
 public partial class Material
 {
@@ -11,17 +8,17 @@ public partial class Material
 
     public string? Description { get; set; }
 
-	public DateOnly? Date { get; set; }
+    public DateOnly? Date { get; set; }
 
-	public string UnitType { get; set; }
+    public string UnitType { get; set; }
 
-	public decimal Price { get; set; }
+    public decimal Price { get; set; }
 
-	public Guid ImageId { get; set; }
+    public Guid ImageId { get; set; }
 
-	public virtual Image Image { get; set; }
+    public virtual Image Image { get; set; }
 
-	public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
+    public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
 
     public virtual ICollection<MaterialPrice> MaterialPrices { get; set; } = new List<MaterialPrice>();
 }

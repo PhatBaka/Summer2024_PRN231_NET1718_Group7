@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.OData;
-using PhotoboothBranchService.Domain.Common.Interfaces;
-using JewelryShop.DAL;
 using JewelryShop.BusinessLayer;
+using JewelryShop.DAL;
+using Microsoft.AspNetCore.OData;
 
 var builder = WebApplication.CreateBuilder(args);
 

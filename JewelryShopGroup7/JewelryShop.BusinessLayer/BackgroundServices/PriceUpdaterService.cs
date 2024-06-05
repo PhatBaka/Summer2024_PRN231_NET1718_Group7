@@ -1,17 +1,9 @@
 ﻿using JewelryShop.DAL.Models;
-using JewelryShop.DAL.Repositories.Interface;
 using JewelryShop.DAL.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JewelryShop.BusinessLayer.BackgroundServices
 {
@@ -128,7 +120,9 @@ namespace JewelryShop.BusinessLayer.BackgroundServices
             if (response == "[]")
             {
                 return new List<Metal>();
-            } else {
+            }
+            else
+            {
                 return JsonConvert.DeserializeObject<List<Metal>>(response);
             }
         }
@@ -139,7 +133,9 @@ namespace JewelryShop.BusinessLayer.BackgroundServices
             if (response == "[]")
             {
                 return new List<Gem>();
-            } else {
+            }
+            else
+            {
                 return JsonConvert.DeserializeObject<List<Gem>>(response);
             }
         }
