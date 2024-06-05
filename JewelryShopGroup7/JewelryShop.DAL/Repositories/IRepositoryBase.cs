@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace PhotoboothBranchService.Domain.Common.Interfaces;
+namespace JewelryShop.DAL.Repositories;
 
 public interface IRepositoryBase<TEntity>
 {

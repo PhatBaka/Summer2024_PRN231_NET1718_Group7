@@ -1,4 +1,4 @@
-﻿namespace PhotoboothBranchService.Domain.Common.Interfaces;
+﻿namespace JewelryShop.BusinessLayer.Mapper;
 
 public interface IMapper<TSource, TDestination>
 {

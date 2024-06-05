@@ -29,10 +29,12 @@ namespace JewelryStoreUI.Pages.Promotions
             {
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();
-
-                dynamic responseResult = JsonConvert.DeserializeObject(result);
-                ResponseResult.Data = JsonConvert.SerializeObject(responseResult);
-                StoreDiscounts = JsonConvert.DeserializeObject<List<StoreDiscountDTO>>(ResponseResult.Data);
+                if (result!= "[]")
+                {
+					dynamic responseResult = JsonConvert.DeserializeObject(result);
+					ResponseResult.Data = JsonConvert.SerializeObject(responseResult);
+					StoreDiscounts = JsonConvert.DeserializeObject<List<StoreDiscountDTO>>(ResponseResult.Data);
+				}
             }
             return Page();
         }

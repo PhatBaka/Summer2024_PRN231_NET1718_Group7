@@ -8,7 +8,7 @@ using AutoMapper;
 using JewelryShop.DAL.Models;
 using Microsoft.AspNetCore.OData.Query;
 
-namespace JewelryShop.API.Controllers
+namespace JewelryShop.OData.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -52,7 +52,7 @@ namespace JewelryShop.API.Controllers
             createModel.TotalPrice = 0;
             foreach (var item in createModel.OrderDetails)
             {
-                var entity = await _jewelryService.GetByIdAsync((Guid) item.JewelryId);
+                var entity = await _jewelryService.GetByIdAsync((Guid)item.JewelryId);
                 var orderDetail = createModel.OrderDetails.First(x => x.JewelryId == entity.JewelryId);
                 orderDetail.UnitPrice = entity.UnitPrice;
                 orderDetail.TotalPrice = entity.UnitPrice * orderDetail.Quantity;

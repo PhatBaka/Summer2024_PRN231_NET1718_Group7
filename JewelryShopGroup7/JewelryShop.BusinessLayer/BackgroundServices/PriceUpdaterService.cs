@@ -54,7 +54,7 @@ namespace JewelryShop.BusinessLayer.BackgroundServices
             {
                 var metals = await FetchMetalsFromApi();
                 var gems = await FetchGemsFromApi();
-
+                DateOnly today = DateOnly.FromDateTime(DateTime.Now);
                 using (var scope = _serviceProvider.CreateScope())
                 {
                     var materialPriceRepository = scope.ServiceProvider.GetRequiredService<IMaterialPriceRepository>();
@@ -68,13 +68,22 @@ namespace JewelryShop.BusinessLayer.BackgroundServices
                             var materialPrice = new MaterialPrice
                             {
                                 MaterialId = jewelryMaterial.MaterialId,
-                                //  Date = DateOnly.FromDateTime(DateTime.Now),
-                                Date = DateTime.UtcNow,
+                                Date = today,
                                 Price = metal.Price,
                                 MaterialPriceId = Guid.NewGuid(),
                                 UnitType = jewelryMaterial.UnitType,
                             };
-                            await materialPriceRepository.AddAsync(materialPrice);
+                            var checkMaterialPrice = (await materialPriceRepository.GetAsync(m => m.Date == today)).FirstOrDefault();
+                            if (checkMaterialPrice != null)
+                            {
+                                materialPrice.MaterialPriceId = checkMaterialPrice.MaterialPriceId;
+                                await materialPriceRepository.UpdateAsync(materialPrice);
+                            }
+                            else
+                            {
+                                await materialPriceRepository.AddAsync(materialPrice);
+                            }
+
                         }
                     }
 
@@ -86,13 +95,22 @@ namespace JewelryShop.BusinessLayer.BackgroundServices
                             var materialPrice = new MaterialPrice
                             {
                                 MaterialId = jewelryMaterial.MaterialId,
-                              //  Date = DateOnly.FromDateTime(DateTime.Now),
-                                Date = DateTime.UtcNow,
+                                Date = today,
                                 Price = gem.Price,
                                 MaterialPriceId = Guid.NewGuid(),
                                 UnitType = jewelryMaterial.UnitType,
                             };
-                            await materialPriceRepository.AddAsync(materialPrice);
+                            var checkMaterialPrice = (await materialPriceRepository.GetAsync(m => m.Date == today)).FirstOrDefault();
+                            if (checkMaterialPrice != null)
+                            {
+                                materialPrice.MaterialPriceId = checkMaterialPrice.MaterialPriceId;
+                                await materialPriceRepository.UpdateAsync(materialPrice);
+                            }
+                            else
+                            {
+                                await materialPriceRepository.AddAsync(materialPrice);
+                            }
+
                         }
                     }
                 }

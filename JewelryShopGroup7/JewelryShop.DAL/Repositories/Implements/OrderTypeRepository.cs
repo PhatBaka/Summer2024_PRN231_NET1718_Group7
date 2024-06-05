@@ -1,5 +1,5 @@
 ﻿using JewelryShop.DAL.Models;
-using JewelryShop.DAL.Repositories.Interface;
+using JewelryShop.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

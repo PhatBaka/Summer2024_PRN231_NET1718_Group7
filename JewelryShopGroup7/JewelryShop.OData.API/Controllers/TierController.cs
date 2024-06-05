@@ -6,7 +6,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using Microsoft.AspNetCore.OData.Query;
 
-namespace JewelryShop.API.Controllers
+namespace JewelryShop.OData.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

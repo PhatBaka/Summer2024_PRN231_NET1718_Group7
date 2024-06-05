@@ -1,5 +1,4 @@
 ﻿using JewelryShop.DTO.DTOs;
-using PhotoboothBranchService.Domain.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JewelryShop.BusinessLayer.Interfaces
 {
-	public interface IImageService : IService<ImageDTO>
+    public interface IImageService : IService<ImageDTO>
 	{
 	}
 }

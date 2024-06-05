@@ -1,10 +1,9 @@
-
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.BusinessLayer.Mapper;
 using JewelryShop.BusinessLayer.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitecture.Application;
+namespace JewelryShop.BusinessLayer;
 
 public static class DependencyInjection
 {

@@ -1,9 +1,5 @@
-
-
 using JewelryShop.DAL.Models;
-using JewelryShop.DAL.Repositories.Implement;
 using JewelryShop.DAL.Repositories.Implements;
-using JewelryShop.DAL.Repositories.Interface;
 using JewelryShop.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Protocols;
 using System.ComponentModel.Design;
 
-namespace CleanArchitecture.Application;
+namespace JewelryShop.DAL;
 
 public static class DependencyInjection
 {

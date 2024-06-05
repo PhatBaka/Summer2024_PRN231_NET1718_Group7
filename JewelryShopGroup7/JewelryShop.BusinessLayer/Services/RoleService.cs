@@ -1,7 +1,7 @@
 using AutoMapper;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
-using JewelryShop.DAL.Repositories.Interface;
+using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
 using System;
 using System.Collections.Generic;

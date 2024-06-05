@@ -1,4 +1,4 @@
-﻿namespace PhotoboothBranchService.Domain.Common.Interfaces;
+﻿namespace JewelryShop.BusinessLayer;
 
 public interface IService<DTOModel>
 {

@@ -1,5 +1,5 @@
 ﻿using JewelryShop.DAL.Models;
-using JewelryShop.DAL.Repositories.Interface;
+using JewelryShop.DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JewelryShop.DAL.Repositories.Implement
+namespace JewelryShop.DAL.Repositories.Implements
 {
     public class GuaranteeRepository : IGuaranteeRepository
     {

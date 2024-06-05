@@ -10,7 +10,7 @@ using JewelryShop.DAL.Repositories.Interface;
 using JewelryShop.DAL.Models;
 using Microsoft.AspNetCore.OData.Query;
 
-namespace JewelryShop.API.Controllers
+namespace JewelryShop.OData.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -50,28 +50,28 @@ namespace JewelryShop.API.Controllers
 
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateJewelryDTO createJewelryDTO)
-		{
+        {
             foreach (var material in createJewelryDTO.CreateJewelryMeterialDTOs)
             {
                 var entity = await _materialService.GetByIdAsync((Guid)material.MaterialId);
                 createJewelryDTO.TotalWeight += material.Weight;
-				createJewelryDTO.UnitPrice += material.Weight * entity.Price;
-			}
-			createJewelryDTO.UnitPrice += (decimal) createJewelryDTO.ManufacturingFees;
-            createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + (createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage);
+                createJewelryDTO.UnitPrice += material.Weight * entity.Price;
+            }
+            createJewelryDTO.UnitPrice += (decimal)createJewelryDTO.ManufacturingFees;
+            createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage;
             createJewelryDTO.Status = ObjectStatus.ACTIVE.ToString();
             var id = await _jewelryService.CreateAsync(_mapper.Map<JewelryDTO>(createJewelryDTO));
             foreach (var material in createJewelryDTO.CreateJewelryMeterialDTOs)
             {
                 var weight = await _materialService.GetByIdAsync((Guid)material.MaterialId);
-				JewelryMaterialDTO jewelryMaterialDTO = new JewelryMaterialDTO()
+                JewelryMaterialDTO jewelryMaterialDTO = new JewelryMaterialDTO()
                 {
                     JewelryId = id,
-                    MaterialId = (Guid) material.MaterialId,
+                    MaterialId = (Guid)material.MaterialId,
                     Weight = material.Weight,
                     ImportTime = DateTime.Now,
                     Price = material.Weight * weight.Price
-				};
+                };
                 await _jewelryMaterialService.CreateAsync(jewelryMaterialDTO);
             }
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
