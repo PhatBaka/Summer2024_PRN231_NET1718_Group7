@@ -212,12 +212,6 @@ namespace JewelryShop.DAL.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("MaterialID");
 
-                    b.Property<DateTime>("ImportTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal?>("Weight")
                         .HasColumnType("decimal(18, 2)");
 

@@ -19,7 +19,6 @@ namespace JewelryStoreUI.Pages
 		public IList<Cart> Carts { get; set; }
 		[BindProperty]
 		public IList<Cart> Carts2 { get; set; }
-		private readonly HttpClient _httpClient;
 		private string baseUrl = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
 		private string jewelryUrl;
 		private string imageUrl;
@@ -32,7 +31,6 @@ namespace JewelryStoreUI.Pages
 			_httpContextAccessor = httpContextAccessor;
 			Carts = new List<Cart>();
 			Carts2 = new List<Cart>();
-			_httpClient = new HttpClient();
 			jewelryUrl = $"{baseUrl}Jewelry/";
 			imageUrl = $"{baseUrl}Image/";
 			orderUrl = $"{baseUrl}Order";
@@ -40,13 +38,13 @@ namespace JewelryStoreUI.Pages
 
 		public async Task OnGet()
         {
-			Carts = GetCartItems();
+            Carts = GetCartItems();
 			foreach (var cart in Carts)
 			{
 				jewelryUrl = $"{jewelryUrl}{cart.JewelryId}";
-				using (var client = _httpClient) 
+				using (var client = new HttpClient()) 
 				{
-					var response = await _httpClient.GetAsync(jewelryUrl);
+					var response = await client.GetAsync(jewelryUrl);
 					var result = await response.Content.ReadAsStringAsync();
 					var entity = JsonConvert.DeserializeObject<dynamic>(result);
 					cart.Data = entity;
@@ -54,8 +52,9 @@ namespace JewelryStoreUI.Pages
 				}
 				TotalPrice += (decimal) cart.Data.sellPrice;
 				Carts2.Add(cart);
-			}
-		}
+                jewelryUrl = $"{baseUrl}Jewelry/";
+            }
+        }
 
 		public IActionResult OnPostClearCart()
 		{
@@ -68,7 +67,8 @@ namespace JewelryStoreUI.Pages
 
 		public List<Cart> GetCartItems()
 		{
-			var cartItemsCookie = _httpContextAccessor.HttpContext.Request.Cookies["cartItems"];
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("cartItems");
+            var cartItemsCookie = _httpContextAccessor.HttpContext.Request.Cookies["cartItems"];
 
 			if (string.IsNullOrEmpty(cartItemsCookie))
 			{
@@ -98,7 +98,7 @@ namespace JewelryStoreUI.Pages
 		}
 		public async Task<string> GetImageAsync(dynamic imageId)
 		{
-			using (var client = _httpClient)
+			using (var client = new HttpClient())
 			{
 				var response = await client.GetAsync($"{imageUrl}{imageId}");
 				var result = await response.Content.ReadAsStringAsync();
@@ -138,7 +138,7 @@ namespace JewelryStoreUI.Pages
 					var result = await response.Content.ReadAsStringAsync();
 					
 				}
-				return RedirectToPage("CheckoutSuccess");
+				return RedirectToPage();
 			}
 			return Page();
 		}
