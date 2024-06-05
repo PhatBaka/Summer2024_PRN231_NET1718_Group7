@@ -11,7 +11,7 @@ public partial class Material
 
     public string? Description { get; set; }
 
-	public DateTime? Date { get; set; }
+	public DateOnly? Date { get; set; }
 
 	public string UnitType { get; set; }
 

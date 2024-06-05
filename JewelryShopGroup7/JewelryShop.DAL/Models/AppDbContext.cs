@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JewelryShop.DAL.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -60,7 +61,14 @@ public partial class AppDbContext : DbContext
         IConfigurationRoot configuration = builder.Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("JewelryShop"), b => b.MigrationsAssembly("JewelryShop.DAL"));
     }
-        
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+
+        configurationBuilder.Properties<DateOnly>()
+            .HaveConversion<DateOnlyConverter>();
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
