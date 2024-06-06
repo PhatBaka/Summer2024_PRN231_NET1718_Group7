@@ -167,8 +167,8 @@ namespace JewelryShop.DAL.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<Guid?>("JewelryType")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("JewelryType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("ManufacturingFees")
                         .HasColumnType("decimal(18, 2)");
@@ -197,8 +197,6 @@ namespace JewelryShop.DAL.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.HasIndex("JewelryType");
-
                     b.ToTable("Jewelry", (string)null);
                 });
 
@@ -221,24 +219,6 @@ namespace JewelryShop.DAL.Migrations
                     b.HasIndex("MaterialId");
 
                     b.ToTable("JewelryMaterial", (string)null);
-                });
-
-            modelBuilder.Entity("JewelryShop.DAL.Models.JewelryType", b =>
-                {
-                    b.Property<Guid>("TypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("TypeID")
-                        .HasDefaultValueSql("(newid())");
-
-                    b.Property<string>("TypeName")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("TypeId")
-                        .HasName("PK__JewelryT__516F0395CCBB916E");
-
-                    b.ToTable("JewelryType", (string)null);
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.Material", b =>
@@ -608,14 +588,7 @@ namespace JewelryShop.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JewelryShop.DAL.Models.JewelryType", "JewelryTypeNavigation")
-                        .WithMany("Jewelries")
-                        .HasForeignKey("JewelryType")
-                        .HasConstraintName("FK__Jewelry__Jewelry__38996AB5");
-
                     b.Navigation("Image");
-
-                    b.Navigation("JewelryTypeNavigation");
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.JewelryMaterial", b =>
@@ -772,11 +745,6 @@ namespace JewelryShop.DAL.Migrations
                     b.Navigation("JewelryMaterials");
 
                     b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("JewelryShop.DAL.Models.JewelryType", b =>
-                {
-                    b.Navigation("Jewelries");
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.Material", b =>

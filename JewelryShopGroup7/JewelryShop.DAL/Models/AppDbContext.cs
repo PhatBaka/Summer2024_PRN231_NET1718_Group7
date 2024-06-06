@@ -25,7 +25,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<JewelryMaterial> JewelryMaterials { get; set; }
 
-    public virtual DbSet<JewelryType> JewelryTypes { get; set; }
+    //public virtual DbSet<JewelryType> JewelryTypes { get; set; }
 
     public virtual DbSet<Material> Materials { get; set; }
 
@@ -143,9 +143,9 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.ManufacturingFees).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Status).HasMaxLength(50);
 
-            entity.HasOne(d => d.JewelryTypeNavigation).WithMany(p => p.Jewelries)
-                .HasForeignKey(d => d.JewelryType)
-                .HasConstraintName("FK__Jewelry__Jewelry__38996AB5");
+            //entity.HasOne(d => d.JewelryTypeNavigation).WithMany(p => p.Jewelries)
+            //    .HasForeignKey(d => d.JewelryType)
+            //    .HasConstraintName("FK__Jewelry__Jewelry__38996AB5");
         });
 
         modelBuilder.Entity<JewelryMaterial>(entity =>
@@ -169,17 +169,17 @@ public partial class AppDbContext : DbContext
                 .HasConstraintName("FK__JewelryMa__Mater__3C69FB99");
         });
 
-        modelBuilder.Entity<JewelryType>(entity =>
-        {
-            entity.HasKey(e => e.TypeId).HasName("PK__JewelryT__516F0395CCBB916E");
+        //modelBuilder.Entity<JewelryType>(entity =>
+        //{
+        //    entity.HasKey(e => e.TypeId).HasName("PK__JewelryT__516F0395CCBB916E");
 
-            entity.ToTable("JewelryType");
+        //    entity.ToTable("JewelryType");
 
-            entity.Property(e => e.TypeId)
-                .HasDefaultValueSql("(newid())")
-                .HasColumnName("TypeID");
-            entity.Property(e => e.TypeName).HasMaxLength(255);
-        });
+        //    entity.Property(e => e.TypeId)
+        //        .HasDefaultValueSql("(newid())")
+        //        .HasColumnName("TypeID");
+        //    entity.Property(e => e.TypeName).HasMaxLength(255);
+        //});
 
         modelBuilder.Entity<Material>(entity =>
         {
