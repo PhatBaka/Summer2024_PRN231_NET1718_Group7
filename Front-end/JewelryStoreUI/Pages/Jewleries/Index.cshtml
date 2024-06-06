@@ -194,15 +194,17 @@
 											<div class="col-sm-6 feature_2im4r space_right" >
 												<ul>
 													<li>
-												@if (HttpContext.Session.GetString("ROLE") == "STAFF")
-												{
-													<form id="addToCartForm" method="post">
-														<input type="hidden" name="handler" value="AddToCart" />
-														<input type="hidden" name="itemId" id="itemId" value="@result.Data.jewelryId" />
-														<!-- Use JavaScript to submit the form when anchor tag is clicked -->
-														<a href="#" onclick="submitAddToCartForm(); return false;"><i class="fa fa-shopping-cart"></i></a>
-													</form>
-												}
+														@if (HttpContext.Session.GetString("ROLE") == "STAFF")
+														{
+															<form id="addToCartForm-@result.Data.jewelryId" method="post">
+																<input type="hidden" name="handler" value="AddToCart" />
+																<input type="hidden" name="itemId" value="@result.Data.jewelryId" />
+																<!-- Use JavaScript to submit the form when anchor tag is clicked -->
+																<a href="#" onclick="submitAddToCartForm('@result.Data.jewelryId'); return false;">
+																	<i class="fa fa-shopping-cart"></i>
+																</a>
+															</form>
+														}
 													</li>
 													<li><a href="detail.html"><i class="fa fa-rocket"></i></a></li>
 													<li><a href="detail.html"><i class="fa fa-heart-o"></i></a></li>
@@ -249,8 +251,9 @@
 </section>
 
 <script>
-	function submitAddToCartForm() {
-		document.getElementById('addToCartForm').submit();
-		return false;
+	function submitAddToCartForm(jewelryId) {
+		console.log("Submitting form for jewelryId:", jewelryId);
+        document.getElementById('addToCartForm-' + jewelryId).submit();
+        return false;
 	}
 </script>
