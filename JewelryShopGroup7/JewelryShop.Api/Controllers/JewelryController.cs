@@ -51,7 +51,7 @@ namespace JewelryShop.API.Controllers
                 createJewelryDTO.UnitPrice += material.Weight * entity.Price;
             }
             createJewelryDTO.UnitPrice += (decimal)createJewelryDTO.ManufacturingFees;
-            createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + (createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage);
+            createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + (createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage / 100);
             createJewelryDTO.Status = ObjectStatus.ACTIVE.ToString();
             var id = await _jewelryService.CreateAsync(_mapper.Map<JewelryDTO>(createJewelryDTO));
             foreach (var material in createJewelryDTO.CreateJewelryMeterialDTOs)
