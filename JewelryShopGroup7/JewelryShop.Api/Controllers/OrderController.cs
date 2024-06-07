@@ -44,6 +44,7 @@ namespace JewelryShop.API.Controllers
         public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderDTO createModel)
         {
             createModel.TotalPrice = 0;
+            List<JewelryDTO> jewelryDTOs = new List<JewelryDTO>();
             foreach (var item in createModel.OrderDetails)
             {
                 var entity = await _jewelryService.GetByIdAsync((Guid)item.JewelryId);

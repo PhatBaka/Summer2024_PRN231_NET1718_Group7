@@ -18,8 +18,8 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Material, MaterialDTO>().ReverseMap();
             CreateMap<MaterialPrice, MaterialPriceDTO>().ReverseMap();
             CreateMap<Offer, OfferDTO>().ReverseMap();
-            CreateMap<Order, OrderDTO>().ReverseMap();
-            CreateMap<OrderDetail, OrderDetailDTO>().ReverseMap();
+            //CreateMap<Order, OrderDTO>().ReverseMap();
+            //CreateMap<OrderDetail, OrderDetailDTO>().ReverseMap();
             CreateMap<OrderDiscount, OrderDiscountDTO>().ReverseMap();
             CreateMap<OrderType, OrderTypeDTO>().ReverseMap();
             CreateMap<Role, RoleDTO>().ReverseMap();
@@ -42,10 +42,18 @@ namespace JewelryShop.BusinessLayer.Mapper
             #endregion
 
             #region Order
+            CreateMap<Order, OrderDTO>()
+                .ReverseMap();
             CreateMap<OrderDTO, CreateOrderDTO>().ReverseMap();
+            CreateMap<OrderDetail, OrderDetailDTO>()
+                .ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
+                .ReverseMap();
             #endregion
 
             #region OrderDetail
+            CreateMap<OrderDetail, OrderDetailDTO>()
+                .ForMember(dest => dest.Jewelry, opt => opt.Ignore())
+                .ReverseMap();
             CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
             #endregion
         }

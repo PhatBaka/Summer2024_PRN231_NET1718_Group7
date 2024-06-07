@@ -67,7 +67,6 @@ namespace JewelryStoreUI.Pages
 
 		public List<Cart> GetCartItems()
 		{
-            _httpContextAccessor.HttpContext.Response.Cookies.Delete("cartItems");
             var cartItemsCookie = _httpContextAccessor.HttpContext.Request.Cookies["cartItems"];
 
 			if (string.IsNullOrEmpty(cartItemsCookie))

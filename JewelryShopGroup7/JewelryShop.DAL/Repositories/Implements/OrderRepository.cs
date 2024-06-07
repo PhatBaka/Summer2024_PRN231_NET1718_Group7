@@ -1,5 +1,6 @@
 ﻿using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace JewelryShop.DAL.Repositories.Implements
