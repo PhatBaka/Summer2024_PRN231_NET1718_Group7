@@ -52,6 +52,10 @@ namespace JewelryShop.BusinessLayer.Services
         public async Task<StoreDiscountDTO> GetByIdAsync(Guid id)
         {
             var storeDiscount = (await _storeDiscountRepository.GetAsync(sd => sd.StoreDiscountId == id)).FirstOrDefault();
+            if (storeDiscount != null)
+            {
+                await _storeDiscountRepository.LoadRelate(storeDiscount);
+            }
             return _mapper.Map<StoreDiscountDTO>(storeDiscount);
         }
 

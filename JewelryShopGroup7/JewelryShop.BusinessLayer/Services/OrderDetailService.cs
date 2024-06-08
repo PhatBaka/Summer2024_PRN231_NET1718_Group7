@@ -68,5 +68,6 @@ namespace JewelryShop.BusinessLayer.Services
                 throw new KeyNotFoundException("Order Detail not found.");
             }
         }
+
     }
 }

@@ -32,6 +32,44 @@
                         <p>@Model.StoreDiscount.RemainingUsage</p>
                     </div>
                 </div>
+                <hr>
+                <div class="order-discounts">
+                    <h2>Order Discounts</h2>
+                    @if (Model.StoreDiscount.OrderDiscounts.Any())
+                    {
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Order Discount ID</th>
+                                    <th>Value</th>
+                                    <th>Name</th>
+                                    <th>Store Discount ID</th>
+                                    <th>Offer ID</th>
+                                    <th>Tier ID</th>
+                                    <!-- Add other headers as necessary -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var orderDiscount in Model.StoreDiscount.OrderDiscounts)
+                                {
+                                    <tr>
+                                        <td>@orderDiscount.OrderDiscountId</td>
+                                        <td>@orderDiscount.Value</td>
+                                        <td>@orderDiscount.Name</td>
+                                        <td>@orderDiscount.StoreDiscountId</td>
+                                        <td>@orderDiscount.OfferId</td>
+                                        <td>@orderDiscount.TierId</td>
+                                        <!-- Add other fields as necessary -->
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No order discounts available for this store discount.</p>
+                    }
+                </div>
             </div>
         </div>
     </div>

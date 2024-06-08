@@ -1,5 +1,6 @@
 ﻿using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace JewelryShop.DAL.Repositories.Implements
@@ -45,6 +46,14 @@ namespace JewelryShop.DAL.Repositories.Implements
         public async Task<StoreDiscount> GetFirstOrDefaultAsync(Expression<Func<StoreDiscount, bool>> predicate)
         {
             return await Task.FromResult(_dbContext.StoreDiscounts.FirstOrDefault(predicate));
+        }
+
+        public async Task<StoreDiscount> LoadRelate(StoreDiscount storeDiscount)
+        {
+            await _dbContext.Entry(storeDiscount)
+                      .Collection(sd => sd.OrderDiscounts)
+                      .LoadAsync();
+            return storeDiscount;
         }
     }
 }
