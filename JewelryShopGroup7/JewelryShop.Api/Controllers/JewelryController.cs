@@ -62,8 +62,6 @@ namespace JewelryShop.API.Controllers
                     JewelryId = id,
                     MaterialId = (Guid)material.MaterialId,
                     Weight = material.Weight,
-                    ImportTime = DateTime.Now,
-                    Price = material.Weight * weight.Price
                 };
                 await _jewelryMaterialService.CreateAsync(jewelryMaterialDTO);
             }

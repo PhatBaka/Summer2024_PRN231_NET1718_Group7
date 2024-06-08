@@ -1,4 +1,111 @@
 ﻿@page
 @model JewelryStoreUI.Pages.Jewleries.DetailModel
 @{
+    Layout = "_StaffLayout";
 }
+
+
+<section id="center" class="center_shop">
+    <div class="container">
+        <div class="row">
+            <div class="center_shop_t clearfix">
+                <div class="col-sm-6">
+                    <div class="center_shop_tl clearfix">
+                        <h4 class="mgt">JEWELRY</h4>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="center_shop_tr text-right clearfix">
+                        <h6 class="col_2">You are here: <a href="#">Jewelry</a> / Detail</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="center" class="center_shop">
+    <div class="container">
+        <div class="row">
+            <div class="center_shop_t clearfix">
+                <div class="justify-content-center">
+                    <img src="data:image/png;base64, @Model.JewelryDTO.Base64" alt="Red dot" style="width: 260px; height: 260px;" />
+                </div>
+                <div class="row">
+                    <div class="checkout_1 clearfix">
+                        <div class="col-sm-12">
+                            <div class="checkout_1l1 clearfix">
+                                <div class="col-sm-3 space_left">
+                                    <h5>ID <span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.jewelryId</span>
+                                </div>
+                                <div class="col-sm-3 space_left">
+                                    <h5>Name <span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.jewelryName</span>
+                                </div>
+                                <div class="col-sm-3 space_left">
+                                    <h5>Manufacturing Fee<span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.manufacturingFees</span>
+                                </div>                       
+                                <div class="col-sm-3 space_left">
+                                    <h5>Status <span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.status</span>
+                                </div>
+                                <div class="col-sm-3 space_left">
+                                    <h5>Guarantee Duration<span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.guaranteeDuration</span>
+                                </div>
+                                <div class="col-sm-3 space_left">
+                                    <h5>Quantity Left <span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.quantity</span>
+                                </div>
+                                <div class="col-sm-3 space_left">
+                                    <h5>Weight <span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.totalWeight</span>
+                                </div>
+                                <div class="col-sm-3 space_left">
+                                    <h5>Unit Price <span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.unitPrice$</span>
+                                </div>
+                                <div class="col-sm-3 space_left">
+                                    <h5>Markup percentage <span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.markupPercentage</span>
+                                </div>
+                                <div class="col-sm-3 space_left">
+                                    <h5>Sell Price <span class="col_1">*</span></h5>
+                                    <span class="form-control" id="grandTotal">@Model.JewelryDTO.Data.sellPrice$</span>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Material ID</th>
+                                    <th>Material Name</th>
+                                    <th>Unit Price</th>
+                                    <th>Weight</th>
+                                    <th>Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var material in Model.MaterialDTOs)
+                                {
+                                    <tr>
+                                        <td>@material.Data.materialId</td>
+                                        <td>@material.Data.name</td>
+                                        <td>@material.Data.price</td>
+                                        <td>@material.Data.weight</td>
+                                        <td>@material.Data.price</td>
+                                        <div class="justify-content-center">
+                                            <img src="data:image/png;base64, @material.Base64" alt="Red dot" style="width: 50px; height: 50px;" />
+                                        </div>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

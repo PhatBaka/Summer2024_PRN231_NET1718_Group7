@@ -18,7 +18,7 @@ public partial class MaterialDTO
 
 	// public virtual ImageDTO Image { get; set; }
 
-    public ICollection<JewelryMaterialDTO> JewelryMaterials { get; set; } = new List<JewelryMaterialDTO>();
+    // public ICollection<JewelryMaterialDTO> JewelryMaterials { get; set; } = new List<JewelryMaterialDTO>();
 
     // public virtual ICollection<MaterialPriceDTO> MaterialPrices { get; set; } = new List<MaterialPrice>();
 }

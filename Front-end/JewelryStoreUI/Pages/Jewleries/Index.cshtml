@@ -180,7 +180,7 @@
 								<div class="col-sm-4 space_left">
 									<div class="feature_2im clearfix" style="width: 260px; height: 260px;">
 										<div class="feature_2im1 clearfix">
-											<a href="detail.html">
+											<a asp-page="/Jewelries/Detail" asp-route-orderId="@result.Data.jewelryId">
 												<img src="data:image/png;base64, @result.Base64" alt="Red dot" style="width: 260px; height: 260px;" />
 											</a>
 										</div>
@@ -207,8 +207,6 @@
 															</form>
 														}
 													</li>
-													<li><a href="detail.html"><i class="fa fa-rocket"></i></a></li>
-													<li><a href="detail.html"><i class="fa fa-heart-o"></i></a></li>
 												</ul>
 											</div>
 										</div>
