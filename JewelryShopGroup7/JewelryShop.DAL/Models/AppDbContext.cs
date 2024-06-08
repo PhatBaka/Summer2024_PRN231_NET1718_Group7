@@ -41,7 +41,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<OrderType> OrderTypes { get; set; }
 
-    public virtual DbSet<Role> Roles { get; set; }
+    //public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<StoreDiscount> StoreDiscounts { get; set; }
 
@@ -82,12 +82,12 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.Password).HasMaxLength(255);
             entity.Property(e => e.PhoneNumber).HasMaxLength(50);
-            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            //entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.Status).HasMaxLength(50);
 
-            entity.HasOne(d => d.Role).WithMany(p => p.Accounts)
-                .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__Account__RoleID__286302EC");
+            //entity.HasOne(d => d.Role).WithMany(p => p.Accounts)
+            //    .HasForeignKey(d => d.RoleId)
+            //    .HasConstraintName("FK__Account__RoleID__286302EC");
         });
 
         modelBuilder.Entity<Customer>(entity =>
@@ -246,7 +246,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.DiscountPrice).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.FinalPrice).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.OrderDate).HasColumnType("date");
+            entity.Property(e => e.OrderDate).HasColumnType("datetime");
             entity.Property(e => e.OrderDiscountId).HasColumnName("OrderDiscountID");
             //entity.Property(e => e.OrderTypeId).HasColumnName("OrderTypeID");
             entity.Property(e => e.Status).HasMaxLength(50);
@@ -331,19 +331,19 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.TypeName).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<Role>(entity =>
-        {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A89C40932");
+        //modelBuilder.Entity<Role>(entity =>
+        //{
+        //    entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A89C40932");
 
-            entity.ToTable("Role");
+        //    entity.ToTable("Role");
 
-            entity.Property(e => e.RoleId)
-                .HasDefaultValueSql("(newid())")
-                .HasColumnName("RoleID");
-            entity.Property(e => e.Role1)
-                .HasMaxLength(255)
-                .HasColumnName("Role");
-        });
+        //    entity.Property(e => e.RoleId)
+        //        .HasDefaultValueSql("(newid())")
+        //        .HasColumnName("RoleID");
+        //    entity.Property(e => e.Role1)
+        //        .HasMaxLength(255)
+        //        .HasColumnName("Role");
+        //});
 
         modelBuilder.Entity<StoreDiscount>(entity =>
         {

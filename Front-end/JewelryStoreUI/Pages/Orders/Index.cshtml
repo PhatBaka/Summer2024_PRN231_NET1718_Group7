@@ -32,6 +32,7 @@
                         <tr>
                             <th>Order ID</th>
                             <th>Order Date</th>
+                            <th>Phoner Number</th>
                             <th>Total Price</th>
                             <th>Discount Price</th>
                             <th>Final Price</th>
@@ -45,6 +46,7 @@
                             <tr>
                                 <td>@order.orderId</td>
                                 <td>@((DateTime)order.orderDate)</td>
+                                <td>@order.phoneNumber)</td>
                                 <td>@(order.totalPrice ?? "N/A")</td>
                                 <td>@(order.discountPrice ?? "N/A")</td>
                                 <td>@(order.finalPrice ?? "N/A")</td>

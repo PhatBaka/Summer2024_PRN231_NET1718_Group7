@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.DAL.Models;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.Enums;
 
 namespace JewelryShop.BusinessLayer.Mapper
 {
@@ -9,8 +11,8 @@ namespace JewelryShop.BusinessLayer.Mapper
         public MappingProfile()
         {
             CreateMap<Account, AccountDTO>()
-                .ForMember(x => x.Role1, opt => opt.MapFrom(dest => dest.Role.Role1))
-                .ReverseMap(); ;
+                .ForMember(des => des.Role, src => src.MapFrom(src => EnumMapper<RoleEnum>.MapType(src.Role)))
+                .ReverseMap(); 
             CreateMap<Customer, CustomerDTO>().ReverseMap();
             CreateMap<Guarantee, GuaranteeDTO>().ReverseMap();
             CreateMap<JewelryMaterial, JewelryMaterialDTO>().ReverseMap();
@@ -22,7 +24,7 @@ namespace JewelryShop.BusinessLayer.Mapper
             //CreateMap<OrderDetail, OrderDetailDTO>().ReverseMap();
             CreateMap<OrderDiscount, OrderDiscountDTO>().ReverseMap();
             CreateMap<OrderType, OrderTypeDTO>().ReverseMap();
-            CreateMap<Role, RoleDTO>().ReverseMap();
+            //CreateMap<Role, RoleDTO>().ReverseMap();
             CreateMap<StoreDiscount, StoreDiscountDTO>().ReverseMap();
             CreateMap<Tier, TierDTO>().ReverseMap();
 
@@ -43,16 +45,15 @@ namespace JewelryShop.BusinessLayer.Mapper
 
             #region Order
             CreateMap<Order, OrderDTO>()
+                .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(dest => dest.Account.PhoneNumber))
                 .ReverseMap();
             CreateMap<OrderDTO, CreateOrderDTO>().ReverseMap();
-            CreateMap<OrderDetail, OrderDetailDTO>()
-                .ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
-                .ReverseMap();
             #endregion
 
             #region OrderDetail
             CreateMap<OrderDetail, OrderDetailDTO>()
-                .ForMember(dest => dest.Jewelry, opt => opt.Ignore())
+                .ForMember(x => x.Jewelry, opt => opt.MapFrom(dest => dest.Jewelry))
+                .ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
                 .ReverseMap();
             CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
             #endregion

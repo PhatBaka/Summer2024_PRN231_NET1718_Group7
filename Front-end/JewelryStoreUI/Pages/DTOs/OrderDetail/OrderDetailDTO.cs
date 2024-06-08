@@ -8,4 +8,10 @@ namespace JewelryStoreUI.Pages.DTOs.OrderDetail
     {
         public string Base64;
     }
+
+    public class CreateOrderDetailDTO
+    {
+        public Guid JewelryId { get; set; }
+        public int Quantity { get; set; }
+    }
 }

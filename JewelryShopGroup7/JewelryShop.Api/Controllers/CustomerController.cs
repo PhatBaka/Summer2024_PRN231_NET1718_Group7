@@ -22,7 +22,15 @@ namespace JewelryShop.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("phone/{phoneNumber}")]
+        public async Task<ActionResult<CustomerDTO>> GetCustomerByPhoneAsync(string phoneNumber)
+        {
+            var result = await _customerService.GetAllAsync();
+            return Ok(result.FirstOrDefault(x => x.PhoneNumber == phoneNumber));
+        }
+
+
+        [HttpGet("id/{id}")]
         public async Task<ActionResult<CustomerDTO>> GetByIdAsync(Guid id)
         {
             var result = await _customerService.GetByIdAsync(id);

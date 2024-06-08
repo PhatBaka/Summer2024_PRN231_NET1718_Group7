@@ -19,7 +19,12 @@ namespace JewelryShop.BusinessLayer.Services
 
         public async Task<Guid> CreateAsync(OrderDTO createModel)
         {
+            // cho nay tam code au
             Order order = _mapper.Map<Order>(createModel);
+            foreach (var entity in order.OrderDetails)
+            {
+                entity.Jewelry = null;
+            }
             return await _orderRepository.AddAsync(order);
         }
 

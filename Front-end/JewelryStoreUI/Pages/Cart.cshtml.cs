@@ -6,13 +6,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Numerics;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace JewelryStoreUI.Pages
 {
     public class CartModel : PageModel
     {
+		[BindProperty]
+		public string? PhoneNumber { get; set; }
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private string? cartItemsCookie;
 		[BindProperty]
@@ -23,6 +27,7 @@ namespace JewelryStoreUI.Pages
 		private string jewelryUrl;
 		private string imageUrl;
 		private string orderUrl;
+		private string customerUrl;
 
 		public decimal TotalPrice = 0;
 
@@ -34,6 +39,7 @@ namespace JewelryStoreUI.Pages
 			jewelryUrl = $"{baseUrl}Jewelry/";
 			imageUrl = $"{baseUrl}Image/";
 			orderUrl = $"{baseUrl}Order";
+			customerUrl = $"{baseUrl}Customer/";
 		}
 
 		public async Task OnGet()
@@ -124,9 +130,9 @@ namespace JewelryStoreUI.Pages
 				{
 					Status = 0,
 					OrderType = 0,
-					CustomerId = "84F4AFAF-2314-47FC-BD96-B4A4B8B7E399",
+					CustomerId = await GetCustomerId(PhoneNumber),
 					OrderDetails = OrderDetail,
-					AccountId = "BFFDC64B-B6D7-487A-A56E-D4C1AFDA8EF6"
+					AccountId = "BFFDC64B-B6D7-487A-A56E-D4C1AFDA8EF6" // read in session
 				};
 				var json = JsonConvert.SerializeObject(request);
 				var data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -141,5 +147,17 @@ namespace JewelryStoreUI.Pages
 			}
 			return Page();
 		}
+
+		private async Task<Guid> GetCustomerId(string number)
+        {
+			dynamic entity;
+            using (var client = new HttpClient())
+			{
+                var response = await client.GetAsync($"{customerUrl}phone/{number}");
+                var result = await response.Content.ReadAsStringAsync();
+                entity = JsonConvert.DeserializeObject<dynamic>(result);
+            }
+            return (Guid) entity.customerId;
+        }
 	}
 }

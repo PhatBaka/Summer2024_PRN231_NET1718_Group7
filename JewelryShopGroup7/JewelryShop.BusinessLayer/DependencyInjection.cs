@@ -23,7 +23,7 @@ public static class DependencyInjection
         services.AddScoped<IOrderDiscountService, OrderDiscountService>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IOrderTypeService, OrderTypeService>();
-        services.AddScoped<IRoleService, RoleService>();
+        //services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IStoreDiscountService, StoreDiscountService>();
         services.AddScoped<ITierService, TierService>();
         services.AddScoped<IImageService, ImageService>();

@@ -1,3 +1,4 @@
+using JewelryStoreUI.Enums;
 using JewelryStoreUI.Pages.Helpers;
 using JewelryStoreUI.Pages.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -43,12 +44,12 @@ namespace JewelryStoreUI.Pages
             }
             if (ResponseResult.Result == true)
             {
-                HttpContext.Session.SetString("ROLE", (string) ResponseResult.Data.role1);
-                if (ResponseResult.Data.role1 == "MANAGER")
+                HttpContext.Session.SetInt32("ROLE", (int) ResponseResult.Data.role);
+                if (ResponseResult.Data.role == RoleEnum.MANAGER)
                 {
                     return RedirectToPage("ManagerDashboard");
                 }
-                else if (ResponseResult.Data.role1 == "STAFF")
+                else if (ResponseResult.Data.role == RoleEnum.STAFF)
                 {
                     return RedirectToPage("StaffDashboard");
                 }

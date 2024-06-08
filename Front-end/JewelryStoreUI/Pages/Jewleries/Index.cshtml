@@ -1,4 +1,5 @@
 ﻿@page
+@using JewelryStoreUI.Enums
 @model JewelryStoreUI.Pages.Jewleries.IndexModel
 @{
     Layout = "_StaffLayout";
@@ -194,7 +195,7 @@
 											<div class="col-sm-6 feature_2im4r space_right" >
 												<ul>
 													<li>
-														@if (HttpContext.Session.GetString("ROLE") == "STAFF")
+														@if (HttpContext.Session.GetInt32("ROLE") == (int) RoleEnum.STAFF)
 														{
 															<form id="addToCartForm-@result.Data.jewelryId" method="post">
 																<input type="hidden" name="handler" value="AddToCart" />
