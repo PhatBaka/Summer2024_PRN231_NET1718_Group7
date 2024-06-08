@@ -8,7 +8,7 @@ public partial class MaterialDTO
 
     public string? Description { get; set; }
 
-    public DateTime? Date { get; set; }
+	public DateOnly? Date { get; set; }
 
     public string? UnitType { get; set; }
 
@@ -16,9 +16,9 @@ public partial class MaterialDTO
 
     public Guid? ImageId { get; set; }
 
-    public ImageDTO? Image { get; set; }
+	// public virtual ImageDTO Image { get; set; }
 
-    public ICollection<JewelryMaterialDTO> JewelryMaterials { get; set; } = new List<JewelryMaterialDTO>();
+    // public ICollection<JewelryMaterialDTO> JewelryMaterials { get; set; } = new List<JewelryMaterialDTO>();
 
     // public virtual ICollection<MaterialPriceDTO> MaterialPrices { get; set; } = new List<MaterialPrice>();
 }

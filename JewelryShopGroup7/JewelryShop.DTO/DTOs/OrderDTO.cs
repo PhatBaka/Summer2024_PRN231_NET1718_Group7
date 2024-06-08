@@ -25,6 +25,8 @@ public partial class OrderDTO
 
     public Guid? CustomerId { get; set; }
 
+    public string? PhoneNumber { get; set; }
+
     //public AccountDTO? Account { get; set; }
 
     //public CustomerDTO? Customer { get; set; }

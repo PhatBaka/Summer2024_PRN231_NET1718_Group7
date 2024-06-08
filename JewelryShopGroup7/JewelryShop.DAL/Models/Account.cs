@@ -1,4 +1,6 @@
-﻿namespace JewelryShop.DAL.Models;
+﻿
+
+namespace JewelryShop.DAL.Models;
 
 public partial class Account
 {
@@ -12,7 +14,7 @@ public partial class Account
 
     public string? Status { get; set; }
 
-    public Guid? RoleId { get; set; }
+    public string Role { get; set; }
 
     public virtual ICollection<Guarantee> Guarantees { get; set; } = new List<Guarantee>();
 
@@ -22,5 +24,5 @@ public partial class Account
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public virtual Role? Role { get; set; }
+    //public virtual Role? Role { get; set; }
 }

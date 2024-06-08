@@ -12,7 +12,7 @@ public partial class Jewelry
 
     public decimal? ManufacturingFees { get; set; }
 
-    public Guid? JewelryType { get; set; }
+    public string? JewelryType { get; set; }
 
     public string? Status { get; set; }
 
@@ -20,7 +20,7 @@ public partial class Jewelry
 
     public decimal? GuaranteeDuration { get; set; }
 
-    public virtual JewelryType? JewelryTypeNavigation { get; set; }
+    // public virtual JewelryType? JewelryTypeNavigation { get; set; }
 
     public Guid ImageId { get; set; }
 

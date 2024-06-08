@@ -1,4 +1,5 @@
 ﻿@page
+@using JewelryStoreUI.Enums
 @model JewelryStoreUI.Pages.Jewleries.IndexModel
 @{
     Layout = "_StaffLayout";
@@ -26,7 +27,7 @@
 						<div class="center_shop_1li clearfix">
 							<h5 class="mgt">CATEGORY</h5>
 							<div class="ziehharmonika">
-								<h3 data-prefix="★" class="active">
+								<h3 data-prefix="★" class="active"> </h3
 									<a href="detail.html">Bangles</a>
 									<div class="arrowDown"></div>
 									<div class="collapseIcon">–</div>
@@ -104,22 +105,6 @@
 							</div>
 						</div>
 						<div class="center_shop_1li1 clearfix">
-							<h5 class="mgt">POPULAR TAGS</h5>
-							<div class="center_shop_1li1i clearfix">
-								<ul class="mgt">
-									<li><a href="detail.html">Phone</a></li>
-									<li><a href="detail.html">Vest</a></li>
-									<li><a href="detail.html">Smartphone</a></li>
-									<li><a href="detail.html">Furniture</a></li>
-									<li><a href="detail.html">T-shirt</a></li>
-									<li><a href="detail.html">Sweatpants</a></li>
-									<li><a href="detail.html">Sneaker</a></li>
-									<li><a href="detail.html">Toys</a></li>
-									<li><a href="detail.html">Rose</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="center_shop_1li1 clearfix">
 							<h5 class="mgt">NEWSLETTERS</h5>
 							<h6>Sign Up for Our Newsletter!</h6>
 							<input class="form-control" placeholder="Subscribe" type="text">
@@ -193,10 +178,10 @@
 							@foreach (var result in Model.ResponseResult)
 							{
 								<div class="col-sm-4 space_left">
-									<div class="feature_2im clearfix">
+									<div class="feature_2im clearfix" style="width: 260px; height: 260px;">
 										<div class="feature_2im1 clearfix">
-											<a href="detail.html">
-												<img src="data:image/png;base64, @result.Base64" alt="Red dot" style="width: 260.9px; height: 260px;" />
+											<a asp-page="/Jewelries/Detail" asp-route-orderId="@result.Data.jewelryId">
+												<img src="data:image/png;base64, @result.Base64" alt="Red dot" style="width: 260px; height: 260px;" />
 											</a>
 										</div>
 										<div class="feature_2im2 clearfix">
@@ -210,18 +195,18 @@
 											<div class="col-sm-6 feature_2im4r space_right" >
 												<ul>
 													<li>
-														@if (HttpContext.Session.GetString("ROLE") == "STAFF")
+														@if (HttpContext.Session.GetInt32("ROLE") == (int) RoleEnum.STAFF)
 														{
-															<form id="addToCartForm" method="post">
+															<form id="addToCartForm-@result.Data.jewelryId" method="post">
 																<input type="hidden" name="handler" value="AddToCart" />
 																<input type="hidden" name="itemId" value="@result.Data.jewelryId" />
 																<!-- Use JavaScript to submit the form when anchor tag is clicked -->
-																<a href="#" onclick="document.getElementById('addToCartForm').submit(); return false;"><i class="fa fa-shopping-cart"></i></a>
+																<a href="#" onclick="submitAddToCartForm('@result.Data.jewelryId'); return false;">
+																	<i class="fa fa-shopping-cart"></i>
+																</a>
 															</form>
 														}
 													</li>
-													<li><a href="detail.html"><i class="fa fa-rocket"></i></a></li>
-													<li><a href="detail.html"><i class="fa fa-heart-o"></i></a></li>
 												</ul>
 											</div>
 										</div>
@@ -265,9 +250,9 @@
 </section>
 
 <script>
-	function submitAddToCartForm() {
-		document.getElementById('addToCartForm').submit();
-		return false;
-	}
+	function submitAddToCartForm(jewelryId) {
+		console.log("Submitting form for jewelryId:", jewelryId);
+        document.getElementById('addToCartForm-' + jewelryId).submit();
+        return false;
 	}
 </script>

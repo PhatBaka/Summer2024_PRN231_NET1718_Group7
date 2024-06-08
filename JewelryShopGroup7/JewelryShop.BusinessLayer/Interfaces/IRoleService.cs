@@ -1,8 +1,8 @@
-﻿using JewelryShop.DTO.DTOs;
+﻿//using JewelryShop.DTO.DTOs;
 
-namespace JewelryShop.BusinessLayer.Interfaces
-{
-    public interface IRoleService : IService<RoleDTO>
-    {
-    }
-}
+//namespace JewelryShop.BusinessLayer.Interfaces
+//{
+//    public interface IRoleService : IService<RoleDTO>
+//    {
+//    }
+//}

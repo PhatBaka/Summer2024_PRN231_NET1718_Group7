@@ -11,6 +11,8 @@ public partial class OrderDetailDTO
 
     public Guid? JewelryId { get; set; }
 
+    public Guid? ImageId { get; set; }
+
     // public decimal? SubTotalPrice { get; set; }
 
     public decimal UnitPrice { get; set; }

@@ -1,4 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using JewelryShop.DTO.Enums;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace JewelryShop.DTO.DTOs;
 
@@ -10,7 +15,7 @@ public partial class JewelryDTO
 
     public decimal? ManufacturingFees { get; set; }
 
-    public Guid? JewelryType { get; set; }
+	public JewelryType JewelryType { get; set; }
 
     public string? Status { get; set; }
 
@@ -28,7 +33,7 @@ public partial class JewelryDTO
 
     public decimal MarkupPercentage { get; set; }
 
-    public string TypeName { get; set; }
+	//public string TypeName { get; set; }
 
     public decimal SellPrice { get; set; }
 
@@ -43,7 +48,7 @@ public partial class CreateJewelryDTO
 
     public decimal? ManufacturingFees { get; set; }
 
-    public Guid? JewelryType { get; set; }
+    public JewelryType JewelryType { get; set; }
 
     public string? Status { get; set; }
 

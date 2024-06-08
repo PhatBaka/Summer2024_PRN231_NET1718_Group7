@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JewelryShop.DTO.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace JewelryShop.DTO.DTOs;
 
@@ -14,9 +15,7 @@ public partial class AccountDTO
 
     public string? Status { get; set; }
 
-    public Guid? RoleId { get; set; }
-
-    public string Role1 { get; set; }
+    public RoleEnum Role { get; set; }
 
     public List<GuaranteeDTO> Guarantees { get; } = new List<GuaranteeDTO>();
 
