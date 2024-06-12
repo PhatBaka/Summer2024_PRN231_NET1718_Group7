@@ -9,12 +9,18 @@ namespace JewelryShop.BusinessLayer.Services
     public class OrderDiscountService : IOrderDiscountService
     {
         private readonly IOrderDiscountRepository _orderDiscountRepository;
+        private readonly IOfferRepository _offerRepository;
+        private readonly IStoreDiscountRepository _storeDiscountRepository;
+        private readonly ITierRepository _tierRepository;
         private readonly IMapper _mapper;
 
-        public OrderDiscountService(IOrderDiscountRepository orderDiscountRepository, IMapper mapper)
+        public OrderDiscountService(IOrderDiscountRepository orderDiscountRepository, IMapper mapper,IOfferRepository offerRepository, IStoreDiscountRepository storeDiscountRepository, ITierRepository tierRepository)
         {
             _orderDiscountRepository = orderDiscountRepository;
             _mapper = mapper;
+            _offerRepository = offerRepository;
+            _storeDiscountRepository = storeDiscountRepository;
+            _tierRepository = tierRepository;
         }
 
         public async Task<Guid> CreateAsync(OrderDiscountDTO createModel)
@@ -68,5 +74,31 @@ namespace JewelryShop.BusinessLayer.Services
                 throw new KeyNotFoundException("Order Discount not found.");
             }
         }
+
+        public Task<Guid> UpdateDiscount(string? tiername, string? OrderDiscountCode, decimal? offerPercent, decimal? total)
+        {
+            var offerdis = _offerRepository.GetFirstOrDefaultAsync(of => of.OfferPercent == offerPercent);
+            var orderdis = _storeDiscountRepository.GetFirstOrDefaultAsync(sd => sd.DiscountCode == OrderDiscountCode);
+            var tierdis = _tierRepository.GetFirstOrDefaultAsync(ti => ti.TierName == tiername);
+
+            OrderDiscountDTO orderDiscountDTO = new OrderDiscountDTO();
+
+            orderDiscountDTO.OfferId = offerdis.Result.OfferId != null ? offerdis.Result.OfferId : (Guid?)null;
+            orderDiscountDTO.StoreDiscountId = orderdis.Result.StoreDiscountId != null ? orderdis.Result.StoreDiscountId : (Guid?)null;
+            orderDiscountDTO.TierId = tierdis.Result.TierId != null ? tierdis.Result.TierId : (Guid?)null;
+
+            
+
+            var offerdisprice = offerdis.Result.OfferPercent ?? 0;
+            var orderdisprice = orderdis.Result.DiscountAmount ?? 0;
+            var tierdisprice = tierdis.Result.DiscountPercentage ?? 0;
+
+            orderDiscountDTO.Value = (((total * orderdisprice) / 100) + ((total * offerdisprice) / 100) + ((total * tierdisprice) / 100));
+
+            var id = CreateAsync(orderDiscountDTO);
+
+            return id ;
+        }
+
     }
 }

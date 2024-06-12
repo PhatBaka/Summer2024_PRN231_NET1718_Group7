@@ -1,4 +1,4 @@
-using JewelryShop.BusinessLayer.Interfaces;
+/*using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -68,3 +68,4 @@ namespace JewelryShop.OData.Api.Controllers
         }
     }
 }
+*/

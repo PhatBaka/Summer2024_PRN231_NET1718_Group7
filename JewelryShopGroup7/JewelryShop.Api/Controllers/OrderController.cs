@@ -12,17 +12,20 @@ namespace JewelryShop.API.Controllers
         private readonly IOrderDetailService _orderDetailService;
         private readonly IOrderService _orderService;
         private readonly IJewelryService _jewelryService;
+        private readonly IOrderDiscountService _orderDiscountService;
         private readonly IMapper _mapper;
 
         public OrderController(IOrderService orderService,
                                 IJewelryService jewelryService,
                                 IOrderDetailService orderDetailService,
-                                IMapper mapper)
+                                IMapper mapper,
+                                IOrderDiscountService orderDiscountService)
         {
             _orderDetailService = orderDetailService;
             _orderService = orderService;
             _jewelryService = jewelryService;
             _mapper = mapper;
+            _orderDiscountService = orderDiscountService;
         }
 
         [HttpGet]
@@ -41,7 +44,7 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderDTO createModel, string? tiername, string? OrderDiscountCode, decimal? offerPercent)
         {
             createModel.TotalPrice = 0;
             List<JewelryDTO> jewelryDTOs = new List<JewelryDTO>();
@@ -55,7 +58,9 @@ namespace JewelryShop.API.Controllers
                 createModel.TotalPrice += entity.SellPrice;
             }
             // discount o day
-            createModel.FinalPrice = createModel.TotalPrice;
+            var iddis = _orderDiscountService.UpdateDiscount(tiername, OrderDiscountCode, offerPercent, createModel.TotalPrice).Result;
+            var discount = _orderDiscountService.GetByIdAsync(iddis);
+            createModel.FinalPrice = createModel.TotalPrice - discount.Result.Value;
             createModel.OrderDate = DateTime.Now;
             var id = await _orderService.CreateAsync(_mapper.Map<OrderDTO>(createModel));
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
