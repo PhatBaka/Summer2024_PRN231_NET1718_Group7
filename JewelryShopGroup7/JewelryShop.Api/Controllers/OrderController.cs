@@ -62,6 +62,7 @@ namespace JewelryShop.API.Controllers
             var discount = _orderDiscountService.GetByIdAsync(iddis);
             createModel.FinalPrice = createModel.TotalPrice - discount.Result.Value;
             createModel.OrderDate = DateTime.Now;
+            createModel.OrderDiscountId = iddis;
             var id = await _orderService.CreateAsync(_mapper.Map<OrderDTO>(createModel));
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
