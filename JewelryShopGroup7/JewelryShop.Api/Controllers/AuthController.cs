@@ -1,6 +1,7 @@
 ﻿using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Account;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.Api.Controllers
@@ -17,7 +18,7 @@ namespace JewelryShop.Api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ResponseResult<AccountDTO>> Login([FromBody] LoginDTO loginDTO)
+        public async Task<ResponseResult<AccountResponse>> Login([FromBody] LoginRequest loginDTO)
         {
             return _accountService.GetAccountByEmailAndPasswordAsync(loginDTO).Result;
         }

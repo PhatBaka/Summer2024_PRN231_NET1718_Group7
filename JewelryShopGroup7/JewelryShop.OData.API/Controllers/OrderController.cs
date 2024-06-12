@@ -1,8 +1,8 @@
 using AutoMapper;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Order;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Query;
 
 namespace JewelryShop.OData.Api.Controllers
 {
@@ -27,15 +27,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpGet]
-        [EnableQuery]
-        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetAllAsync()
         {
             var result = await _orderService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OrderDTO>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<OrderResponse>> GetByIdAsync(Guid id)
         {
             var result = await _orderService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -43,12 +42,13 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderRequest createModel)
         {
             createModel.TotalPrice = 0;
+            //List<JewelryDTO> jewelryDTOs = new List<JewelryDTO>();
             foreach (var item in createModel.OrderDetails)
             {
-                var entity = await _jewelryService.GetByIdAsync((Guid)item.JewelryId);
+                var entity = await _jewelryService.GetByIdAsync(item.JewelryId);
                 var orderDetail = createModel.OrderDetails.First(x => x.JewelryId == entity.JewelryId);
                 orderDetail.UnitPrice = entity.UnitPrice;
                 orderDetail.TotalPrice = entity.UnitPrice * orderDetail.Quantity;
@@ -58,12 +58,12 @@ namespace JewelryShop.OData.Api.Controllers
             // discount o day
             createModel.FinalPrice = createModel.TotalPrice;
             createModel.OrderDate = DateTime.Now;
-            var id = await _orderService.CreateAsync(_mapper.Map<OrderDTO>(createModel));
+            var id = await _orderService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] OrderDTO updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateOrderRequest updateModel)
         {
             try
             {

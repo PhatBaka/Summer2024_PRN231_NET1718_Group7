@@ -4,6 +4,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Account;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(AccountDTO createModel)
+        public async Task<Guid> CreateAsync(CreateAccountRequest createModel)
         {
             Account account = _mapper.Map<Account>(createModel);
             return await _accountRepository.AddAsync(account);
@@ -39,24 +40,24 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<ResponseResult<AccountDTO>> GetAccountByEmailAndPasswordAsync(LoginDTO loginDTO)
+        public async Task<ResponseResult<AccountResponse>> GetAccountByEmailAndPasswordAsync(LoginRequest loginDTO)
         {
-            AccountDTO data;
+            AccountResponse data;
             try
             {
-                data = _mapper.Map<AccountDTO>(_accountRepository.GetFirstOrDefaultAsync(x => x.Email.Trim().Equals(loginDTO.Email)
+                data = _mapper.Map<AccountResponse>(_accountRepository.GetFirstOrDefaultAsync(x => x.Email.Trim().Equals(loginDTO.Email)
                                                                                 && x.Password.Equals(loginDTO.Password)).Result);
 
                 if (data == null)
                 {
-                    return new ResponseResult<AccountDTO>()
+                    return new ResponseResult<AccountResponse>()
                     {
                         Message = Constraints.NOT_FOUND_INFO,
                         Result = false
                     };
                 }
 
-                return new ResponseResult<AccountDTO>()
+                return new ResponseResult<AccountResponse>()
                 {
                     Message = Constraints.FOUND_INFO,
                     Result = true,
@@ -69,19 +70,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<AccountDTO>> GetAllAsync()
+        public async Task<IEnumerable<AccountResponse>> GetAllAsync()
         {
             var accounts = await _accountRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<AccountDTO>>(accounts.ToList());
+            return _mapper.Map<IEnumerable<AccountResponse>>(accounts.ToList());
         }
 
-        public async Task<AccountDTO> GetByIdAsync(Guid id)
+        public async Task<AccountResponse> GetByIdAsync(Guid id)
         {
             var account = (await _accountRepository.GetAsync(a => a.AccountId == id)).FirstOrDefault();
-            return _mapper.Map<AccountDTO>(account);
+            return _mapper.Map<AccountResponse>(account);
         }
 
-        public async Task UpdateAsync(Guid id, AccountDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateAccountRequest updateModel)
         {
             var account = (await _accountRepository.GetAsync(a => a.AccountId == id)).FirstOrDefault();
             if (account != null)

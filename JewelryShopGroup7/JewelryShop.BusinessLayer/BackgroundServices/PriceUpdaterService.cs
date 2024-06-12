@@ -49,60 +49,25 @@ namespace JewelryShop.BusinessLayer.BackgroundServices
                 DateOnly today = DateOnly.FromDateTime(DateTime.Now);
                 using (var scope = _serviceProvider.CreateScope())
                 {
-                    var materialPriceRepository = scope.ServiceProvider.GetRequiredService<IMaterialPriceRepository>();
                     var materialRepository = scope.ServiceProvider.GetRequiredService<IMaterialRepository>();
                     // Update the database with the new prices
                     foreach (var metal in metals)
                     {
-                        var jewelryMaterial = (await materialRepository.GetAsync(m => m.Name.Contains(metal.MetalType) && m.Name.Contains(metal.Purity.ToString()))).FirstOrDefault();
-                        if (jewelryMaterial != null)
+                        var material = (await materialRepository.GetAsync(m => m.Name.Contains(metal.MetalType) && m.Name.Contains(metal.Purity.ToString()))).FirstOrDefault();
+                        if (material != null)
                         {
-                            var materialPrice = new MaterialPrice
-                            {
-                                MaterialId = jewelryMaterial.MaterialId,
-                                Date = today,
-                                Price = metal.Price,
-                                MaterialPriceId = Guid.NewGuid(),
-                                UnitType = jewelryMaterial.UnitType,
-                            };
-                            var checkMaterialPrice = (await materialPriceRepository.GetAsync(m => m.Date == today)).FirstOrDefault();
-                            if (checkMaterialPrice != null)
-                            {
-                                materialPrice.MaterialPriceId = checkMaterialPrice.MaterialPriceId;
-                                await materialPriceRepository.UpdateAsync(materialPrice);
-                            }
-                            else
-                            {
-                                await materialPriceRepository.AddAsync(materialPrice);
-                            }
-
+                            material.Price = metal.Price;
+                            await materialRepository.UpdateAsync(material);
                         }
                     }
 
                     foreach (var gem in gems)
                     {
-                        var jewelryMaterial = (await materialRepository.GetAsync(m => m.Name.Contains(gem.Name) && m.Name.Contains(gem.Carat.ToString()))).FirstOrDefault();
-                        if (jewelryMaterial != null)
+                        var material = (await materialRepository.GetAsync(m => m.Name.Contains(gem.Name) && m.Name.Contains(gem.Carat.ToString()))).FirstOrDefault();
+                        if (material != null)
                         {
-                            var materialPrice = new MaterialPrice
-                            {
-                                MaterialId = jewelryMaterial.MaterialId,
-                                Date = today,
-                                Price = gem.Price,
-                                MaterialPriceId = Guid.NewGuid(),
-                                UnitType = jewelryMaterial.UnitType,
-                            };
-                            var checkMaterialPrice = (await materialPriceRepository.GetAsync(m => m.Date == today)).FirstOrDefault();
-                            if (checkMaterialPrice != null)
-                            {
-                                materialPrice.MaterialPriceId = checkMaterialPrice.MaterialPriceId;
-                                await materialPriceRepository.UpdateAsync(materialPrice);
-                            }
-                            else
-                            {
-                                await materialPriceRepository.AddAsync(materialPrice);
-                            }
-
+                            material.Price = gem.Price;
+                            await materialRepository.UpdateAsync(material);
                         }
                     }
                 }

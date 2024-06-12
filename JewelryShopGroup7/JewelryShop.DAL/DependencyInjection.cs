@@ -23,15 +23,11 @@ public static class DependencyInjection
         services.AddScoped<IGuaranteeRepository, GuaranteeRepository>();
         services.AddScoped<IJewelryMaterialRepository, JewelryMaterialRepository>();
         services.AddScoped<IJewelryRepository, JewelryRepository>();
-        //services.AddScoped<IJewelryTypeRepository, JewelryTypeRepository>();
-        services.AddScoped<IMaterialPriceRepository, MaterialPriceRepository>();
         services.AddScoped<IMaterialRepository, MaterialRepository>();
         services.AddScoped<IOfferRepository, OfferRepository>();
         services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         services.AddScoped<IOrderDiscountRepository, OrderDiscountRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
-        services.AddScoped<IOrderTypeRepository, OrderTypeRepository>();
-        //services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IStoreDiscountRepository, StoreDiscountRepository>();
         services.AddScoped<ITierRepository, TierRepository>();
         services.AddScoped<IImageRepository, ImageRepository>();

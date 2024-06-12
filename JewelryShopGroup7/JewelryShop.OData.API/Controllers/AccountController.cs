@@ -1,5 +1,6 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Account;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 
@@ -18,14 +19,14 @@ namespace JewelryShop.OData.Api.Controllers
 
         [HttpGet]
         [EnableQuery]
-        public async Task<ActionResult<IEnumerable<AccountDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<AccountResponse>>> GetAllAsync()
         {
             var result = await _accountService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AccountDTO>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<AccountResponse>> GetByIdAsync(Guid id)
         {
             var result = await _accountService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -33,14 +34,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] AccountDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateAccountRequest createModel)
         {
             var id = await _accountService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] AccountDTO updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateAccountRequest updateModel)
         {
             try
             {

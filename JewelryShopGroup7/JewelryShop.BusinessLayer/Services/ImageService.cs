@@ -4,6 +4,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Image;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -18,7 +19,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(ImageDTO createModel)
+        public async Task<Guid> CreateAsync(CreateImageRequest createModel)
         {
             Image image = new()
             {
@@ -47,19 +48,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<ImageDTO>> GetAllAsync()
+        public async Task<IEnumerable<ImageResponse>> GetAllAsync()
         {
             var images = await _imageRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ImageDTO>>(images.ToList());
+            return _mapper.Map<IEnumerable<ImageResponse>>(images.ToList());
         }
 
-        public async Task<ImageDTO> GetByIdAsync(Guid id)
+        public async Task<ImageResponse> GetByIdAsync(Guid id)
         {
             var image = (await _imageRepository.GetAsync(g => g.ImageId == id)).FirstOrDefault();
-            return _mapper.Map<ImageDTO>(image);
+            return _mapper.Map<ImageResponse>(image);
         }
 
-        public async Task UpdateAsync(Guid id, ImageDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateImageRequest updateModel)
         {
             var image = (await _imageRepository.GetAsync(g => g.ImageId == id)).FirstOrDefault();
             if (image != null)

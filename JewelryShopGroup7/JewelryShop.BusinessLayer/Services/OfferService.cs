@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Offer;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(OfferDTO createModel)
+        public async Task<Guid> CreateAsync(CreateOfferRequest createModel)
         {
             Offer offer = _mapper.Map<Offer>(createModel);
             return await _offerRepository.AddAsync(offer);
@@ -43,19 +44,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<OfferDTO>> GetAllAsync()
+        public async Task<IEnumerable<OfferResponse>> GetAllAsync()
         {
             var offers = await _offerRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<OfferDTO>>(offers.ToList());
+            return _mapper.Map<IEnumerable<OfferResponse>>(offers.ToList());
         }
 
-        public async Task<OfferDTO> GetByIdAsync(Guid id)
+        public async Task<OfferResponse> GetByIdAsync(Guid id)
         {
             var offer = (await _offerRepository.GetAsync(o => o.OfferId == id)).FirstOrDefault();
-            return _mapper.Map<OfferDTO>(offer);
+            return _mapper.Map<OfferResponse>(offer);
         }
 
-        public async Task UpdateAsync(Guid id, OfferDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateOffterRequest updateModel)
         {
             var offer = (await _offerRepository.GetAsync(o => o.OfferId == id)).FirstOrDefault();
             if (offer != null)

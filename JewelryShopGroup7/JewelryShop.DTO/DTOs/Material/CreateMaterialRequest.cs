@@ -8,5 +8,12 @@ namespace JewelryShop.DTO.DTOs.Material
 {
     public class CreateMaterialRequest
     {
+        public string? Name { get; set; }
+
+        public string? Description { get; set; }
+
+        public string UnitType { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

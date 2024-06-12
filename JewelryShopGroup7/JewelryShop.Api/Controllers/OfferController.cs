@@ -1,5 +1,6 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Offer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.API.Controllers
@@ -16,14 +17,14 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OfferDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<OfferResponse>>> GetAllAsync()
         {
             var result = await _offerService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OfferDTO>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<OfferResponse>> GetByIdAsync(Guid id)
         {
             var result = await _offerService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -31,14 +32,14 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] OfferDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOfferRequest createModel)
         {
             var id = await _offerService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] OfferDTO updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateOffterRequest updateModel)
         {
             try
             {

@@ -8,5 +8,11 @@ namespace JewelryShop.DTO.DTOs.JewelryMaterial
 {
     public class JewelryMaterialFilter
     {
+        public Guid JewelryId { get; set; }
+
+        public Guid MaterialId { get; set; }
+
+        public decimal? Weight { get; set; }
+
     }
 }

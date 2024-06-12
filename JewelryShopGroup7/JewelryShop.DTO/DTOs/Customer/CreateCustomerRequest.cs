@@ -8,5 +8,8 @@ namespace JewelryShop.DTO.DTOs.Customer
 {
     public class CreateCustomerRequest
     {
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
     }
 }

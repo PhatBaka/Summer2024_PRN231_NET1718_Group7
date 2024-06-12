@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Tier;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(TierDTO createModel)
+        public async Task<Guid> CreateAsync(CreateTierRequest createModel)
         {
             Tier tier = _mapper.Map<Tier>(createModel);
             return await _tierRepository.AddAsync(tier);
@@ -43,19 +44,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<TierDTO>> GetAllAsync()
+        public async Task<IEnumerable<TierResponse>> GetAllAsync()
         {
             var tiers = await _tierRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<TierDTO>>(tiers.ToList());
+            return _mapper.Map<IEnumerable<TierResponse>>(tiers.ToList());
         }
 
-        public async Task<TierDTO> GetByIdAsync(Guid id)
+        public async Task<TierResponse> GetByIdAsync(Guid id)
         {
             var tier = (await _tierRepository.GetAsync(t => t.TierId == id)).FirstOrDefault();
-            return _mapper.Map<TierDTO>(tier);
+            return _mapper.Map<TierResponse>(tier);
         }
 
-        public async Task UpdateAsync(Guid id, TierDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateTierRequest updateModel)
         {
             var tier = (await _tierRepository.GetAsync(t => t.TierId == id)).FirstOrDefault();
             if (tier != null)

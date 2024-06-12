@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Image;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.Api.Controllers
@@ -20,14 +21,14 @@ namespace JewelryShop.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ImageDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<CreateImageRequest>>> GetAllAsync()
         {
             var result = await _imageService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}", Name = "GetByIdAsync")]
-        public async Task<ActionResult<ImageDTO>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<ImageResponse>> GetByIdAsync(Guid id)
         {
             var result = await _imageService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -35,18 +36,18 @@ namespace JewelryShop.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromForm] CreateImageDTO createImageDTO)
+        public async Task<ActionResult<Guid>> CreateAsync([FromForm] CreateImageRequest createImageDTO)
         {
-            var id = await _imageService.CreateAsync(_mapper.Map<ImageDTO>(createImageDTO));
+            var id = await _imageService.CreateAsync(createImageDTO);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromForm] UpdateImageDTO updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromForm] UpdateImageRequest updateModel)
         {
             try
             {
-                await _imageService.UpdateAsync(id, _mapper.Map<ImageDTO>(updateModel));
+                await _imageService.UpdateAsync(id, updateModel);
                 return NoContent();
             }
             catch (KeyNotFoundException)

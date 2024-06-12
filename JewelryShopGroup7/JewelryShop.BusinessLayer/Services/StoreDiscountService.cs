@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.StoreDiscount;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(StoreDiscountDTO createModel)
+        public async Task<Guid> CreateAsync(CreateStoreDiscountRequest createModel)
         {
             StoreDiscount storeDiscount = _mapper.Map<StoreDiscount>(createModel);
             return await _storeDiscountRepository.AddAsync(storeDiscount);
@@ -43,23 +44,23 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<StoreDiscountDTO>> GetAllAsync()
+        public async Task<IEnumerable<StoreDiscountResponse>> GetAllAsync()
         {
             var storeDiscounts = await _storeDiscountRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<StoreDiscountDTO>>(storeDiscounts.ToList());
+            return _mapper.Map<IEnumerable<StoreDiscountResponse>>(storeDiscounts.ToList());
         }
 
-        public async Task<StoreDiscountDTO> GetByIdAsync(Guid id)
+        public async Task<StoreDiscountResponse> GetByIdAsync(Guid id)
         {
             var storeDiscount = (await _storeDiscountRepository.GetAsync(sd => sd.StoreDiscountId == id)).FirstOrDefault();
             if (storeDiscount != null)
             {
                 await _storeDiscountRepository.LoadRelate(storeDiscount);
             }
-            return _mapper.Map<StoreDiscountDTO>(storeDiscount);
+            return _mapper.Map<StoreDiscountResponse>(storeDiscount);
         }
 
-        public async Task UpdateAsync(Guid id, StoreDiscountDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateStoreDiscountRequest updateModel)
         {
             var storeDiscount = (await _storeDiscountRepository.GetAsync(sd => sd.StoreDiscountId == id)).FirstOrDefault();
             if (storeDiscount != null)

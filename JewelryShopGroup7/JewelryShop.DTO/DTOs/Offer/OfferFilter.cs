@@ -8,5 +8,8 @@ namespace JewelryShop.DTO.DTOs.Offer
 {
     public class OfferFilter
     {
+        public decimal? OfferPercent { get; set; }
+
+        public string? Constraints { get; set; }
     }
 }

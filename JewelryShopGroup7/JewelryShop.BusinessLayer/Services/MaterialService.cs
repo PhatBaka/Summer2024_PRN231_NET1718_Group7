@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Material;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(MaterialDTO createModel)
+        public async Task<Guid> CreateAsync(CreateMaterialRequest createModel)
         {
             Material material = _mapper.Map<Material>(createModel);
             return await _materialRepository.AddAsync(material);
@@ -43,19 +44,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<MaterialDTO>> GetAllAsync()
+        public async Task<IEnumerable<MaterialResponse>> GetAllAsync()
         {
             var materials = await _materialRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<MaterialDTO>>(materials.ToList());
+            return _mapper.Map<IEnumerable<MaterialResponse>>(materials.ToList());
         }
 
-        public async Task<MaterialDTO> GetByIdAsync(Guid id)
+        public async Task<MaterialResponse> GetByIdAsync(Guid id)
         {
             var material = (await _materialRepository.GetAsync(m => m.MaterialId == id)).FirstOrDefault();
-            return _mapper.Map<MaterialDTO>(material);
+            return _mapper.Map<MaterialResponse>(material);
         }
 
-        public async Task UpdateAsync(Guid id, MaterialDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateMaterialRequest updateModel)
         {
             var material = (await _materialRepository.GetAsync(m => m.MaterialId == id)).FirstOrDefault();
             if (material != null)

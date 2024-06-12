@@ -8,5 +8,12 @@ namespace JewelryShop.DTO.DTOs.Guarantee
 {
     public class CreateGuaranteeRequest
     {
+        public Guid? OrderDetailId { get; set; }
+
+        public DateTime? DateReceive { get; set; }
+
+        public DateTime? DateBack { get; set; }
+
+        public string? Confirm { get; set; }
     }
 }

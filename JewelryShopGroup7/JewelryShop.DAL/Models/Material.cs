@@ -8,8 +8,6 @@ public partial class Material
 
     public string? Description { get; set; }
 
-    public DateOnly? Date { get; set; }
-
     public string UnitType { get; set; }
 
     public decimal Price { get; set; }
@@ -20,5 +18,4 @@ public partial class Material
 
     public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
 
-    public virtual ICollection<MaterialPrice> MaterialPrices { get; set; } = new List<MaterialPrice>();
 }

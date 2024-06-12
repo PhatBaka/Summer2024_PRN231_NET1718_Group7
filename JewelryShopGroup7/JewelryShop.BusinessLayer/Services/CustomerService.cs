@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Customer;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(CustomerDTO createModel)
+        public async Task<Guid> CreateAsync(CreateCustomerRequest createModel)
         {
             Customer customer = _mapper.Map<Customer>(createModel);
             return await _customerRepository.AddAsync(customer);
@@ -43,19 +44,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<CustomerDTO>> GetAllAsync()
+        public async Task<IEnumerable<CustomerResponse>> GetAllAsync()
         {
             var customers = await _customerRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<CustomerDTO>>(customers.ToList());
+            return _mapper.Map<IEnumerable<CustomerResponse>>(customers.ToList());
         }
 
-        public async Task<CustomerDTO> GetByIdAsync(Guid id)
+        public async Task<CustomerResponse> GetByIdAsync(Guid id)
         {
             var customer = (await _customerRepository.GetAsync(c => c.CustomerId == id)).FirstOrDefault();
-            return _mapper.Map<CustomerDTO>(customer);
+            return _mapper.Map<CustomerResponse>(customer);
         }
 
-        public async Task UpdateAsync(Guid id, CustomerDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateCustomerRequest updateModel)
         {
             var customer = (await _customerRepository.GetAsync(c => c.CustomerId == id)).FirstOrDefault();
             if (customer != null)

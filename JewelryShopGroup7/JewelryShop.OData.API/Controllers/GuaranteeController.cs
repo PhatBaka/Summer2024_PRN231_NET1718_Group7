@@ -1,5 +1,6 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Guarantee;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 
@@ -18,14 +19,14 @@ namespace JewelryShop.OData.Api.Controllers
 
         [HttpGet]
         [EnableQuery]
-        public async Task<ActionResult<IEnumerable<GuaranteeDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<GuaranteeResponse>>> GetAllAsync()
         {
             var result = await _guaranteeService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GuaranteeDTO>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<GuaranteeResponse>> GetByIdAsync(Guid id)
         {
             var result = await _guaranteeService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -33,14 +34,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] GuaranteeDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateGuaranteeRequest createModel)
         {
             var id = await _guaranteeService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] GuaranteeDTO updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateGuaranteeRequest updateModel)
         {
             try
             {

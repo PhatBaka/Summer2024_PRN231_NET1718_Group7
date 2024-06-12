@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.OrderDiscount;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(OrderDiscountDTO createModel)
+        public async Task<Guid> CreateAsync(CreateOrderDiscountRequest createModel)
         {
             OrderDiscount orderDiscount = _mapper.Map<OrderDiscount>(createModel);
             return await _orderDiscountRepository.AddAsync(orderDiscount);
@@ -43,19 +44,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<OrderDiscountDTO>> GetAllAsync()
+        public async Task<IEnumerable<OrderDiscountResponse>> GetAllAsync()
         {
             var orderDiscounts = await _orderDiscountRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<OrderDiscountDTO>>(orderDiscounts.ToList());
+            return _mapper.Map<IEnumerable<OrderDiscountResponse>>(orderDiscounts.ToList());
         }
 
-        public async Task<OrderDiscountDTO> GetByIdAsync(Guid id)
+        public async Task<OrderDiscountResponse> GetByIdAsync(Guid id)
         {
             var orderDiscount = (await _orderDiscountRepository.GetAsync(od => od.OrderDiscountId == id)).FirstOrDefault();
-            return _mapper.Map<OrderDiscountDTO>(orderDiscount);
+            return _mapper.Map<OrderDiscountResponse>(orderDiscount);
         }
 
-        public async Task UpdateAsync(Guid id, OrderDiscountDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateOrderDiscountRequest updateModel)
         {
             var orderDiscount = (await _orderDiscountRepository.GetAsync(od => od.OrderDiscountId == id)).FirstOrDefault();
             if (orderDiscount != null)

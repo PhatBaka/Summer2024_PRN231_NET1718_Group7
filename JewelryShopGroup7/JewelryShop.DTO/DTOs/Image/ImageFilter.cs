@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JewelryShop.BusinessLayer.FilterModels
+namespace JewelryShop.DTO.DTOs.Image
 {
-    public class CustomerFilter
+    public class ImageFilter
     {
-        public string? PhoneNumer { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Guarantee;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(GuaranteeDTO createModel)
+        public async Task<Guid> CreateAsync(CreateGuaranteeRequest createModel)
         {
             Guarantee guarantee = _mapper.Map<Guarantee>(createModel);
             return await _guaranteeRepository.AddAsync(guarantee);
@@ -43,19 +44,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<GuaranteeDTO>> GetAllAsync()
+        public async Task<IEnumerable<GuaranteeResponse>> GetAllAsync()
         {
             var guarantees = await _guaranteeRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<GuaranteeDTO>>(guarantees.ToList());
+            return _mapper.Map<IEnumerable<GuaranteeResponse>>(guarantees.ToList());
         }
 
-        public async Task<GuaranteeDTO> GetByIdAsync(Guid id)
+        public async Task<GuaranteeResponse> GetByIdAsync(Guid id)
         {
             var guarantee = (await _guaranteeRepository.GetAsync(g => g.GuaranteeId == id)).FirstOrDefault();
-            return _mapper.Map<GuaranteeDTO>(guarantee);
+            return _mapper.Map<GuaranteeResponse>(guarantee);
         }
 
-        public async Task UpdateAsync(Guid id, GuaranteeDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateGuaranteeRequest updateModel)
         {
             var guarantee = (await _guaranteeRepository.GetAsync(g => g.GuaranteeId == id)).FirstOrDefault();
             if (guarantee != null)

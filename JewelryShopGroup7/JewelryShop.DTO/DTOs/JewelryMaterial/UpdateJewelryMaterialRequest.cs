@@ -8,5 +8,10 @@ namespace JewelryShop.DTO.DTOs.JewelryMaterial
 {
     public class UpdateJewelryMaterialRequest
     {
+
+        public Guid MaterialId { get; set; }
+
+        public decimal? Weight { get; set; }
+
     }
 }
