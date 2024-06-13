@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using Microsoft.IdentityModel.Tokens;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -99,6 +100,48 @@ namespace JewelryShop.BusinessLayer.Services
 
             return id ;
         }
+        public Task<decimal?> updateTotalPriceaddOff(decimal offerPercent, decimal? total) {
+            var offer = _offerRepository.GetFirstOrDefaultAsync(off => off.OfferPercent == offerPercent);
+            if (offer.Result.ApprovedBy == null)
+            {
+                throw new NotImplementedException("The discount not have permittion");
+            }
+            else {
+                var offerdisprice = offer.Result.OfferPercent ?? 0;
+                decimal? result = ((total * offerdisprice) / 100);
+                return Task.FromResult(result);
+            }
+            
+        }
 
+        public Task<decimal?> updateTotalPriceaddStoreCode(string? Code, decimal? total)
+        {
+            try
+            {
+                var orderdis = _storeDiscountRepository.GetFirstOrDefaultAsync(sd => sd.DiscountCode == Code);
+                var orderdisprice = orderdis.Result.DiscountAmount ?? 0;
+                return Task.FromResult((total * orderdisprice) / 100);
+
+            }catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
+        public Task<decimal?> updateTotalPriceaddTier(string? tier, decimal? total)
+        {
+            try
+            {
+                var TierDis = _tierRepository.GetFirstOrDefaultAsync(sd => sd.TierName == tier);
+                var TierDisPrice = TierDis.Result.DiscountPercentage ?? 0;
+                return Task.FromResult((total * TierDisPrice) / 100);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
