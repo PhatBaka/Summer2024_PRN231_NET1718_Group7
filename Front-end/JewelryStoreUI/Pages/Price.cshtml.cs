@@ -14,6 +14,8 @@ namespace JewelryStoreUI.Pages
 		private string materialUrl { get; set; }
 		private string imageUrl { get; set; }
 
+		public DateTime DateTime = DateTime.Now;
+
 		public PriceModel()
 		{
 			materialUrl = $"{url}Material";
