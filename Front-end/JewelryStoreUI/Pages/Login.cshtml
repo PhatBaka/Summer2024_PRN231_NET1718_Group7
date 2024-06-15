@@ -5,30 +5,28 @@
     Layout = "_Layout";
 }
 
-<section id="footer">
-	<div class="container">
-		<div class="row">
-			<div class="footer_1 clearfix">
-				<div class="col-sm-6">
-					<a class="navbar-brand" href="index.html">
-						<i class="fa fa-diamond"></i> <span class="col">Jewe</span>lry
-					</a>
-					<form method="post">
-						<div class="footer_1i1 clearfix">
-							<h1 class="col_3">LOGIN</h1>
-							<input class="form-control" asp-for="LoginDTO.Email" placeholder="Email address" type="text">
-							<input class="form-control" asp-for="LoginDTO.Password" placeholder="Password" type="password">
-							<h5><input class="button" type="submit" value="LOGIN" /></h5>
-						</div>
-					</form>
-					@if (@Model.ResponseResult.Message != null)
-					{
-						<h5 class="col_3">@Model.ResponseResult.Message</h5>
-					}
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="text-blue h4">LOGIN</h4>
+        </div>
+    </div>
+    <form>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Text</label>
+            <div class="col-sm-12 col-md-10">
+                <input asp-for="@Model.LoginDTO.Email" class="form-control" type="email" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Search</label>
+            <div class="col-sm-12 col-md-10">
+                <input asp-for="@Model.LoginDTO.Password" class="form-control" type="password" placeholder="Password">
+            </div>
+            <input type="submit" class="btn btn-primary btn-sm code-copy pull-center" data-clipboard-target="#horizontal-basic" />
+        </div>
+</form>
+                            </code></pre>
+        </div>
+    </div>
+</div>
