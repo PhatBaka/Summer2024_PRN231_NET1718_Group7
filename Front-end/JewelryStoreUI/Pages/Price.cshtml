@@ -1,0 +1,36 @@
+﻿@page
+@model JewelryStoreUI.Pages.PriceModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="card-box mb-30">
+	<div class="pd-20">
+		<h4 class="text-blue h4">Updated in @DateTime.Now.ToString("yyyy-MM-dd")</h4>
+	</div>
+	<div class="pb-20">
+		<table class="data-table table stripe hover nowrap">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Unit type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					@foreach (var item in Model.Materials)
+					{
+						<td>
+							<img src="data:image/png;base64, @item.Base64" alt="Red dot" style="width: 100px; height: 100px;" />
+						</td>
+						<td>@item.Data.name</td>
+						<td>@item.Data.price</td>
+						<td>@item.Data.unitType</td>
+					}
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

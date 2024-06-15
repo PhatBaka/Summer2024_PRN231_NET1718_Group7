@@ -1,44 +1,112 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Jewelry</title>
-	<link href="~/css/bootstrap.min.css" rel="stylesheet">
-	<link href="~/css/global.css" rel="stylesheet">
-	<link href="~/css/index.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css" />
-	<link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
-	<script src="~/js/jquery-2.1.1.min.js"></script>
-	<script src="~/js/bootstrap.min.js"></script>
-	<style>
-		body {
-			background: #333
-		}
-		butt
-	</style>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/vendors/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/vendors/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/vendors/images/favicon-16x16.png">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="~/vendors/styles/core.css">
+    <link rel="stylesheet" type="text/css" href="~/vendors/styles/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/src/plugins/datatables/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendors/styles/style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="header">
+        <div class="header-left">
+            <div class="menu-icon dw dw-menu"></div>
+            <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+            <div class="header-search">
+                <form>
+                    <div class="form-group mb-0">
+                        <i class="dw dw-search2 search-icon"></i>
+                        <input type="text" class="form-control search-input" placeholder="Search Here">
+                        <div class="dropdown">
+                            <div class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+                                <input type="submit" value="Search" class="btn-primary"></input>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="dashboard-setting user-notification">
+                <div class="dropdown">
+                    <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+                        <i class="dw dw-settings2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-	<script>
-		$(document).ready(function () {
-			/*****Fixed Menu******/
-			var secondaryNav = $('.cd-secondary-nav'),
-				secondaryNavTopPosition = secondaryNav.offset().top;
-			$(window).on('scroll', function () {
-				if ($(window).scrollTop() > secondaryNavTopPosition) {
-					secondaryNav.addClass('is-fixed');
-				} else {
-					secondaryNav.removeClass('is-fixed');
-				}
-			});
 
-		});
-	</script>
+    <div class="left-side-bar">
+        <div class="brand-logo">
+            <a href="index.html">
+                <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
+                <img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
+            </a>
+            <div class="close-sidebar" data-toggle="left-sidebar-close">
+                <i class="ion-close-round"></i>
+            </div>
+        </div>
+        <div class="menu-block customscroll">
+            <div class="sidebar-menu">
+                <ul id="accordion-menu">
+                    <li>
+                        <a href="Login" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-chat3"></span><span class="mtext">Login</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Price" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-invoice"></span><span class="mtext">Price</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
+
+    <div class="main-container">
+        <div class="pd-ltr-20">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/vendors/scripts/core.js"></script>
+    <script src="~/vendors/scripts/script.min.js"></script>
+    <script src="~/vendors/scripts/process.js"></script>
+    <script src="~/vendors/scripts/layout-settings.js"></script>
+    <script src="~/src/plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="~/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="~/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/vendors/scripts/dashboard.js"></script>
 </body>
 
 </html>

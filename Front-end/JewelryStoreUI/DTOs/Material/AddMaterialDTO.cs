@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JewelryStoreUI.Pages.DTOs
+namespace JewelryStoreUI.Pages.DTOs.Material
 {
 	public class AddMaterialDTO
 	{

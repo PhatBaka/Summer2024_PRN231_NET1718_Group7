@@ -1,4 +1,4 @@
-﻿namespace JewelryStoreUI.Pages.DTOs
+﻿namespace JewelryStoreUI.Pages.DTOs.Material
 {
 	public class MaterialPriceDTO
 	{
