@@ -1,251 +1,108 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Jewelry</title>
-	<link href="~/css/bootstrap.min.css" rel="stylesheet">
-	<link href="~/css/global.css" rel="stylesheet">
-	<link href="~/css/shop.css" rel="stylesheet">
-	<link href="~/css/cart.css" rel="stylesheet">
-	<link href="~/css/checkout.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css" />
-	<link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
-	<script src="~/js/jquery-2.1.1.min.js"></script>
-	<script src="~/js/bootstrap.min.js"></script>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/vendors/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/vendors/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/vendors/images/favicon-16x16.png">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="~/vendors/styles/core.css">
+    <link rel="stylesheet" type="text/css" href="~/vendors/styles/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/src/plugins/datatables/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendors/styles/style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
 </head>
 <body>
-	<section id="menu" class="clearfix cd-secondary-nav">
-		<nav class="navbar nav_t">
-			<div class="container">
-				<div class="navbar-header page-scroll">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="index.html">
-						<i class="fa fa-diamond"></i> <span class="col">Jewe</span>lry
-					</a>
-				</div>
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav nav_m">
-						<li><a class="m_tag active_tab" asp-page="ManagarDashboard">Home</a></li>
-						<li><a class="m_tag" asp-page="/Jewleries/Index">Jewelry</a></li>
-						<li><a class="m_tag" asp-page="/Materials/Index">Material</a></li>
-						<li><a class="m_tag" asp-page="/Orders/Index">Order</a></li>
-					</ul>
-					<ul class="nav navbar-nav mgt navbar-right nav_r">
-						<li><a class="m_tag" href="#"><i class="fa fa-user"></i></a></li>
-						<li class="dropdown">
-							<a class="m_tag" href="#" data-toggle="dropdown">
-								<span class="fa fa-search"></span>
-							</a>
-						<li class="dropdown">
-							<a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-								<i class="glyphicon glyphicon-shopping-cart"></i>
-							</a>
-							<ul class="dropdown-menu drop_1" role="menu">
-								<li>
-									<div class="drop_1i clearfix">
-										<div class="col-sm-6">
-											<div class="drop_1il clearfix">
-												<h5 class="mgt">2 ITEMS</h5>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="drop_1il text-right clearfix">
-												<h5 class="mgt"><a href="#">VIEW CART</a></h5>
-											</div>
-										</div>
-									</div>
-									<div class="drop_1i1 clearfix">
-										<div class="col-sm-8">
-											<div class="drop_1i1l clearfix">
-												<h6 class="mgt bold">
-													<a href="#">Nulla Quis</a> <br> <span class="normal col_2">1x - $89.00</span> <br> <span>
-														<i class="fa fa-remove"></i>
-													</span>
-												</h6>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="drop_1i1r text-right clearfix">
-												<a href="#">
-													<img src="img/1.jpg"
-														 class="iw" alt="abc">
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="drop_1i1 clearfix">
-										<div class="col-sm-8">
-											<div class="drop_1i1l clearfix">
-												<h6 class="mgt bold">
-													<a href="#">Eget Nulla</a> <br> <span class="normal col_2">1x - $49.00</span> <br> <span>
-														<i class="fa fa-remove"></i>
-													</span>
-												</h6>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="drop_1i1r text-right clearfix">
-												<a href="#">
-													<img src="img/2.png"
-														 class="iw" alt="abc">
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="drop_1i2 clearfix">
-										<div class="col-sm-6">
-											<div class="drop_1il clearfix">
-												<h5 class="mgt">TOTAL</h5>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="drop_1il text-right clearfix">
-												<h5 class="mgt">$138.00</h5>
-											</div>
-										</div>
-									</div>
-									<div class="drop_1i3 text-center clearfix">
-										<div class="col-sm-12">
-											<h5><a class="button_1 block" href="checkout.html">CHECKOUT</a></h5>
-											<h5><a class="button block" asp-page="/Cart">VIEW CART</a></h5>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</li>
-							<ul class="dropdown-menu drop_2" style="min-width: 300px;">
-								<li>
-									<div class="row_1">
-										<div class="col-sm-12">
-											<form class="navbar-form navbar-left" role="search">
-												<div class="input-group">
-													<input type="text" class="form-control" placeholder="Search">
-													<span class="input-group-btn">
-														<button class="btn btn-primary" type="button">
-															Search
-														</button>
-													</span>
-												</div>
-											</form>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</li>
-					</ul>
+    <div class="header">
+        <div class="header-left">
+            <div class="menu-icon dw dw-menu"></div>
+            <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+            <div class="header-search">
+                <form>
+                    <div class="form-group mb-0">
+                        <i class="dw dw-search2 search-icon"></i>
+                        <input type="text" class="form-control search-input" placeholder="Search Here">
+                        <div class="dropdown">
+                            <div class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+                                <input type="submit" value="Search" class="btn-primary"></input>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-				</div>
-				<!-- /.navbar-collapse -->
-			</div>
-			<!-- /.container-fluid -->
-		</nav>
+    <div class="left-side-bar">
+        <div class="brand-logo">
+            <a href="index.html">
+                <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
+                <img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
+            </a>
+            <div class="close-sidebar" data-toggle="left-sidebar-close">
+                <i class="ion-close-round"></i>
+            </div>
+        </div>
+        <div class="menu-block customscroll">
+            <div class="sidebar-menu">
+                <ul id="accordion-menu">
+                    <li>
+                        <a asp-page="Jewelries/Index" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-chat3"></span><span class="mtext">Jewelry</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-page="Orders/Index" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-chat3"></span><span class="mtext">History</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Logout" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-invoice"></span><span class="mtext">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-	</section>
 
-	<div>
-		@RenderBody()
-	</div>
+    <div class="main-container">
+        <div class="pd-ltr-20">
+            @RenderBody()
+        </div>
+    </div>
 
-	<section id="footer">
-		<div class="container">
-			<div class="row">
-				<div class="footer_1 clearfix">
-					<div class="col-sm-3">
-						<div class="footer_1i clearfix">
-							<a class="navbar-brand" href="index.html">
-								<i class="fa fa-diamond"></i> <span class="col">Jewe</span>lry
-							</a>
-							<h5 class="col_3 normal"><span>Hotline:</span> <a class="col" href="#">01234</a></h5>
-							<h5 class="col_3 normal">
-								<span>Phone:</span> <a class="col" href="#">(+123) 456-7898</a>
-							</h5>
-							<h5 class="col_3 normal"><span>Email:</span> <a class="col" href="#">info@gmail.com</a></h5>
-							<h5 class="col_3 normal">
-								<span>Address:</span> <a class="col" href="#">
-									2190 Clue, The Xronz,
-									OZ 0038, USA
-								</a>
-							</h5>
-							<ul class="social-network social-circle">
-								<li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
-								<li>
-									<a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a>
-								</li>
-								<li>
-									<a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="footer_1i1 clearfix">
-							<h4 class="mgt">Information</h4>
-							<ul>
-								<li class="col_3"><a class="col_3" href="#">About Us</a></li>
-								<li class="col_3"><a class="col_3" href="#">Contact Us</a></li>
-								<li class="col_3"><a class="col_3" href="#">Privacy Policy</a></li>
-								<li class="col_3"><a class="col_3" href="#">Terms &amp; Conditions</a></li>
-								<li class="col_3"><a class="col_3" href="#">Delivery Information</a></li>
-								<li class="col_3"><a class="col_3" href="#">Orders and Returns</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="footer_1i1 clearfix">
-							<h4 class="mgt">Customer Care</h4>
-							<ul>
-								<li class="col_3"><a class="col_3" href="#">Help &amp; FAQs</a></li>
-								<li class="col_3"><a class="col_3" href="#">My Account</a></li>
-								<li class="col_3"><a class="col_3" href="#">Order History</a></li>
-								<li class="col_3"><a class="col_3" href="#">Wishlist</a></li>
-								<li class="col_3"><a class="col_3" href="#">Newsletter</a></li>
-								<li class="col_3"><a class="col_3" href="#">Newsletter</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="footer_1i1 clearfix">
-							<h4 class="mgt">Newsletter</h4>
-							<p class="col_3">Sign up for our mailing list to get the latest updates &amp; offers.</p>
-							<input class="form-control" placeholder="Email address" type="text">
-							<h5><a class="button" href="#"> Subscribe Now</a></h5>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section id="footer_bottom">
-		<div class="container">
-			<div class="row">
-				<div class="footer_2 text-center clearfix">
-					<div class="col-sm-12">
-						<p class="mgt col_3">
-							© 2013 Your Website Name. All Rights Reserved | Design by <a class="col_1"
-																	href="http://www.templateonweb.com">TemplateOnWeb</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <script src="~/vendors/scripts/core.js"></script>
+    <script src="~/vendors/scripts/script.min.js"></script>
+    <script src="~/vendors/scripts/process.js"></script>
+    <script src="~/vendors/scripts/layout-settings.js"></script>
+    <script src="~/src/plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="~/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="~/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/vendors/scripts/dashboard.js"></script>
 </body>
+
 </html>

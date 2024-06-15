@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace JewelryStoreUI.Pages
 {
-    public class StaffDashboardModel : PageModel
+    public class StaffModel : PageModel
     {
         public void OnGet()
         {
