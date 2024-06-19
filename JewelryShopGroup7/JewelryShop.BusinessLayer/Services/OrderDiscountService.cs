@@ -100,7 +100,7 @@ namespace JewelryShop.BusinessLayer.Services
 
             return id ;
         }
-        public Task<decimal?> updateTotalPriceaddOff(decimal offerPercent, decimal? total) {
+        public Task<decimal?> UpdateTotalPriceaddOff(decimal offerPercent, decimal? total) {
             var offer = _offerRepository.GetFirstOrDefaultAsync(off => off.OfferPercent == offerPercent);
             if (offer.Result.ApprovedBy == null)
             {
@@ -114,7 +114,7 @@ namespace JewelryShop.BusinessLayer.Services
             
         }
 
-        public Task<decimal?> updateTotalPriceaddStoreCode(string? Code, decimal? total)
+        public Task<decimal?> UpdateTotalPriceaddStoreCode(string? Code, decimal? total)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace JewelryShop.BusinessLayer.Services
             
         }
 
-        public Task<decimal?> updateTotalPriceaddTier(string? tier, decimal? total)
+        public Task<decimal?> UpdateTotalPriceaddTier(string? tier, decimal? total)
         {
             try
             {

@@ -1,4 +1,4 @@
-using JewelryShop.DTO.DTOs;
+using JewelryStoreUI.Pages.DTOs.Discount;
 using JewelryStoreUI.Pages.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
