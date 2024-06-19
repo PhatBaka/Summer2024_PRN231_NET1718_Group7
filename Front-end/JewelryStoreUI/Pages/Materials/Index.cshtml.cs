@@ -1,4 +1,5 @@
 using JewelryStoreUI.Pages.DTOs;
+using JewelryStoreUI.Pages.DTOs.Material;
 using JewelryStoreUI.Pages.Helpers;
 using JewelryStoreUI.Pages.ViewModels;
 using Microsoft.AspNetCore.Mvc;

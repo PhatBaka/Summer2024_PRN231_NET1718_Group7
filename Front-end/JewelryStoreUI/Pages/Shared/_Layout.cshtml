@@ -1,44 +1,56 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var datetime = DateTime.Now;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Jewelry</title>
-	<link href="~/css/bootstrap.min.css" rel="stylesheet">
-	<link href="~/css/global.css" rel="stylesheet">
-	<link href="~/css/index.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css" />
-	<link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
-	<script src="~/js/jquery-2.1.1.min.js"></script>
-	<script src="~/js/bootstrap.min.js"></script>
-	<style>
-		body {
-			background: #333
-		}
-		butt
-	</style>
+    <base href="">
+    <meta charset="utf-8" />
+    <title>Start | Keenthemes</title>
+    <meta name="description" content="Check out all the features of the Start admin panel. A large number of templates, components and widgets." />
+    <meta name="keywords" content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template" />
+    <link rel="canonical" href="Https://preview.keenthemes.com/start" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="~/media/logos/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link href="~/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/style.bundle.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
-    <div>
-        @RenderBody()
+<body id="kt_body" data-sidebar="on" class="header-fixed header-tablet-and-mobile-fixed sidebar-enabled">
+    <div class="d-flex flex-column">
+        <!--begin::Page-->
+        <div class="page d-flex flex-row flex-column-fluid">
+            <!--begin::Wrapper-->
+            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+                <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+                    <div class="container d-flex align-items-stretch justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <a href="index.html">
+                                <img alt="Logo" src="~/media/logos/diamond.png" class="h-30px" />
+                                JEWELRY STORE
+                            </a>
+                            <h1></h1>
+                        </div>
+                        <h1>PRICE TODAY - Update Date: @datetime</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-	<script>
-		$(document).ready(function () {
-			/*****Fixed Menu******/
-			var secondaryNav = $('.cd-secondary-nav'),
-				secondaryNavTopPosition = secondaryNav.offset().top;
-			$(window).on('scroll', function () {
-				if ($(window).scrollTop() > secondaryNavTopPosition) {
-					secondaryNav.addClass('is-fixed');
-				} else {
-					secondaryNav.removeClass('is-fixed');
-				}
-			});
 
-		});
-	</script>
+	<div class="d-flex flex-column flex-root">
+			<div class="container">
+                @RenderBody()
+			</div>
+	</div>
+
+    <script src="~/plugins/global/plugins.bundle.js"></script>
+    <script src="~/js/scripts.bundle.js"></script>
+    <script src="~/js/custom/widgets.js"></script>
+    <script src="~/js/custom/modals/create-app.js"></script>
+    <script src="~/js/custom/modals/select-location.js"></script>
+    <script src="~/js/custom/modals/users-search.js"></script>
 
 </body>
-
 </html>

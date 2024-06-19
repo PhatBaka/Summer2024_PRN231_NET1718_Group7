@@ -65,5 +65,45 @@ namespace JewelryShop.API.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost("UpdateOffDis")]
+        public async Task<ActionResult<decimal?>> UpdateTotalPriceAddOff([FromBody] decimal offerDis, decimal? total )
+        {
+            try
+            {
+                decimal? result = await _orderDiscountService.UpdateTotalPriceaddOff(offerDis, total);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost("UpdateStoreDis")]
+        public async Task<ActionResult<decimal?>> UpdateTotalPriceAddStoreDis([FromBody] string? storeCode, decimal? total)
+        {
+            try
+            {
+                decimal? result = await _orderDiscountService.UpdateTotalPriceaddStoreCode(storeCode, total);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost("UpdateTierDis")]
+        public async Task<ActionResult<decimal?>> UpdateTotalPriceAddTier([FromBody] string? Tiername, decimal? total)
+        {
+            try
+            {
+                decimal? result = await _orderDiscountService.UpdateTotalPriceaddTier(Tiername, total);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
