@@ -47,11 +47,11 @@ namespace JewelryStoreUI.Pages
                 HttpContext.Session.SetInt32("ROLE", (int) ResponseResult.Data.role);
                 if (ResponseResult.Data.role == RoleEnum.MANAGER)
                 {
-                    return RedirectToPage("ManagerDashboard");
+                    return RedirectToPage("Manager");
                 }
                 else if (ResponseResult.Data.role == RoleEnum.STAFF)
                 {
-                    return RedirectToPage("StaffDashboard");
+                    return RedirectToPage("Staff");
                 }
             }
             return Page();
