@@ -4,12 +4,13 @@ using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/JewelryOData")]
     [ApiController]
-    public class JewelryController : ControllerBase
+    public class JewelryController : ODataController
     {
         private readonly IJewelryService _jewelryService;
         private readonly IJewelryMaterialService _jewelryMaterialService;

@@ -2,12 +2,13 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/GuaranteeOData")]
     [ApiController]
-    public class GuaranteeController : ControllerBase
+    public class GuaranteeController : ODataController
     {
         private readonly IGuaranteeService _guaranteeService;
 

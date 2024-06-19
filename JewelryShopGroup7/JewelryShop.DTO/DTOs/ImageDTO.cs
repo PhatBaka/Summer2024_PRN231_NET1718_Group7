@@ -5,6 +5,7 @@ namespace JewelryShop.DTO.DTOs
 {
     public class ImageDTO
     {
+        [Key]
         public Guid ImageId { get; set; }
         public byte[] ImageData { get; set; }
         public IFormFile ImageFile { get; set; }

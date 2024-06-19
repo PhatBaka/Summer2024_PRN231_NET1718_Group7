@@ -1,7 +1,10 @@
-﻿namespace JewelryShop.DTO.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace JewelryShop.DTO.DTOs
 {
     public class TierDTO
     {
+        [Key]
         public Guid? TierId { get; set; }
 
         public string? TierName { get; set; } = null!;

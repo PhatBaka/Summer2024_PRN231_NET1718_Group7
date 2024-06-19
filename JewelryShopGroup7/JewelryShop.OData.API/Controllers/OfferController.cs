@@ -2,12 +2,13 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/OfferOData")]
     [ApiController]
-    public class OfferController : ControllerBase
+    public class OfferController : ODataController
     {
         private readonly IOfferService _offerService;
 

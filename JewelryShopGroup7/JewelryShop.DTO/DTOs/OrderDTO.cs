@@ -1,10 +1,12 @@
 ﻿using JewelryShop.DTO.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace JewelryShop.DTO.DTOs;
 
 public partial class OrderDTO
 {
+    [Key]
     public Guid? OrderId { get; set; }
 
     public DateTime? OrderDate { get; set; }

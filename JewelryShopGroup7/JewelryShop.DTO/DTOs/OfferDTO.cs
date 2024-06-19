@@ -1,7 +1,10 @@
-﻿namespace JewelryShop.DTO.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace JewelryShop.DTO.DTOs;
 
 public partial class OfferDTO
 {
+    [Key]
     public Guid? OfferId { get; set; }
 
     public decimal? OfferPercent { get; set; }

@@ -1,7 +1,10 @@
-﻿namespace JewelryShop.DTO.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace JewelryShop.DTO.DTOs;
 
 public partial class CustomerDTO
 {
+    [Key]
     public Guid? CustomerId { get; set; }
 
     public string? Name { get; set; }

@@ -5,6 +5,7 @@ namespace JewelryShop.DTO.DTOs;
 
 public partial class AccountDTO
 {
+    [Key]
     public Guid? AccountId { get; set; }
 
     public string? Email { get; set; }

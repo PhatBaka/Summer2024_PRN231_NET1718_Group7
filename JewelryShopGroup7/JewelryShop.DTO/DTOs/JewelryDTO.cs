@@ -9,6 +9,7 @@ namespace JewelryShop.DTO.DTOs;
 
 public partial class JewelryDTO
 {
+    [Key]
     public Guid JewelryId { get; set; }
 
     public string JewelryName { get; set; }
