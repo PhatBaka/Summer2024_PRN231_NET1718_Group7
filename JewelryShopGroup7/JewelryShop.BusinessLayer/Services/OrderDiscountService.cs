@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.OrderDiscount;
 using Microsoft.IdentityModel.Tokens;
 
 namespace JewelryShop.BusinessLayer.Services
@@ -24,7 +25,7 @@ namespace JewelryShop.BusinessLayer.Services
             _tierRepository = tierRepository;
         }
 
-        public async Task<Guid> CreateAsync(OrderDiscountDTO createModel)
+        public async Task<Guid> CreateAsync(CreateOrderDiscountRequest createModel)
         {
             OrderDiscount orderDiscount = _mapper.Map<OrderDiscount>(createModel);
             return await _orderDiscountRepository.AddAsync(orderDiscount);
@@ -50,19 +51,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<OrderDiscountDTO>> GetAllAsync()
+        public async Task<IEnumerable<OrderDiscountResponse>> GetAllAsync()
         {
             var orderDiscounts = await _orderDiscountRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<OrderDiscountDTO>>(orderDiscounts.ToList());
+            return _mapper.Map<IEnumerable<OrderDiscountResponse>>(orderDiscounts.ToList());
         }
 
-        public async Task<OrderDiscountDTO> GetByIdAsync(Guid id)
+        public async Task<OrderDiscountResponse> GetByIdAsync(Guid id)
         {
             var orderDiscount = (await _orderDiscountRepository.GetAsync(od => od.OrderDiscountId == id)).FirstOrDefault();
-            return _mapper.Map<OrderDiscountDTO>(orderDiscount);
+            return _mapper.Map<OrderDiscountResponse>(orderDiscount);
         }
 
-        public async Task UpdateAsync(Guid id, OrderDiscountDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateOrderDiscountRequest updateModel)
         {
             var orderDiscount = (await _orderDiscountRepository.GetAsync(od => od.OrderDiscountId == id)).FirstOrDefault();
             if (orderDiscount != null)
@@ -82,11 +83,11 @@ namespace JewelryShop.BusinessLayer.Services
             var orderdis = _storeDiscountRepository.GetFirstOrDefaultAsync(sd => sd.DiscountCode == OrderDiscountCode);
             var tierdis = _tierRepository.GetFirstOrDefaultAsync(ti => ti.TierName == tiername);
 
-            OrderDiscountDTO orderDiscountDTO = new OrderDiscountDTO();
+            CreateOrderDiscountRequest createOrderDiscountRequest = new CreateOrderDiscountRequest();
 
-            orderDiscountDTO.OfferId = offerdis.Result.OfferId != null ? offerdis.Result.OfferId : (Guid?)null;
-            orderDiscountDTO.StoreDiscountId = orderdis.Result.StoreDiscountId != null ? orderdis.Result.StoreDiscountId : (Guid?)null;
-            orderDiscountDTO.TierId = tierdis.Result.TierId != null ? tierdis.Result.TierId : (Guid?)null;
+            createOrderDiscountRequest.OfferId = offerdis.Result.OfferId != null ? offerdis.Result.OfferId : (Guid?)null;
+            createOrderDiscountRequest.StoreDiscountId = orderdis.Result.StoreDiscountId != null ? orderdis.Result.StoreDiscountId : (Guid?)null;
+            createOrderDiscountRequest.TierId = tierdis.Result.TierId != null ? tierdis.Result.TierId : (Guid?)null;
 
             
 
@@ -94,9 +95,12 @@ namespace JewelryShop.BusinessLayer.Services
             var orderdisprice = orderdis.Result.DiscountAmount ?? 0;
             var tierdisprice = tierdis.Result.DiscountPercentage ?? 0;
 
-            orderDiscountDTO.Value = (((total * orderdisprice) / 100) + ((total * offerdisprice) / 100) + ((total * tierdisprice) / 100));
+            if (total.HasValue)
+            {
+                createOrderDiscountRequest.Value = (total.Value * orderdisprice / 100) + (total.Value * offerdisprice / 100) + (total.Value * tierdisprice / 100);
+            }
 
-            var id = CreateAsync(orderDiscountDTO);
+            var id = CreateAsync(createOrderDiscountRequest);
 
             return id ;
         }

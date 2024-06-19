@@ -7,7 +7,7 @@ public partial class OrderDiscount
     public string? Type { get; set; }
 
     public string? Name { get; set; }
-
+    public decimal Value { get; set; }
     public Guid? TierId { get; set; }
 
     public Guid? StoreDiscountId { get; set; }
