@@ -3,7 +3,7 @@
     "JewelryStoreUI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "Price",
+      "launchUrl": "Login",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

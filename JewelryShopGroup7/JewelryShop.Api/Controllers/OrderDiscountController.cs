@@ -71,7 +71,7 @@ namespace JewelryShop.API.Controllers
         {
             try
             {
-                decimal? result = await _orderDiscountService.UpdateTotalPriceaddOff(offerDis, total);
+                decimal? result = await _orderDiscountService.updateTotalPriceaddOff(offerDis, total);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -84,7 +84,7 @@ namespace JewelryShop.API.Controllers
         {
             try
             {
-                decimal? result = await _orderDiscountService.UpdateTotalPriceaddStoreCode(storeCode, total);
+                decimal? result = await _orderDiscountService.updateTotalPriceaddStoreCode(storeCode, total);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace JewelryShop.API.Controllers
         {
             try
             {
-                decimal? result = await _orderDiscountService.UpdateTotalPriceaddTier(Tiername, total);
+                decimal? result = await _orderDiscountService.updateTotalPriceaddTier(Tiername, total);
                 return Ok(result);
             }
             catch (Exception ex)

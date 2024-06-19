@@ -1,12 +1,125 @@
 ﻿@page
 @model JewelryStoreUI.Pages.CartModel
 @{
-	Layout = "_CartLayout";
+	Layout = "_StaffLayout";
 }
 
-<div class="d-flex flex-column flex-root">
-    <div class="page d-flex flex-row flex-column-fluid">
-        <div id="kt_sidebar" class="sidebar bg-info" data-kt-drawer="true" data-kt-drawer-name="sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '350px': '300px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_sidebar_toggler">
-        </div>
-    </div>
-</div>
+<section id="center" class="center_shop">
+	<div class="container">
+		<div class="row">
+			<div class="center_shop_t clearfix">
+				<div class="col-sm-6">
+					<div class="center_shop_tl clearfix">
+						<h4 class="mgt">Shopping Cart</h4>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="center_shop_tr text-right clearfix">
+						<h6 class="col_2">You are here: <a href="#">Home</a> / Shopping Cart</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="cart_page" class="clearfix cart">
+	<div class="container">
+		<div class="row">
+			<div class="cart_2 clearfix">
+				<div class="col-sm-6">
+					<h3 class="bold col_1 mgt">MY CART</h3>
+				</div>
+
+				<form method="post" asp-page-handler="ClearCart">
+					<button type="submit">Clear Cart</button>
+				</form>
+
+				<div class="col-sm-6">
+					<h5 class="text-right mgt"><a asp-page="/Jewleries/Index">Continue Shopping</a></h5>
+				</div>
+			</div>
+			<div class="cart_3 clearfix">
+				<div class="col-sm-8">
+					<div class="cart_3l clearfix">
+						<h5 class="mgt">PRODUCT</h5>
+					</div>
+					@foreach (var item in Model.Carts2)
+					{
+						<div class="cart_3l1 border_none clearfix">
+							<div class="col-sm-3 space_left">
+								<div class="cart_3l1i clearfix">
+									<a href="#"><img src="data:image/png;base64, @item.Base64" alt="abc" class="iw"></a>
+								</div>
+							</div>
+							<div class="col-sm-9">
+								<div class="cart_3l1i1 clearfix">
+									<h5 class="mgt">
+										<a href="#">
+											@item.Data.jewelryName
+										</a>
+									</h5>
+									<h4>$@item.Data.sellPrice</h4>
+									<h5>Quantity</h5>
+								</div>
+								<div class="cart_3l1i2 clearfix">
+									<div class="input-group number-spinner">
+										<span class="input-group-btn">
+											<button class="btn btn-default" data-dir="dwn">
+												<span class="glyphicon glyphicon-minus"></span>
+											</button>
+										</span>
+										<input type="text" class="form-control text-center" value="1">
+										<span class="input-group-btn">
+											<button class="btn btn-default" data-dir="up">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+									<h6 class="mgt"><a class="button_1 mgt" href="#">REMOVE</a></h6>
+									<h6 class="mgt"><a class="button mgt" href="#">UPDATE CART</a></h6>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+				<div class="col-sm-4">
+					<div class="cart_3r clearfix">
+						<h5 class="mgt head_1">SUBTOTAL</h5>
+						<h3 class="text-center">$@Model.TotalPrice</h3>
+						<hr>
+						<h6>Phone</h6>
+						<form method="post">
+							<input class="form-control" asp-for="@Model.PhoneNumber"></input>
+							<h5 class="text-center">
+								<button type="submit" name="action" value="checkout" class="button">PROCEED TO CHECKOUT</button>
+							</h5>
+						</form>
+						<br>
+						<h5>GET SHIPPING ESTIMATES</h5>
+						<hr>
+					</div>
+					<div class="cart_3r1 clearfix">
+						<h6>Country</h6>
+						<select class="form-control" id="subject" name="subject">
+							<option>America</option>
+							<option>India</option>
+							<option>England</option>
+							<option>Africa</option>
+						</select><br>
+						<h6>State</h6>
+						<select class="form-control" id="subject" name="subject">
+							<option>Delhi</option>
+							<option>Uttar Pradesh</option>
+							<option>Punjab</option>
+							<option>Madhya Pradesh</option>
+						</select><br>
+						<h6>Postal/Zip Code</h6>
+						<input class="form-control" type="text">
+						<h5 class="text-center"><a class="button_1" href="#">CALCULATE SHIPPING</a></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
