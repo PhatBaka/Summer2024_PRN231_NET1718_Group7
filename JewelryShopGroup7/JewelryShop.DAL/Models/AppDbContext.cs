@@ -51,13 +51,13 @@ public partial class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(local);uid=sa;pwd=12345;database=JewelryShop;TrustServerCertificate=True");
-        /*optionsBuilder.UseLazyLoadingProxies();
+        /*optionsBuilder.UseSqlServer("Server=(local);uid=sa;pwd=12345;database=JewelryShop;TrustServerCertificate=True");*/
+        optionsBuilder.UseLazyLoadingProxies();
         var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         IConfigurationRoot configuration = builder.Build();
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("JewelryShop"), b => b.MigrationsAssembly("JewelryShop.DAL"));*/
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("JewelryShop"), b => b.MigrationsAssembly("JewelryShop.DAL"));
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
