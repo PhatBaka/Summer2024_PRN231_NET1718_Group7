@@ -1,6 +1,5 @@
 using JewelryStoreUI.Pages.DTOs.Jewelry;
 using JewelryStoreUI.Pages.DTOs.Material;
-using JewelryStoreUI.Pages.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
@@ -19,7 +18,7 @@ namespace JewelryStoreUI.Pages.Jewleries
         public DetailModel()
         {
             jewelryUrl = url + "Jewelry/";
-            imageUrl = url + "Image/"; 
+            imageUrl = url + "Image/";
         }
 
         public async Task<string> GetImageAsync(dynamic imageId)

@@ -19,7 +19,7 @@ namespace JewelryStoreUI.Pages.Orders
 
         public async Task OnGetAsync()
         {
-            using (var client  = new HttpClient()) 
+            using (var client = new HttpClient())
             {
                 var response = await client.GetAsync(orderUrl);
                 var result = await response.Content.ReadAsStringAsync();

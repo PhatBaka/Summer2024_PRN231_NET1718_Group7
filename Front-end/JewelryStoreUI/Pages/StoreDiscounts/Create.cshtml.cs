@@ -1,10 +1,10 @@
-using JewelryShop.DTO.DTOs;
+using JewelryStoreUI.Pages.DTOs;
 using JewelryStoreUI.Pages.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 
-namespace JewelryStoreUI.Pages.Promotions
+namespace JewelryStoreUI.Pages.StoreDiscounts
 {
     public class CreateModel : PageModel
     {

@@ -1,6 +1,6 @@
 using JewelryStoreUI.Enums;
+using JewelryStoreUI.Pages.DTOs;
 using JewelryStoreUI.Pages.Helpers;
-using JewelryStoreUI.Pages.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
@@ -17,16 +17,16 @@ namespace JewelryStoreUI.Pages
         private string url = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
 
 
-		private void LoadData()
+        private void LoadData()
         {
-			url += "Auth/Login";
+            url += "Auth/Login";
             ResponseResult = new();
-		}
+        }
 
         public void OnGet()
         {
             LoadData();
-		}
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -40,11 +40,11 @@ namespace JewelryStoreUI.Pages
                 var response = await client.PostAsync(url, data);
                 var result = await response.Content.ReadAsStringAsync();
 
-				ResponseResult = JsonConvert.DeserializeObject<ResponseResult<dynamic>>(result);
+                ResponseResult = JsonConvert.DeserializeObject<ResponseResult<dynamic>>(result);
             }
             if (ResponseResult.Result == true)
             {
-                HttpContext.Session.SetInt32("ROLE", (int) ResponseResult.Data.role);
+                HttpContext.Session.SetInt32("ROLE", (int)ResponseResult.Data.role);
                 if (ResponseResult.Data.role == RoleEnum.MANAGER)
                 {
                     return RedirectToPage("ManagerDashboard");

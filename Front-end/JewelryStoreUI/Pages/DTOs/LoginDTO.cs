@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JewelryStoreUI.Pages.ViewModels
+namespace JewelryStoreUI.Pages.DTOs
 {
     public class LoginDTO
     {
