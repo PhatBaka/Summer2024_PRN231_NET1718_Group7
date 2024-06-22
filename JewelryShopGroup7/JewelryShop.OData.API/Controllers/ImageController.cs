@@ -37,40 +37,5 @@ namespace JewelryShop.OData.Api.Controllers
             if (result == null) return NotFound();
             return Ok(result);
         }
-
-        [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromForm] CreateImageRequest createImageDTO)
-        {
-            var id = await _imageService.CreateAsync(createImageDTO);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromForm] UpdateImageRequest updateModel)
-        {
-            try
-            {
-                await _imageService.UpdateAsync(id, updateModel);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(Guid id)
-        {
-            try
-            {
-                await _imageService.DeleteAsync(id);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
     }
 }

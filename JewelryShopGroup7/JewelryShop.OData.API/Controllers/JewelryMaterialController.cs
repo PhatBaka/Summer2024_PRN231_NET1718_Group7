@@ -2,6 +2,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.JewelryMaterial;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace JewelryShop.OData.Api.Controllers
 {
@@ -17,6 +18,7 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async Task<ActionResult<IEnumerable<JewelryMaterialResponse>>> GetAllAsync()
         {
             var result = await _jewelryMaterialService.GetAllAsync();
@@ -31,39 +33,5 @@ namespace JewelryShop.OData.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateJewelryMaterialRequest createModel)
-        {
-            var id = await _jewelryMaterialService.CreateAsync(createModel);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
-        }
-
-        [HttpPut("{jewelryId}/{materialId}")]
-        public async Task<IActionResult> UpdateAsync(Guid jewelryId, Guid materialId, [FromBody] UpdateJewelryMaterialRequest updateModel)
-        {
-            try
-            {
-                await _jewelryMaterialService.UpdateAsync(jewelryId, materialId, updateModel);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
-
-        [HttpDelete("{jewelryId}/{materialId}")]
-        public async Task<IActionResult> DeleteAsync(Guid jewelryId, Guid materialId)
-        {
-            try
-            {
-                await _jewelryMaterialService.DeleteAsync(jewelryId, materialId);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
     }
 }

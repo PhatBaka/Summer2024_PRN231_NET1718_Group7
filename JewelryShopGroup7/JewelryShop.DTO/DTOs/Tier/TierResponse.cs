@@ -2,7 +2,7 @@
 
 namespace JewelryShop.DTO.DTOs
 {
-    public class TierDTO
+    public class TierResponse
     {
         [Key]
         public Guid? TierId { get; set; }

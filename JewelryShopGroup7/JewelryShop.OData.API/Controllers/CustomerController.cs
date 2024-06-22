@@ -34,39 +34,5 @@ namespace JewelryShop.OData.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateCustomerRequest createModel)
-        {
-            var id = await _customerService.CreateAsync(createModel);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateCustomerRequest updateModel)
-        {
-            try
-            {
-                await _customerService.UpdateAsync(id, updateModel);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(Guid id)
-        {
-            try
-            {
-                await _customerService.DeleteAsync(id);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
     }
 }
