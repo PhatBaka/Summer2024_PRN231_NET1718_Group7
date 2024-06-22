@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace JewelryShop.DTO.DTOs.Tier
+namespace JewelryShop.DTO.DTOs
 {
-    public class TierResponse
+    public class TierDTO
     {
+        [Key]
         public Guid? TierId { get; set; }
 
         public string? TierName { get; set; } = null!;
@@ -15,5 +12,6 @@ namespace JewelryShop.DTO.DTOs.Tier
         public decimal? MinAmountSpent { get; set; }
 
         public decimal? DiscountPercentage { get; set; }
+
     }
 }

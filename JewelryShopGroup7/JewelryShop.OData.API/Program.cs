@@ -1,13 +1,23 @@
 using JewelryShop.BusinessLayer;
 using JewelryShop.DAL;
+using JewelryShop.DTO.DTOs;
 using Microsoft.AspNetCore.OData;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers()
-    .AddOData(option => option.Select().Filter().Count().OrderBy().Expand());
+builder.Services.AddControllers().AddOData(opt =>
+          opt.AddRouteComponents("odata", GetEdmModel())
+              .Select()
+              .Filter()
+              .OrderBy()
+              .Expand()
+              .Count()  // Enable $count
+              .SetMaxTop(100));
+
 builder.Services.AddMvc(options =>
 {
     options.SuppressAsyncSuffixInActionNames = false;
@@ -32,3 +42,24 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+static IEdmModel GetEdmModel()
+{
+    ODataConventionModelBuilder modelBuilder = new ODataConventionModelBuilder();
+    modelBuilder.EntitySet<AccountDTO>("AccountOData");
+    modelBuilder.EntitySet<CustomerDTO>("CustomerOData");
+    modelBuilder.EntitySet<GuaranteeDTO>("GuaranteeOData");
+    modelBuilder.EntitySet<ImageDTO>("ImageOData");
+    modelBuilder.EntitySet<JewelryDTO>("JewelryOData");
+    modelBuilder.EntitySet<JewelryTypeDTO>("JewelryTypeOData");
+    modelBuilder.EntitySet<MaterialDTO>("MaterialOData");
+    modelBuilder.EntitySet<MaterialPriceDTO>("MaterialPriceOData");
+    modelBuilder.EntitySet<OfferDTO>("OfferOData");
+    modelBuilder.EntitySet<OrderDiscountDTO>("OrderDiscountOData");
+    modelBuilder.EntitySet<OrderDTO>("OrderOData");
+    modelBuilder.EntitySet<OrderTypeDTO>("OrderTypeOData");
+    modelBuilder.EntitySet<StoreDiscountDTO>("StoreDiscountOData");
+    modelBuilder.EntitySet<TierDTO>("TierOData");
+    return modelBuilder.GetEdmModel();
+}

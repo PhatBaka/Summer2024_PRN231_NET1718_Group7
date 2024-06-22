@@ -16,6 +16,10 @@ public partial class Material
 
     public virtual Image Image { get; set; }
 
+    public Guid CertificateId { get; set; }
+
+    public bool IsMetal { get; set; }
+
     public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
 
 }

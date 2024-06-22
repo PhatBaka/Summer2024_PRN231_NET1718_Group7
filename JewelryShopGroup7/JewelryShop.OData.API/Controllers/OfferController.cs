@@ -1,13 +1,14 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
-using JewelryShop.DTO.DTOs.Offer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/OfferOData")]
     [ApiController]
-    public class OfferController : ControllerBase
+    public class OfferController : ODataController
     {
         private readonly IOfferService _offerService;
 
@@ -17,14 +18,15 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OfferResponse>>> GetAllAsync()
+        [EnableQuery]
+        public async Task<ActionResult<IEnumerable<OfferDTO>>> GetAllAsync()
         {
             var result = await _offerService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OfferResponse>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<OfferDTO>> GetByIdAsync(Guid id)
         {
             var result = await _offerService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -32,14 +34,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOfferRequest createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] OfferDTO createModel)
         {
             var id = await _offerService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateOffterRequest updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] OfferDTO updateModel)
         {
             try
             {

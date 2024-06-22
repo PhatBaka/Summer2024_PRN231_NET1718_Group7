@@ -1,6 +1,9 @@
 using JewelryShop.BusinessLayer;
 using JewelryShop.BusinessLayer.BackgroundServices;
 using JewelryShop.DAL;
+using JewelryShop.DAL.Models;
+using JewelryShop.DAL.Seed;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,5 +39,21 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<AppDbContext>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedAcc(context);
+    await Seed.SeedJew(context);
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error while seeding data");
+}
+
 
 app.Run();

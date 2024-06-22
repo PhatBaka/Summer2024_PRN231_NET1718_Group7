@@ -1,13 +1,14 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
-using JewelryShop.DTO.DTOs.Tier;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/TierOData")]
     [ApiController]
-    public class TierController : ControllerBase
+    public class TierController : ODataController
     {
         private readonly ITierService _tierService;
 
@@ -17,14 +18,15 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TierResponse>>> GetAllAsync()
+        [EnableQuery]
+        public async Task<ActionResult<IEnumerable<TierDTO>>> GetAllAsync()
         {
             var result = await _tierService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TierResponse>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<TierDTO>> GetByIdAsync(Guid id)
         {
             var result = await _tierService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -32,14 +34,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateTierRequest createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] TierDTO createModel)
         {
             var id = await _tierService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateTierRequest updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] TierDTO updateModel)
         {
             try
             {
