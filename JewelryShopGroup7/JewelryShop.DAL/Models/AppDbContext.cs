@@ -51,7 +51,7 @@ public partial class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // optionsBuilder.UseSqlServer("Server=(local);uid=sa;pwd=sa;database=JewelryShop;TrustServerCertificate=True");
+        /*optionsBuilder.UseSqlServer("Server=(local);uid=sa;pwd=12345;database=JewelryShop;TrustServerCertificate=True");*/
         optionsBuilder.UseLazyLoadingProxies();
         var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())

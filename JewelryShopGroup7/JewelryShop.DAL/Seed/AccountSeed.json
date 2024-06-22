@@ -1,0 +1,63 @@
+[
+  {
+    "AccountId": "c21a23f2-4573-4c54-939b-092b5a67dd6e",
+    "Email": "Admin@example.com",
+    "Password": "123",
+    "PhoneNumber": "123-456-7890",
+    "Status": "Active",
+    "Role": "Admin",
+    "Guarantees": [],
+    "OfferApprovedBies": [
+      {
+        "OfferId": "76a8209b-f469-4f0f-8f4d-bcd7b62d29c5",
+        "OfferPercent": 10,
+        "Constraints": "Limited time offer",
+        "CreatedById": "c21a23f2-4573-4c54-939b-092b5a67dd6e",
+        "ApprovedById": "d3b5d5f4-7432-4f31-967d-1f6ed5b4e65a",
+        "OrderDiscounts": []
+      }
+    ],
+    "OfferCreatedBies": [],
+    "Orders": [
+      {
+        "OrderId": "fa34a2b1-0a59-4d70-9c78-dc2f8f38f07e",
+        "OrderDate": "2023-06-19T00:00:00",
+        "TotalPrice": 200.00,
+        "DiscountPrice": 20.00,
+        "FinalPrice": 180.00,
+        "Status": "Completed",
+        "OrderType": "Online",
+        "OrderDiscountId": null,
+        "AccountId": "c21a23f2-4573-4c54-939b-092b5a67dd6e",
+        "CustomerId": null,
+        "OrderDetails": []
+      }
+    ]
+  },
+  {
+    "AccountId": "d3b5d5f4-7432-4f31-967d-1f6ed5b4e65a",
+    "Email": "jane.smith@example.com",
+    "Password": "456",
+    "PhoneNumber": "098-765-4321",
+    "Status": "Inactive",
+    "Role": "User",
+    "Guarantees": [],
+    "OfferApprovedBies": [],
+    "OfferCreatedBies": [],
+    "Orders": [
+      {
+        "OrderId": "957ce010-45a1-49c2-8f6a-5f2f9f38f07e",
+        "OrderDate": "2023-06-19T00:00:00",
+        "TotalPrice": 200.00,
+        "DiscountPrice": 20.00,
+        "FinalPrice": 180.00,
+        "Status": "Completed",
+        "OrderType": "Online",
+        "OrderDiscountId": null,
+        "AccountId": "c21a23f2-4573-4c54-939b-092b5a67dd6e",
+        "CustomerId": null,
+        "OrderDetails": []
+      }
+    ]
+  }
+]
