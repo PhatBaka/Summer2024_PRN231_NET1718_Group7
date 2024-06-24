@@ -71,13 +71,23 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost("Gem")]
-        public async Task<ActionResult<Guid>> CreateAsync([FromForm] GemDTO createModel)
+        public async Task<ActionResult<Guid>> CreateGemAsync([FromForm] GemDTO createModel)
         {
             var gem = _mapper.Map<MaterialDTO>(createModel);
             gem.CreatedDate = DateTime.Now;
             gem.CertificateImageData = await FileHelper.ConvertToByteArrayAsync(createModel.CertificateImageFile);
             gem.MaterialImageData = await FileHelper.ConvertToByteArrayAsync(createModel.MaterialImageFile);
+            gem.SellPrice = gem.BuyPrice * 70 / 100;
             var id = await _materialService.CreateAsync(gem);
+            return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
+        }
+
+        [HttpPost("Metal")]
+        public async Task<ActionResult<Guid>> CreateMetalAsync([FromBody] MetalDTO createModel)
+        {
+            var metal = _mapper.Map<MaterialDTO>(createModel);
+            metal.CreatedDate = DateTime.Now;
+            var id = await _materialService.CreateAsync(metal);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
     }

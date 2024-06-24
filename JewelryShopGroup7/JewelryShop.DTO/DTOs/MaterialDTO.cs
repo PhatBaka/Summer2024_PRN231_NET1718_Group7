@@ -31,9 +31,11 @@ public partial class MaterialDTO
 
     public DateTime? CreatedDate { get; set; }
 
-    public decimal InitialPrice { get; set; }
+    public decimal CurrentPrice { get; set; }
 
-    public decimal TotalPrice { get; set; }
+    public decimal SellPrice { get; set; }
+
+    public decimal BuyPrice { get; set; }
 
     public byte[]? MaterialImageData { get; set; }
 
@@ -48,6 +50,8 @@ public partial class MaterialDTO
     public string? Color { get; set; }
 
     public string? Sharp { get; set; }
+
+    public bool IsMetal { get; set; }
 }
 
 public class GemDTO
@@ -57,10 +61,15 @@ public class GemDTO
     public string? Description { get; set; }
 
     [JsonIgnore]
-    public DateTime? CreatedDate { get; set; }
+    public DateTime? CreatedDate = DateTime.Now;
 
     // giá tiền của kim cương được fix cứng từ đầu 
-    public decimal TotalPrice { get; set; }
+    // giá bán
+    public decimal SellPrice { get; set; }
+
+    // giá mua: 70% giá bán 
+    [JsonIgnore]
+    public decimal BuyPrice { get; set; }
 
     public required IFormFile MaterialImageFile { get; set; }
 
@@ -77,7 +86,23 @@ public class GemDTO
     public string? Color { get; set; }
 
     public string? Sharp { get; set; }
+}
+
+public class MetalDTO 
+{
+    [Required]
+    public string? Name { get; set; }
 
     [JsonIgnore]
-    public virtual ICollection<JewelryMaterialDTO> JewelryMaterials { get; set; } = new List<JewelryMaterialDTO>();
+    public DateTime? CreatedDate = DateTime.Now;
+
+    public decimal Weight { get; set; }
+
+    public decimal CurrentPrice { get; set; }
+
+    public decimal SellPrice { get; set; }
+
+    public decimal BuyPrice { get; set; }
+
+    public bool IsMetal = true;
 }
