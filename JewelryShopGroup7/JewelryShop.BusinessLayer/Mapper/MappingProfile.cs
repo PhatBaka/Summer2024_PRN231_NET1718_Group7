@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.DAL.Models;
+using JewelryShop.DTO;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.Enums;
 
@@ -20,12 +21,12 @@ namespace JewelryShop.BusinessLayer.Mapper
                 .ReverseMap();
             //CreateMap<JewelryType, JewelryTypeDTO>().ReverseMap();
             CreateMap<Material, MaterialDTO>().ReverseMap();
-            CreateMap<MaterialPrice, MaterialPriceDTO>().ReverseMap();
+            //CreateMap<MaterialPrice, MaterialPriceDTO>().ReverseMap();
             CreateMap<Offer, OfferDTO>().ReverseMap();
             //CreateMap<Order, OrderDTO>().ReverseMap();
             //CreateMap<OrderDetail, OrderDetailDTO>().ReverseMap();
             CreateMap<OrderDiscount, OrderDiscountDTO>().ReverseMap();
-            CreateMap<OrderType, OrderTypeDTO>().ReverseMap();
+            //CreateMap<OrderType, OrderTypeDTO>().ReverseMap();
             //CreateMap<Role, RoleDTO>().ReverseMap();
             CreateMap<StoreDiscount, StoreDiscountDTO>().ReverseMap();
             CreateMap<Tier, TierDTO>().ReverseMap();
@@ -53,7 +54,7 @@ namespace JewelryShop.BusinessLayer.Mapper
             #endregion
 
             #region OrderDetail
-            CreateMap<OrderDetail, OrderDetailDTO>()
+            CreateMap<OrderDetail,  OrderDetailDTO>()
                 .ForMember(x => x.Jewelry, opt => opt.MapFrom(dest => dest.Jewelry))
                 .ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
                 .ReverseMap();

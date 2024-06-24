@@ -2,6 +2,7 @@ using AutoMapper;
 using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Material;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.API.Controllers
@@ -43,7 +44,7 @@ namespace JewelryShop.API.Controllers
         //}
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] MaterialDTO updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateMaterialRequest updateModel)
         {
             try
             {
@@ -71,23 +72,23 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost("Gem")]
-        public async Task<ActionResult<Guid>> CreateGemAsync([FromForm] GemDTO createModel)
+        public async Task<ActionResult<Guid>> CreateGemAsync([FromForm] CreateMaterialRequest createModel)
         {
-            var gem = _mapper.Map<MaterialDTO>(createModel);
-            gem.CreatedDate = DateTime.Now;
-            gem.CertificateImageData = await FileHelper.ConvertToByteArrayAsync(createModel.CertificateImageFile);
-            gem.MaterialImageData = await FileHelper.ConvertToByteArrayAsync(createModel.MaterialImageFile);
-            gem.SellPrice = gem.BuyPrice * 70 / 100;
-            var id = await _materialService.CreateAsync(gem);
+            //var gem = _mapper.Map<MaterialDTO>(createModel);
+            //gem.CreatedDate = DateTime.Now;
+            //gem.CertificateImageData = await FileHelper.ConvertToByteArrayAsync(createModel.CertificateImageFile);
+            //gem.MaterialImageData = await FileHelper.ConvertToByteArrayAsync(createModel.MaterialImageFile);
+            //gem.SellPrice = gem.BuyPrice * 70 / 100;
+            var id = await _materialService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPost("Metal")]
-        public async Task<ActionResult<Guid>> CreateMetalAsync([FromBody] MetalDTO createModel)
+        public async Task<ActionResult<Guid>> CreateMetalAsync([FromBody] CreateMaterialRequest createModel)
         {
-            var metal = _mapper.Map<MaterialDTO>(createModel);
-            metal.CreatedDate = DateTime.Now;
-            var id = await _materialService.CreateAsync(metal);
+            //var metal = _mapper.Map<MaterialDTO>(createModel);
+            //metal.CreatedDate = DateTime.Now;
+            var id = await _materialService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
     }

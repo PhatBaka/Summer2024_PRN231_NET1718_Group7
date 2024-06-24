@@ -29,7 +29,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Material> Materials { get; set; }
 
-    public virtual DbSet<MaterialPrice> MaterialPrices { get; set; }
+    // public virtual DbSet<MaterialPrice> MaterialPrices { get; set; }
 
     public virtual DbSet<Offer> Offers { get; set; }
 
@@ -39,7 +39,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<OrderDiscount> OrderDiscounts { get; set; }
 
-    public virtual DbSet<OrderType> OrderTypes { get; set; }
+    //public virtual DbSet<OrderType> OrderTypes { get; set; }
 
     //public virtual DbSet<Role> Roles { get; set; }
 
@@ -193,23 +193,23 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<MaterialPrice>(entity =>
-        {
-            entity.HasKey(e => e.MaterialPriceId).HasName("PK__Material__59B706AE2621B949");
+        //modelBuilder.Entity<MaterialPrice>(entity =>
+        //{
+        //    entity.HasKey(e => e.MaterialPriceId).HasName("PK__Material__59B706AE2621B949");
 
-            entity.ToTable("MaterialPrice");
+        //    entity.ToTable("MaterialPrice");
 
-            entity.Property(e => e.MaterialPriceId)
-                .HasDefaultValueSql("(newid())")
-                .HasColumnName("MaterialPriceID");
-            entity.Property(e => e.Date).HasColumnType("date");
-            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
-            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+        //    entity.Property(e => e.MaterialPriceId)
+        //        .HasDefaultValueSql("(newid())")
+        //        .HasColumnName("MaterialPriceID");
+        //    entity.Property(e => e.Date).HasColumnType("date");
+        //    entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+        //    entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
 
-            //entity.HasOne(d => d.Material).WithMany(p => p.MaterialPrices)
-            //    .HasForeignKey(d => d.MaterialId)
-            //    .HasConstraintName("FK__MaterialP__Mater__31EC6D26");
-        });
+        //    //entity.HasOne(d => d.Material).WithMany(p => p.MaterialPrices)
+        //    //    .HasForeignKey(d => d.MaterialId)
+        //    //    .HasConstraintName("FK__MaterialP__Mater__31EC6D26");
+        //});
 
         modelBuilder.Entity<Offer>(entity =>
         {
@@ -319,17 +319,17 @@ public partial class AppDbContext : DbContext
                 .HasConstraintName("FK__OrderDisc__TierI__4D94879B");
         });
 
-        modelBuilder.Entity<OrderType>(entity =>
-        {
-            entity.HasKey(e => e.OrderTypeId).HasName("PK__OrderTyp__23AC264CD2AC420D");
+        //modelBuilder.Entity<OrderType>(entity =>
+        //{
+        //    entity.HasKey(e => e.OrderTypeId).HasName("PK__OrderTyp__23AC264CD2AC420D");
 
-            entity.ToTable("OrderType");
+        //    entity.ToTable("OrderType");
 
-            entity.Property(e => e.OrderTypeId)
-                .HasDefaultValueSql("(newid())")
-                .HasColumnName("OrderTypeID");
-            entity.Property(e => e.TypeName).HasMaxLength(255);
-        });
+        //    entity.Property(e => e.OrderTypeId)
+        //        .HasDefaultValueSql("(newid())")
+        //        .HasColumnName("OrderTypeID");
+        //    entity.Property(e => e.TypeName).HasMaxLength(255);
+        //});
 
         //modelBuilder.Entity<Role>(entity =>
         //{

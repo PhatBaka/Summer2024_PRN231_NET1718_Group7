@@ -66,3 +66,30 @@ public class CreateOrderDTO
 
     public List<CreateOrderDetailDTO> OrderDetails { get; set; }
 }
+
+public class UpdateOrderDTO 
+{
+    [JsonIgnore]
+    public DateTime? OrderDate { get; set; }
+
+    [JsonIgnore]
+    public decimal? TotalPrice { get; set; }
+
+    [JsonIgnore]
+    public decimal? DiscountPrice { get; set; }
+
+    [JsonIgnore]
+    public decimal? FinalPrice { get; set; }
+
+    public OrderStatus Status { get; set; }
+
+    public OrderTypeEnum OrderType { get; set; }
+
+    public Guid? OrderDiscountId { get; set; } = null;
+
+    public Guid AccountId { get; set; }
+
+    public Guid? CustomerId { get; set; }
+
+    public List<CreateOrderDetailDTO> OrderDetails { get; set; }
+}
