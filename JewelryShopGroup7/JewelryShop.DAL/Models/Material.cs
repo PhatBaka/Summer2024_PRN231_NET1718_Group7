@@ -28,9 +28,13 @@ public partial class Material
     //public Guid ImageId { get; set; }
     //public virtual Image Image { get; set; }
 
-    public Guid MaterialImageId { get; set; }
+    //public Guid MaterialImageId { get; set; }
 
-    public Guid CertificateImageId { get; set; }
+    //public Guid CertificateImageId { get; set; }
+
+    public byte[] ?MaterialImageData { get; set; }
+
+    public byte[]? CertificateImageData { get; set; } 
 
     public bool IsMetal { get; set; }
 
