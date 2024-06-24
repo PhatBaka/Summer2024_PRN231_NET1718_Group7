@@ -1,3 +1,5 @@
+using AutoMapper;
+using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,13 @@ namespace JewelryShop.API.Controllers
     public class MaterialController : ControllerBase
     {
         private readonly IMaterialService _materialService;
+        private readonly IMapper _mapper;
 
-        public MaterialController(IMaterialService materialService)
+        public MaterialController(IMaterialService materialService,
+                                    IMapper mapper)
         {
             _materialService = materialService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -30,12 +35,12 @@ namespace JewelryShop.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] MaterialDTO createModel)
-        {
-            var id = await _materialService.CreateAsync(createModel);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
-        }
+        //[HttpPost]
+        //public async Task<ActionResult<Guid>> CreateAsync([FromBody] MaterialDTO createModel)
+        //{
+        //    var id = await _materialService.CreateAsync(createModel);
+        //    return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] MaterialDTO updateModel)
@@ -63,6 +68,17 @@ namespace JewelryShop.API.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpPost("Gem")]
+        public async Task<ActionResult<Guid>> CreateAsync([FromForm] GemDTO createModel)
+        {
+            var gem = _mapper.Map<MaterialDTO>(createModel);
+            gem.CreatedDate = DateTime.Now;
+            gem.CertificateImageData = await FileHelper.ConvertToByteArrayAsync(createModel.CertificateImageFile);
+            gem.MaterialImageData = await FileHelper.ConvertToByteArrayAsync(createModel.MaterialImageFile);
+            var id = await _materialService.CreateAsync(gem);
+            return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
     }
 }

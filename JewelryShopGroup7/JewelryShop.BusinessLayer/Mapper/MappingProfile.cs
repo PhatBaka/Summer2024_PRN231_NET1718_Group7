@@ -59,6 +59,8 @@ namespace JewelryShop.BusinessLayer.Mapper
                 .ReverseMap();
             CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
             #endregion
+
+            CreateMap<MaterialDTO, GemDTO>().ReverseMap();
         }
     }
 }
