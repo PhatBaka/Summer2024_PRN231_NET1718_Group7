@@ -7,8 +7,7 @@ public partial class Jewelry
     public Guid JewelryId { get; set; }
 
     [Required]
-    [StringLength(100)]
-    public string JewelryName { get; set; }
+    public string? JewelryName { get; set; }
 
     public decimal? ManufacturingFees { get; set; }
 
@@ -16,7 +15,7 @@ public partial class Jewelry
 
     public string? Status { get; set; }
 
-    public string? Barcode { get; set; }
+    //public string? Barcode { get; set; }
 
     public decimal? GuaranteeDuration { get; set; }
 
@@ -33,8 +32,8 @@ public partial class Jewelry
     [Required]
     public decimal UnitPrice { get; set; }
 
-    [Required]
-    public double MarkupPercentage { get; set; }
+    //[Required]
+    //public double MarkupPercentage { get; set; }
 
     [Required]
     public decimal SellPrice { get; set; }

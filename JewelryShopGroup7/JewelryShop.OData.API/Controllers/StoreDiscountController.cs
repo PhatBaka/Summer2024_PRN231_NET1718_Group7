@@ -1,13 +1,14 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
-using JewelryShop.DTO.DTOs.StoreDiscount;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/StoreDiscountOData")]
     [ApiController]
-    public class StoreDiscountController : ControllerBase
+    public class StoreDiscountController : ODataController
     {
         private readonly IStoreDiscountService _storeDiscountService;
 
@@ -17,14 +18,15 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StoreDiscountResponse>>> GetAllAsync()
+        [EnableQuery]
+        public async Task<ActionResult<IEnumerable<StoreDiscountDTO>>> GetAllAsync()
         {
             var result = await _storeDiscountService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<StoreDiscountResponse>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<StoreDiscountDTO>> GetByIdAsync(Guid id)
         {
             var result = await _storeDiscountService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -32,14 +34,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateStoreDiscountRequest createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] StoreDiscountDTO createModel)
         {
             var id = await _storeDiscountService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateStoreDiscountRequest updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] StoreDiscountDTO updateModel)
         {
             try
             {

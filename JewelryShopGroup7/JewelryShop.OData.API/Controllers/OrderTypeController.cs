@@ -1,52 +1,51 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
-using JewelryShop.DTO.DTOs.Account;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("odata/AccountOData")]
+    [Route("odata/OrderTypeOData")]
     [ApiController]
-    public class AccountController : ODataController
+    public class OrderTypeController : ODataController
     {
-        private readonly IAccountService _accountService;
+        private readonly IOrderTypeService _orderTypeService;
 
-        public AccountController(IAccountService accountService)
+        public OrderTypeController(IOrderTypeService orderTypeService)
         {
-            _accountService = accountService;
+            _orderTypeService = orderTypeService;
         }
 
         [HttpGet]
         [EnableQuery]
-        public async Task<ActionResult<IEnumerable<AccountResponse>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<OrderTypeDTO>>> GetAllAsync()
         {
-            var result = await _accountService.GetAllAsync();
+            var result = await _orderTypeService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AccountResponse>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<OrderTypeDTO>> GetByIdAsync(Guid id)
         {
-            var result = await _accountService.GetByIdAsync(id);
+            var result = await _orderTypeService.GetByIdAsync(id);
             if (result == null) return NotFound();
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateAccountRequest createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] OrderTypeDTO createModel)
         {
-            var id = await _accountService.CreateAsync(createModel);
+            var id = await _orderTypeService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateAccountRequest updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] OrderTypeDTO updateModel)
         {
             try
             {
-                await _accountService.UpdateAsync(id, updateModel);
+                await _orderTypeService.UpdateAsync(id, updateModel);
                 return NoContent();
             }
             catch (KeyNotFoundException)
@@ -60,7 +59,7 @@ namespace JewelryShop.OData.Api.Controllers
         {
             try
             {
-                await _accountService.DeleteAsync(id);
+                await _orderTypeService.DeleteAsync(id);
                 return NoContent();
             }
             catch (KeyNotFoundException)

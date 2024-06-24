@@ -1,16 +1,16 @@
 using AutoMapper;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
-using JewelryShop.DTO.DTOs.Jewelry;
-using JewelryShop.DTO.DTOs.JewelryMaterial;
 using JewelryShop.DTO.Enums;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/JewelryOData")]
     [ApiController]
-    public class JewelryController : ControllerBase
+    public class JewelryController : ODataController
     {
         private readonly IJewelryService _jewelryService;
         private readonly IJewelryMaterialService _jewelryMaterialService;
@@ -29,14 +29,15 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<JewelryResponse>>> GetAllAsync()
+        [EnableQuery]
+        public async Task<ActionResult<IEnumerable<JewelryDTO>>> GetAllAsync()
         {
             var result = await _jewelryService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<JewelryResponse>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<JewelryDTO>> GetByIdAsync(Guid id)
         {
             var result = await _jewelryService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -44,22 +45,22 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateJewelryRequest createJewelryDTO)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateJewelryDTO createJewelryDTO)
         {
-            foreach (var material in createJewelryDTO.CreateJewelryMeterialRequests)
+            foreach (var material in createJewelryDTO.CreateJewelryMeterialDTOs)
             {
                 var entity = await _materialService.GetByIdAsync((Guid)material.MaterialId);
                 createJewelryDTO.TotalWeight += material.Weight;
-                createJewelryDTO.UnitPrice += material.Weight * entity.Price;
+                // createJewelryDTO.UnitPrice += material.Weight * entity.Price;
             }
-            createJewelryDTO.UnitPrice += createJewelryDTO.ManufacturingFees;
-            createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage / 100;
+            createJewelryDTO.UnitPrice += (decimal)createJewelryDTO.ManufacturingFees;
+            createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage;
             createJewelryDTO.Status = ObjectStatus.ACTIVE.ToString();
-            var id = await _jewelryService.CreateAsync(createJewelryDTO);
-            foreach (var material in createJewelryDTO.CreateJewelryMeterialRequests)
+            var id = await _jewelryService.CreateAsync(_mapper.Map<JewelryDTO>(createJewelryDTO));
+            foreach (var material in createJewelryDTO.CreateJewelryMeterialDTOs)
             {
                 var weight = await _materialService.GetByIdAsync((Guid)material.MaterialId);
-                CreateJewelryMaterialRequest jewelryMaterialDTO = new CreateJewelryMaterialRequest()
+                JewelryMaterialDTO jewelryMaterialDTO = new JewelryMaterialDTO()
                 {
                     JewelryId = id,
                     MaterialId = (Guid)material.MaterialId,
@@ -71,7 +72,7 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateJewelryRequest updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JewelryDTO updateModel)
         {
             try
             {

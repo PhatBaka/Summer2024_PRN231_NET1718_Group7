@@ -4,12 +4,13 @@ using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Image;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/ImageOData")]
     [ApiController]
-    public class ImageController : ControllerBase
+    public class ImageController : ODataController
     {
         private readonly IImageService _imageService;
         private readonly IMapper _mapper;
