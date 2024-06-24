@@ -53,18 +53,18 @@
 //            }
 //        }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(Guid id)
-        {
-            try
-            {
-                await _roleService.DeleteAsync(id);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-        }
-    }
-}
+//        [HttpDelete("{id}")]
+//        public async Task<IActionResult> DeleteAsync(Guid id)
+//        {
+//            try
+//            {
+//                await _roleService.DeleteAsync(id);
+//                return NoContent();
+//            }
+//            catch (KeyNotFoundException)
+//            {
+//                return NotFound();
+//            }
+//        }
+//    }
+//}

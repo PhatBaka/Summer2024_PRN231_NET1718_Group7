@@ -63,7 +63,7 @@ namespace JewelryShop.BusinessLayer.BackgroundServices
                                 Date = today,
                                 Price = metal.Price,
                                 MaterialPriceId = Guid.NewGuid(),
-                                UnitType = jewelryMaterial.UnitType,
+                                //UnitType = jewelryMaterial.UnitType,
                             };
                             var checkMaterialPrice = (await materialPriceRepository.GetAsync(m => m.Date == today)).FirstOrDefault();
                             if (checkMaterialPrice != null)
@@ -90,7 +90,7 @@ namespace JewelryShop.BusinessLayer.BackgroundServices
                                 Date = today,
                                 Price = gem.Price,
                                 MaterialPriceId = Guid.NewGuid(),
-                                UnitType = jewelryMaterial.UnitType,
+                                // UnitType = jewelryMaterial.UnitType,
                             };
                             var checkMaterialPrice = (await materialPriceRepository.GetAsync(m => m.Date == today)).FirstOrDefault();
                             if (checkMaterialPrice != null)
