@@ -20,10 +20,13 @@ public partial class Material
     // public string UnitType { get; set; }
 
     [Column(TypeName = "money")]
-    public decimal InitialPrice { get; set; }
+    public decimal CurrentPrice { get; set; }
 
     [Column(TypeName = "money")]
-    public decimal TotalPrice { get; set; }
+    public decimal SellPrice { get; set; }
+
+    [Column(TypeName = "money")]
+    public decimal BuyPrice { get; set; }
 
     //public Guid ImageId { get; set; }
     //public virtual Image Image { get; set; }
