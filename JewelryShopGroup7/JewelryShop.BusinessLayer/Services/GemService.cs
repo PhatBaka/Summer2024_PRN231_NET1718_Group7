@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
@@ -29,6 +30,8 @@ namespace JewelryShop.BusinessLayer.Services
             Material material = _mapper.Map<Material>(createModel);
             material.SellPrice = createModel.SellPrice;
             material.BuyPrice = createModel.SellPrice * 70 / 100;
+            material.CertificateImageData = await FileHelper.ConvertToByteArrayAsync(createModel.CertificateImageFile);
+            material.MaterialImageData = await FileHelper.ConvertToByteArrayAsync(createModel.MaterialImageFile);
             return await _materialRepository.AddAsync(material);
         }
 
