@@ -5,6 +5,24 @@
     Layout = "_PriceLayout";
 }
 
+<style>
+    .up-rectangle {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: green; /* Color for up */
+        margin-left: 5px; /* Space between text and rectangle */
+    }
+
+    .down-rectangle {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: red; /* Color for down */
+        margin-left: 5px; /* Space between text and rectangle */
+    }
+</style>
+
 <section id="center" class="center_shop">
 	<div class="container">
 		<div class="row">
@@ -45,6 +63,8 @@
                         <tbody>
                             @foreach (var metal in Model.MetalDTOs)
                             {
+                                var change = metal.Rate?.Change ?? 0;
+                                var changeClass = change > 0 ? "up-rectangle" : "down-rectangle";
                                 <tr>
                                     <td>@metal.Metal</td>
                                     <td>@metal.Rate?.Price.ToString("0.00")</td>
@@ -52,8 +72,14 @@
                                     <td>@metal.Rate?.Bid.ToString("0.00")</td>
                                     <td>@metal.Rate?.High.ToString("0.00")</td>
                                     <td>@metal.Rate?.Low.ToString("0.00")</td>
-                                    <td>@metal.Rate?.Change.ToString("0.00") <i class="bi bi-caret-up"> </i></td>
-                                    <td>@metal.Rate?.ChangePercent.ToString() <i class="bi bi-caret-up"></i> </td>
+                                    <td>
+                                        @metal.Rate?.Change.ToString("0.00")%
+                                        <span class="@changeClass"></span>
+                                    </td>
+                                    <td>
+                                        @metal.Rate?.ChangePercent.ToString()%
+                                        <span class="@changeClass"></span>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
