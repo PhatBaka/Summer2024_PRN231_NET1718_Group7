@@ -2,54 +2,64 @@
 @using System.Globalization
 @model JewelryStoreUI.Pages.PriceModel
 @{
-
+    Layout = "_PriceLayout";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metal Rates</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Custom styles can be added here */
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h3 class="text-center">Metal Rates</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Metal</th>
-                    <th>Price</th>
-                    <th>Ask</th>
-                    <th>Bid</th>
-                    <th>High</th>
-                    <th>Low</th>
-                    <th>Change</th>
-                    <th>Change %</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var metal in Model.MetalDTOs)
-                {
-                    <tr>
-                        <td>@metal.Timestamp.ToString("dd-MMM-yyyy")</td>
-                        <td>@metal.Metal</td>
-                        <td>@metal.Rate?.Price.ToString("0.00")</td>
-                        <td>@metal.Rate?.Ask.ToString("0.00")</td>
-                        <td>@metal.Rate?.Bid.ToString("0.00")</td>
-                        <td>@metal.Rate?.High.ToString("0.00")</td>
-                        <td>@metal.Rate?.Low.ToString("0.00")</td>
-                        <td>@metal.Rate?.Change.ToString("0.00")</td>
-                        <td>@metal.Rate?.ChangePercent.ToString("0.00")%</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+<section id="center" class="center_shop">
+	<div class="container">
+		<div class="row">
+			<div class="center_shop_t clearfix">
+				<div class="col-sm-6">
+					<div class="center_shop_tl clearfix">
+						<h4 class="mgt">PRICE TODAY</h4>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="center_shop_tr text-right clearfix">
+                        <h6 class="col_2">Updated in: @Model.UpdatedDate</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="center" class="center_shop">
+	<div class="container">
+		<div class="row">
+			<div class="center_shop_t clearfix">
+				<div class="center_shop_tl clearfix">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Metal</th>
+                                <th>Price</th>
+                                <th>Ask</th>
+                                <th>Bid</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Change</th>
+                                <th>Change %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var metal in Model.MetalDTOs)
+                            {
+                                <tr>
+                                    <td>@metal.Metal</td>
+                                    <td>@metal.Rate?.Price.ToString("0.00")</td>
+                                    <td>@metal.Rate?.Ask.ToString("0.00")</td>
+                                    <td>@metal.Rate?.Bid.ToString("0.00")</td>
+                                    <td>@metal.Rate?.High.ToString("0.00")</td>
+                                    <td>@metal.Rate?.Low.ToString("0.00")</td>
+                                    <td>@metal.Rate?.Change.ToString("0.00") <i class="bi bi-caret-up"> </i></td>
+                                    <td>@metal.Rate?.ChangePercent.ToString() <i class="bi bi-caret-up"></i> </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

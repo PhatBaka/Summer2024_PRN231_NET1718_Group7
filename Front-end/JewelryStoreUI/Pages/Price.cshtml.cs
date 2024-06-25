@@ -12,6 +12,7 @@ namespace JewelryStoreUI.Pages
     {
         public IList<MetalDTO> MetalDTOs = new List<MetalDTO>();
         private IConfiguration Configuration { get; set; }
+        public string? UpdatedDate { get; set; }
 
         public PriceModel(IConfiguration configuration)
         {
@@ -33,6 +34,7 @@ namespace JewelryStoreUI.Pages
                 MetalDTOs.Add(silver);
                 MetalDTOs.Add(palladium);
             }
+            UpdatedDate = gold.Timestamp.ToString();
         }
     }
 }

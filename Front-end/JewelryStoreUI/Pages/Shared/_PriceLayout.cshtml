@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Jewelry</title>
+	<link href="~/css/bootstrap.min.css" rel="stylesheet">
+	<link href="~/css/global.css" rel="stylesheet">
+	<link href="~/css/shop.css" rel="stylesheet">
+	<link href="~/css/cart.css" rel="stylesheet">
+	<link href="~/css/checkout.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css" />
+	<link href="https://fonts.googleapis.com/css?family=Alata&display=swap" rel="stylesheet">
+	<script src="~/js/jquery-2.1.1.min.js"></script>
+	<script src="~/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<section id="menu" class="clearfix cd-secondary-nav">
+		<nav class="navbar nav_t">
+			<div class="container">
+				<div class="navbar-header page-scroll">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">
+						<i class="fa fa-diamond"></i> <span class="col">Jewe</span>lry
+					</a>
+				</div>
+			</div>
+		</nav>
+	</section>
+
+	<div>
+		@RenderBody()
+	</div>
+
+</body>
+</html>
