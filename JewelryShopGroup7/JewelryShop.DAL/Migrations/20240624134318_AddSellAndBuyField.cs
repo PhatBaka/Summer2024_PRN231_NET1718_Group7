@@ -26,6 +26,15 @@ namespace JewelryShop.DAL.Migrations
                 type: "money",
                 nullable: false,
                 defaultValue: 0m);
+
+            migrationBuilder.AddColumn<DateTime>(
+               name: "CreatedDate",
+               table: "Material");
+
+
+            migrationBuilder.AddColumn<String>(
+               name: "MaterialStatus",
+               table: "Material");
         }
 
         /// <inheritdoc />

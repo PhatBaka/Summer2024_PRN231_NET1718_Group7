@@ -56,4 +56,7 @@ public partial class Material
     public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
 
     // public virtual ICollection<MaterialPrice> MaterialPrices { get; set; } = new List<MaterialPrice>();
+
+    [Required]
+    public string? MaterialStatus { get; set; }
 }

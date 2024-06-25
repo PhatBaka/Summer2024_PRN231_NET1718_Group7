@@ -15,9 +15,9 @@ namespace JewelryShop.DAL.Migrations
                 name: "FK_Material_Image_ImageId",
                 table: "Material");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK__MaterialP__Mater__31EC6D26",
-                table: "MaterialPrice");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK__MaterialP__Mater__31EC6D26",
+            //    table: "MaterialPrice");
 
             migrationBuilder.DropColumn(
                 name: "UnitType",
@@ -36,10 +36,10 @@ namespace JewelryShop.DAL.Migrations
                 table: "Material",
                 newName: "Weight");
 
-            migrationBuilder.RenameColumn(
-                name: "Date",
-                table: "Material",
-                newName: "CreatedDate");
+            //migrationBuilder.RenameColumn(
+            //    name: "Date",
+            //    table: "Material",
+            //    newName: "CreatedDate");
 
             migrationBuilder.RenameColumn(
                 name: "CertificateId",
@@ -143,12 +143,12 @@ namespace JewelryShop.DAL.Migrations
                 principalTable: "Image",
                 principalColumn: "ImageId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_MaterialPrice_Material_MaterialID",
-                table: "MaterialPrice",
-                column: "MaterialID",
-                principalTable: "Material",
-                principalColumn: "MaterialID");
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_MaterialPrice_Material_MaterialID",
+            //    table: "MaterialPrice",
+            //    column: "MaterialID",
+            //    principalTable: "Material",
+            //    principalColumn: "MaterialID");
         }
 
         /// <inheritdoc />
@@ -158,9 +158,9 @@ namespace JewelryShop.DAL.Migrations
                 name: "FK_Material_Image_ImageId",
                 table: "Material");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_MaterialPrice_Material_MaterialID",
-                table: "MaterialPrice");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_MaterialPrice_Material_MaterialID",
+            //    table: "MaterialPrice");
 
             migrationBuilder.DropColumn(
                 name: "CertificateImageId",
@@ -204,10 +204,10 @@ namespace JewelryShop.DAL.Migrations
                 table: "Material",
                 newName: "CertificateId");
 
-            migrationBuilder.RenameColumn(
-                name: "CreatedDate",
-                table: "Material",
-                newName: "Date");
+            //migrationBuilder.RenameColumn(
+            //    name: "CreatedDate",
+            //    table: "Material",
+            //    newName: "Date");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
@@ -276,12 +276,12 @@ namespace JewelryShop.DAL.Migrations
                 principalColumn: "ImageId",
                 onDelete: ReferentialAction.Cascade);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK__MaterialP__Mater__31EC6D26",
-                table: "MaterialPrice",
-                column: "MaterialID",
-                principalTable: "Material",
-                principalColumn: "MaterialID");
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK__MaterialP__Mater__31EC6D26",
+            //    table: "MaterialPrice",
+            //    column: "MaterialID",
+            //    principalTable: "Material",
+            //    principalColumn: "MaterialID");
         }
     }
 }

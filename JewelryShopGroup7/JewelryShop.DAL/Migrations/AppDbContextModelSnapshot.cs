@@ -142,7 +142,7 @@ namespace JewelryShop.DAL.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Image", (string)null);
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.Jewelry", b =>
@@ -248,6 +248,10 @@ namespace JewelryShop.DAL.Migrations
                     b.Property<byte[]>("MaterialImageData")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("MaterialStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -269,36 +273,6 @@ namespace JewelryShop.DAL.Migrations
                         .HasName("PK__Material__C506131735D61340");
 
                     b.ToTable("Material", (string)null);
-                });
-
-            modelBuilder.Entity("JewelryShop.DAL.Models.MaterialPrice", b =>
-                {
-                    b.Property<Guid>("MaterialPriceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("MaterialPriceID")
-                        .HasDefaultValueSql("(newid())");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("date");
-
-                    b.Property<Guid?>("MaterialId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("MaterialID");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18, 2)");
-
-                    b.Property<string>("UnitType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MaterialPriceId")
-                        .HasName("PK__Material__59B706AE2621B949");
-
-                    b.HasIndex("MaterialId");
-
-                    b.ToTable("MaterialPrice", (string)null);
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.Offer", b =>
@@ -366,9 +340,6 @@ namespace JewelryShop.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("OrderTypeId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Status")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -384,8 +355,6 @@ namespace JewelryShop.DAL.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("OrderDiscountId");
-
-                    b.HasIndex("OrderTypeId");
 
                     b.ToTable("Order", (string)null);
                 });
@@ -462,6 +431,9 @@ namespace JewelryShop.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<decimal>("Value")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("OrderDiscountId")
                         .HasName("PK__OrderDis__5EF1875E2279D142");
 
@@ -472,24 +444,6 @@ namespace JewelryShop.DAL.Migrations
                     b.HasIndex("TierId");
 
                     b.ToTable("OrderDiscount", (string)null);
-                });
-
-            modelBuilder.Entity("JewelryShop.DAL.Models.OrderType", b =>
-                {
-                    b.Property<Guid>("OrderTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("OrderTypeID")
-                        .HasDefaultValueSql("(newid())");
-
-                    b.Property<string>("TypeName")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("OrderTypeId")
-                        .HasName("PK__OrderTyp__23AC264CD2AC420D");
-
-                    b.ToTable("OrderType", (string)null);
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.StoreDiscount", b =>
@@ -595,15 +549,6 @@ namespace JewelryShop.DAL.Migrations
                     b.Navigation("Material");
                 });
 
-            modelBuilder.Entity("JewelryShop.DAL.Models.MaterialPrice", b =>
-                {
-                    b.HasOne("JewelryShop.DAL.Models.Material", "Material")
-                        .WithMany()
-                        .HasForeignKey("MaterialId");
-
-                    b.Navigation("Material");
-                });
-
             modelBuilder.Entity("JewelryShop.DAL.Models.Offer", b =>
                 {
                     b.HasOne("JewelryShop.DAL.Models.Account", "ApprovedBy")
@@ -637,10 +582,6 @@ namespace JewelryShop.DAL.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("OrderDiscountId")
                         .HasConstraintName("FK__Order__OrderDisc__5441852A");
-
-                    b.HasOne("JewelryShop.DAL.Models.OrderType", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("OrderTypeId");
 
                     b.Navigation("Account");
 
@@ -739,11 +680,6 @@ namespace JewelryShop.DAL.Migrations
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.OrderDiscount", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("JewelryShop.DAL.Models.OrderType", b =>
                 {
                     b.Navigation("Orders");
                 });
