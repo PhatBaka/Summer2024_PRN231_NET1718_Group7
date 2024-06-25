@@ -57,6 +57,5 @@ public partial class Material
 
     // public virtual ICollection<MaterialPrice> MaterialPrices { get; set; } = new List<MaterialPrice>();
 
-    [Required]
     public string? MaterialStatus { get; set; }
 }

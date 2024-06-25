@@ -3,6 +3,8 @@ using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.DAL.Models;
 using JewelryShop.DTO;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Material.Gem;
+using JewelryShop.DTO.DTOs.Material.Metal;
 using JewelryShop.DTO.Enums;
 
 namespace JewelryShop.BusinessLayer.Mapper
@@ -61,8 +63,20 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
             #endregion
 
-            CreateMap<MaterialDTO, GemDTO>().ReverseMap();
-            CreateMap<MaterialDTO, MetalDTO>().ReverseMap();
+            //CreateMap<MaterialDTO, GemDTO>().ReverseMap();
+            //CreateMap<MaterialDTO, MetalDTO>().ReverseMap();
+
+            #region Gem
+            CreateMap<Material, CreateGemRequest>().ReverseMap();
+            CreateMap<Material, UpdateGemRequest>().ReverseMap();
+            CreateMap<Material, GemResponse>().ReverseMap();
+            #endregion
+
+            #region
+            CreateMap<Material, CreateMetalRequest>().ReverseMap();
+            CreateMap<Material, UpdateMetalRequest>().ReverseMap();
+            CreateMap<Material, MetalResponse>().ReverseMap();
+            #endregion
         }
     }
 }
