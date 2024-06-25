@@ -34,7 +34,8 @@ namespace JewelryShop.DAL.Migrations
 
             migrationBuilder.AddColumn<String>(
                name: "MaterialStatus",
-               table: "Material");
+               table: "Material",
+               nullable: true);
         }
 
         /// <inheritdoc />
