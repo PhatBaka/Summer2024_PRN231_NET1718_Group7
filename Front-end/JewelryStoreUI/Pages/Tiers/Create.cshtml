@@ -1,0 +1,31 @@
+﻿@page
+@model JewelryStoreUI.Pages.Tiers.CreateModel
+@{
+}
+
+<h2>Create Tier</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="CreateTierRequest.TierName" class="control-label"></label>
+        <input asp-for="CreateTierRequest.TierName" class="form-control" />
+        <span asp-validation-for="CreateTierRequest.TierName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CreateTierRequest.MinAmountSpent" class="control-label"></label>
+        <input asp-for="CreateTierRequest.MinAmountSpent" class="form-control" />
+        <span asp-validation-for="CreateTierRequest.MinAmountSpent" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CreateTierRequest.DiscountPercentage" class="control-label"></label>
+        <input asp-for="CreateTierRequest.DiscountPercentage" class="form-control" />
+        <span asp-validation-for="CreateTierRequest.DiscountPercentage" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

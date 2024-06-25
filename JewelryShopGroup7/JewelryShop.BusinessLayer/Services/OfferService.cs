@@ -56,7 +56,7 @@ namespace JewelryShop.BusinessLayer.Services
             return _mapper.Map<OfferResponse>(offer);
         }
 
-        public async Task UpdateAsync(Guid id, UpdateOffterRequest updateModel)
+        public async Task UpdateAsync(Guid id, UpdateOfferRequest updateModel)
         {
             var offer = (await _offerRepository.GetAsync(o => o.OfferId == id)).FirstOrDefault();
             if (offer != null)

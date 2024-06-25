@@ -1,0 +1,31 @@
+﻿@page "{id:guid}"
+@model JewelryStoreUI.Pages.Tiers.EditModel
+@{
+}
+
+<h2>Edit Tier</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="UpdateTierRequest.TierName" class="control-label"></label>
+        <input asp-for="UpdateTierRequest.TierName" class="form-control" />
+        <span asp-validation-for="UpdateTierRequest.TierName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UpdateTierRequest.MinAmountSpent" class="control-label"></label>
+        <input asp-for="UpdateTierRequest.MinAmountSpent" class="form-control" />
+        <span asp-validation-for="UpdateTierRequest.MinAmountSpent" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UpdateTierRequest.DiscountPercentage" class="control-label"></label>
+        <input asp-for="UpdateTierRequest.DiscountPercentage" class="form-control" />
+        <span asp-validation-for="UpdateTierRequest.DiscountPercentage" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

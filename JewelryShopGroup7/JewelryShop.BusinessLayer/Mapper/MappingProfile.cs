@@ -74,7 +74,7 @@ namespace JewelryShop.BusinessLayer.Mapper
             #region Offer
             CreateMap<Offer, OfferResponse>();
             CreateMap<CreateOfferRequest, Offer>();
-            CreateMap<UpdateOffterRequest, Offer>(); 
+            CreateMap<UpdateOfferRequest, Offer>(); 
             #endregion
 
             #region Order

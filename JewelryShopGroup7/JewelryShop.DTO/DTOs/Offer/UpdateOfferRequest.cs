@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JewelryShop.DTO.DTOs.Offer
 {
-    public class UpdateOffterRequest
+    public class UpdateOfferRequest
     {
         public decimal? OfferPercent { get; set; }
 

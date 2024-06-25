@@ -1,4 +1,40 @@
-﻿@page
-@model             UpdateModel
+﻿@page "/edit-store-discount/{id:guid}"
+@model UpdateModel
 @{
+}
+<h3>Edit Store Discount</h3>
+
+<form method="post">
+    <div>
+        <label for="DiscountCode">Discount Code</label>
+        <input type="text" id="DiscountCode" asp-for="StoreDiscount.DiscountCode" />
+        <span asp-validation-for="StoreDiscount.DiscountCode" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="DiscountAmount">Discount Amount</label>
+        <input type="number" id="DiscountAmount" asp-for="StoreDiscount.DiscountAmount" step="0.01" />
+        <span asp-validation-for="StoreDiscount.DiscountAmount" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="StartDate">Start Date</label>
+        <input type="date" id="StartDate" asp-for="StoreDiscount.StartDate" />
+        <span asp-validation-for="StoreDiscount.StartDate" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="EndDate">End Date</label>
+        <input type="date" id="EndDate" asp-for="StoreDiscount.EndDate" />
+        <span asp-validation-for="StoreDiscount.EndDate" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="RemainingUsage">Remaining Usage</label>
+        <input type="number" id="RemainingUsage" asp-for="StoreDiscount.RemainingUsage" />
+        <span asp-validation-for="StoreDiscount.RemainingUsage" class="text-danger"></span>
+    </div>
+    <button type="submit">Save</button>
+</form>
+
+<a asp-page="/StoreDiscounts/Index">Back to List</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

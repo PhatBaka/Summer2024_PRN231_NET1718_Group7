@@ -39,7 +39,7 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateOffterRequest updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateOfferRequest updateModel)
         {
             try
             {

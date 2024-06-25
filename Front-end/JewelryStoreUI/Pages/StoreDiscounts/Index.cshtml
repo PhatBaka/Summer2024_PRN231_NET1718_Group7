@@ -1,5 +1,5 @@
 ﻿@page
-@model             IndexModel
+@model JewelryStoreUI.Pages.StoreDiscounts.IndexModel
 @{
     Layout = "_ManagerLayout";
 }
@@ -39,17 +39,20 @@
                                     <p style="display: inline">Remaining Usage: </p>
                                     <p style="display: inline">@discount.RemainingUsage</p>
                                 </div>
+                                <div>
+                                    <a class="button" asp-page="Details" asp-route-id="@discount.StoreDiscountId">Show Details</a>
+                                </div>
                                 <hr>
                             </div>
                         </div>
                     </div>
                 }
-            } else
+            }
+            else
             {
                 <div>No Store discount</div>
             }
         </div>
     </div>
 </section>
-<h5><a class="button" asp-page="/Promotions/Create">CREATE</a></h5>
-
+<h5><a class="button" asp-page="Create">CREATE</a></h5>
