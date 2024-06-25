@@ -1,14 +1,10 @@
 using JewelryStoreUI.Enums;
-using JewelryStoreUI.Pages.DTOs;
 using JewelryStoreUI.Pages.DTOs.Jewelry;
 using JewelryStoreUI.Pages.DTOs.Material;
-using JewelryStoreUI.Pages.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using System;
 using System.Net.Http.Headers;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace JewelryStoreUI.Pages.Jewleries
 {

@@ -1,6 +1,4 @@
-﻿using JewelryStoreUI.Pages.DTOs.Jewelry;
-using JewelryStoreUI.Pages.Helpers;
-using System.Buffers.Text;
+﻿using JewelryStoreUI.Pages.Helpers;
 
 namespace JewelryStoreUI.Pages.DTOs.OrderDetail
 {

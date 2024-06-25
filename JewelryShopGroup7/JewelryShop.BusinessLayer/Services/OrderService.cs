@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Order;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(OrderDTO createModel)
+        public async Task<Guid> CreateAsync(CreateOrderRequest createModel)
         {
             // cho nay tam code au
             Order order = _mapper.Map<Order>(createModel);
@@ -48,19 +49,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<OrderDTO>> GetAllAsync()
+        public async Task<IEnumerable<OrderResponse>> GetAllAsync()
         {
             var orders = await _orderRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<OrderDTO>>(orders.ToList());
+            return _mapper.Map<IEnumerable<OrderResponse>>(orders.ToList());
         }
 
-        public async Task<OrderDTO> GetByIdAsync(Guid id)
+        public async Task<OrderResponse> GetByIdAsync(Guid id)
         {
             var order = (await _orderRepository.GetAsync(o => o.OrderId == id)).FirstOrDefault();
-            return _mapper.Map<OrderDTO>(order);
+            return _mapper.Map<OrderResponse>(order);
         }
 
-        public async Task UpdateAsync(Guid id, OrderDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateOrderRequest updateModel)
         {
             var order = (await _orderRepository.GetAsync(o => o.OrderId == id)).FirstOrDefault();
             if (order != null)

@@ -4,12 +4,13 @@ using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/JewelryOData")]
     [ApiController]
-    public class JewelryController : ControllerBase
+    public class JewelryController : ODataController
     {
         private readonly IJewelryService _jewelryService;
         private readonly IJewelryMaterialService _jewelryMaterialService;
@@ -50,7 +51,7 @@ namespace JewelryShop.OData.Api.Controllers
             {
                 var entity = await _materialService.GetByIdAsync((Guid)material.MaterialId);
                 createJewelryDTO.TotalWeight += material.Weight;
-                createJewelryDTO.UnitPrice += material.Weight * entity.Price;
+                // createJewelryDTO.UnitPrice += material.Weight * entity.Price;
             }
             createJewelryDTO.UnitPrice += (decimal)createJewelryDTO.ManufacturingFees;
             createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage;

@@ -2,9 +2,9 @@
 
 namespace JewelryStoreUI.Pages.DTOs.Cart
 {
-	public class Cart : JewelryDTO
-	{
-		public Guid JewelryId { get; set; }
-		public int Quantity { get; set; }
-	}
+    public class Cart : JewelryDTO
+    {
+        public Guid JewelryId { get; set; }
+        public int Quantity { get; set; }
+    }
 }

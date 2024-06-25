@@ -1,6 +1,4 @@
-using JewelryStoreUI.Pages.DTOs.Order;
 using JewelryStoreUI.Pages.DTOs.OrderDetail;
-using JewelryStoreUI.Pages.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;

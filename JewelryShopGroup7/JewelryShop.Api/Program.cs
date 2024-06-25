@@ -1,5 +1,5 @@
 using JewelryShop.BusinessLayer;
-using JewelryShop.BusinessLayer.BackgroundServices;
+//using JewelryShop.BusinessLayer.BackgroundServices;
 using JewelryShop.DAL;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Seed;
@@ -17,13 +17,13 @@ builder.Services.AddMvc(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Register the HttpClient with increased timeout
-builder.Services.AddHttpClient<PriceUpdaterService>(client =>
-{
-    client.Timeout = TimeSpan.FromMinutes(5); // Set the timeout to 5 minutes
-});
-// Register the hosted service
-builder.Services.AddHostedService<PriceUpdaterService>();
+//// Register the HttpClient with increased timeout
+//builder.Services.AddHttpClient<PriceUpdaterService>(client =>
+//{
+//    client.Timeout = TimeSpan.FromMinutes(5); // Set the timeout to 5 minutes
+//});
+//// Register the hosted service
+//builder.Services.AddHostedService<PriceUpdaterService>();
 
 builder.Services.AddDataAccessLayer(builder.Configuration);
 builder.Services.AddBusinessLayer();

@@ -1,7 +1,7 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.JewelryMaterial;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Query;
 
 namespace JewelryShop.OData.Api.Controllers
 {
@@ -17,15 +17,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpGet]
-        [EnableQuery]
-        public async Task<ActionResult<IEnumerable<JewelryMaterialDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<JewelryMaterialResponse>>> GetAllAsync()
         {
             var result = await _jewelryMaterialService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{jewelryId}/{materialId}")]
-        public async Task<ActionResult<JewelryMaterialDTO>> GetByIdAsync(Guid jewelryId, Guid materialId)
+        public async Task<ActionResult<JewelryMaterialResponse>> GetByIdAsync(Guid jewelryId, Guid materialId)
         {
             var result = await _jewelryMaterialService.GetByIdAsync(jewelryId, materialId);
             if (result == null) return NotFound();
@@ -33,14 +32,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] JewelryMaterialDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateJewelryMaterialRequest createModel)
         {
             var id = await _jewelryMaterialService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{jewelryId}/{materialId}")]
-        public async Task<IActionResult> UpdateAsync(Guid jewelryId, Guid materialId, [FromBody] JewelryMaterialDTO updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid jewelryId, Guid materialId, [FromBody] UpdateJewelryMaterialRequest updateModel)
         {
             try
             {

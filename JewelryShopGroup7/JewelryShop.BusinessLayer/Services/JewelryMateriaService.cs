@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.JewelryMaterial;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(JewelryMaterialDTO createModel)
+        public async Task<Guid> CreateAsync(CreateJewelryMaterialRequest createModel)
         {
             JewelryMaterial jewelryMaterial = _mapper.Map<JewelryMaterial>(createModel);
             return await _jewelryMaterialRepository.AddAsync(jewelryMaterial);
@@ -43,19 +44,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<JewelryMaterialDTO>> GetAllAsync()
+        public async Task<IEnumerable<JewelryMaterialResponse>> GetAllAsync()
         {
             var jewelryMaterials = await _jewelryMaterialRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<JewelryMaterialDTO>>(jewelryMaterials.ToList());
+            return _mapper.Map<IEnumerable<JewelryMaterialResponse>>(jewelryMaterials.ToList());
         }
 
-        public async Task<JewelryMaterialDTO> GetByIdAsync(Guid jewelryId, Guid materialId)
+        public async Task<JewelryMaterialResponse> GetByIdAsync(Guid jewelryId, Guid materialId)
         {
             var jewelryMaterial = (await _jewelryMaterialRepository.GetAsync(j => j.JewelryId == jewelryId && j.MaterialId == materialId)).FirstOrDefault();
-            return _mapper.Map<JewelryMaterialDTO>(jewelryMaterial);
+            return _mapper.Map<JewelryMaterialResponse>(jewelryMaterial);
         }
 
-        public async Task UpdateAsync(Guid jewelryId, Guid materialId, JewelryMaterialDTO updateModel)
+        public async Task UpdateAsync(Guid jewelryId, Guid materialId, UpdateJewelryMaterialRequest updateModel)
         {
             var jewelryMaterial = (await _jewelryMaterialRepository.GetAsync(j => j.JewelryId == jewelryId && j.MaterialId == materialId)).FirstOrDefault();
             if (jewelryMaterial != null)

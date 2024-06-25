@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace JewelryShop.DTO.DTOs;
+﻿namespace JewelryStoreUI.Pages.DTOs;
 
 public partial class OrderDiscountDTO
 {

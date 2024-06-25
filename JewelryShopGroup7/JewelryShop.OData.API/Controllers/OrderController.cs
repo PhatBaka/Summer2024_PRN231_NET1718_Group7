@@ -3,12 +3,13 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("odata/OrderOData")]
     [ApiController]
-    public class OrderController : ControllerBase
+    public class OrderController : ODataController
     {
         private readonly IOrderDetailService _orderDetailService;
         private readonly IOrderService _orderService;

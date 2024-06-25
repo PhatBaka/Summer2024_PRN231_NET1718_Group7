@@ -1,18 +1,18 @@
 ﻿namespace JewelryShop.BusinessLayer;
 
-public interface IService<DTOModel>
+public interface IService<ResponseModel, CreateModel, UpdateModel, FilterModel>
 {
-    public Task<DTOModel> GetByIdAsync(Guid id);
-    public Task<IEnumerable<DTOModel>> GetAllAsync();
-    public Task<Guid> CreateAsync(DTOModel createModel);
-    public Task UpdateAsync(Guid id, DTOModel updateModel);
+    public Task<ResponseModel> GetByIdAsync(Guid id);
+    public Task<IEnumerable<ResponseModel>> GetAllAsync();
+    public Task<Guid> CreateAsync(CreateModel createModel);
+    public Task UpdateAsync(Guid id, UpdateModel updateModel);
     public Task DeleteAsync(Guid id);
 }
-public interface IServiceAlter<DTOModel>
+public interface IServiceAlter<ResponseModel, CreateModel, UpdateModel, FilterModel>
 {
-    public Task<DTOModel> GetByIdAsync(Guid firstId, Guid secondId);
-    public Task<IEnumerable<DTOModel>> GetAllAsync();
-    public Task<Guid> CreateAsync(DTOModel createModel);
-    public Task UpdateAsync(Guid firstId, Guid secondId, DTOModel updateModel);
+    public Task<ResponseModel> GetByIdAsync(Guid firstId, Guid secondId);
+    public Task<IEnumerable<ResponseModel>> GetAllAsync();
+    public Task<Guid> CreateAsync(CreateModel createModel);
+    public Task UpdateAsync(Guid firstId, Guid secondId, UpdateModel updateModel);
     public Task DeleteAsync(Guid firstId, Guid secondId);
 }

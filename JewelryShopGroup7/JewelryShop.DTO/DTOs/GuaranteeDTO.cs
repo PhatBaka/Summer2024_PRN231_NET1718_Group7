@@ -1,7 +1,10 @@
-﻿namespace JewelryShop.DTO.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace JewelryShop.DTO.DTOs;
 
 public partial class GuaranteeDTO
 {
+    [Key]
     public Guid? GuaranteeId { get; set; }
 
     public Guid? AccountId { get; set; }

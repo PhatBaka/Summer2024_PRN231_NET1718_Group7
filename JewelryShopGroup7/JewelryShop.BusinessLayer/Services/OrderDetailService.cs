@@ -3,6 +3,7 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.OrderDetail;
 
 namespace JewelryShop.BusinessLayer.Services
 {
@@ -17,7 +18,7 @@ namespace JewelryShop.BusinessLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateAsync(OrderDetailDTO createModel)
+        public async Task<Guid> CreateAsync(CreateOrderDetailRequest createModel)
         {
             OrderDetail orderDetail = _mapper.Map<OrderDetail>(createModel);
             return await _orderDetailRepository.AddAsync(orderDetail);
@@ -43,19 +44,19 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
-        public async Task<IEnumerable<OrderDetailDTO>> GetAllAsync()
+        public async Task<IEnumerable<OrderDetailResponse>> GetAllAsync()
         {
             var orderDetails = await _orderDetailRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<OrderDetailDTO>>(orderDetails.ToList());
+            return _mapper.Map<IEnumerable<OrderDetailResponse>>(orderDetails.ToList());
         }
 
-        public async Task<OrderDetailDTO> GetByIdAsync(Guid id)
+        public async Task<OrderDetailResponse> GetByIdAsync(Guid id)
         {
             var orderDetail = (await _orderDetailRepository.GetAsync(od => od.OrderDetailId == id)).FirstOrDefault();
-            return _mapper.Map<OrderDetailDTO>(orderDetail);
+            return _mapper.Map<OrderDetailResponse>(orderDetail);
         }
 
-        public async Task UpdateAsync(Guid id, OrderDetailDTO updateModel)
+        public async Task UpdateAsync(Guid id, UpdateOrderDetailRequest updateModel)
         {
             var orderDetail = (await _orderDetailRepository.GetAsync(od => od.OrderDetailId == id)).FirstOrDefault();
             if (orderDetail != null)
@@ -68,5 +69,6 @@ namespace JewelryShop.BusinessLayer.Services
                 throw new KeyNotFoundException("Order Detail not found.");
             }
         }
+
     }
 }

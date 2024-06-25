@@ -1,7 +1,7 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.OrderDetail;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Query;
 
 namespace JewelryShop.OData.Api.Controllers
 {
@@ -17,15 +17,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpGet]
-        [EnableQuery]
-        public async Task<ActionResult<IEnumerable<OrderDetailDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<OrderDetailResponse>>> GetAllAsync()
         {
             var result = await _orderDetailService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OrderDetailDTO>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<OrderDetailResponse>> GetByIdAsync(Guid id)
         {
             var result = await _orderDetailService.GetByIdAsync(id);
             if (result == null) return NotFound();
@@ -33,14 +32,14 @@ namespace JewelryShop.OData.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] OrderDetailDTO createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderDetailRequest createModel)
         {
             var id = await _orderDetailService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] OrderDetailDTO updateModel)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateOrderDetailRequest updateModel)
         {
             try
             {
