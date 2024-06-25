@@ -60,6 +60,6 @@ static IEdmModel GetEdmModel()
     modelBuilder.EntitySet<OrderDTO>("OrderOData");
     modelBuilder.EntitySet<OrderTypeDTO>("OrderTypeOData");
     modelBuilder.EntitySet<StoreDiscountDTO>("StoreDiscountOData");
-    modelBuilder.EntitySet<TierDTO>("TierOData");
+    //modelBuilder.EntitySet<TierDTO>("TierOData");
     return modelBuilder.GetEdmModel();
 }
