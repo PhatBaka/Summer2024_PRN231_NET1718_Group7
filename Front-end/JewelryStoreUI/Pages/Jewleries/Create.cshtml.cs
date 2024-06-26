@@ -28,7 +28,7 @@ namespace JewelryStoreUI.Pages.Jewleries
             _configuration = configuration;
         }
 
-        public async Task OnGetAsync(int currentPage = 1)
+        public async Task<IActionResult> OnGetAsync(int currentPage = 1)
         {
             var baseUrl = _configuration.GetSection("API_ODATA_URL").Value;
             GemURL = $"{baseUrl}GemOData?$count=true&$top={PageSize}&$skip={(CurrentPage - 1) * PageSize}";
@@ -46,6 +46,7 @@ namespace JewelryStoreUI.Pages.Jewleries
             {
 
             }
+            return Page();
         }
     }
 }
