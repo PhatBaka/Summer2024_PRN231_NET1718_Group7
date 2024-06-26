@@ -73,10 +73,10 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Material, CreateGemRequest>().ReverseMap();
             CreateMap<Material, UpdateGemRequest>().ReverseMap();
             CreateMap<Material, GemResponse>().ReverseMap();
-			#endregion
+            #endregion
 
-			#region Account
-			CreateMap<Account, CreateAccountRequest>().ReverseMap();
+            #region Account
+            CreateMap<Account, CreateAccountRequest>().ReverseMap();
 			CreateMap<Account, UpdateAccountRequest>().ReverseMap();
 			CreateMap<Account, AccountResponse>().ReverseMap();
             #endregion
@@ -91,7 +91,10 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Jewelry, CreateJewelryRequest>().ReverseMap();
             CreateMap<Jewelry, UpdateJewelryRequest>().ReverseMap();
             CreateMap<Jewelry, JewelryResponse>().ReverseMap();
+            CreateMap<Jewelry, ShortenJewelryResponse>().ReverseMap();
             #endregion
+
+            CreateMap<Material, ShortenMaterialResponse>().ReverseMap();
         }
     }
 }

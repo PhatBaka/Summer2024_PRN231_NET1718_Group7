@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JewelryShop.DTO.DTOs.JewelryMaterial;
+using JewelryShop.DTO.DTOs.Jewelry;
 
 namespace JewelryShop.DTO.DTOs.Material.Metal
 {
     public class MetalResponse
     {
+        [Key]
         public Guid MaterialId { get; set; }
 
         public string? Name { get; set; }
@@ -29,8 +31,11 @@ namespace JewelryShop.DTO.DTOs.Material.Metal
 
         public decimal Weight { get; set; }
 
-        public virtual ICollection<JewelryMaterialResponse> JewelryMaterials { get; set; } = new List<JewelryMaterialResponse>();
+        //public virtual ICollection<JewelryMaterialResponse> JewelryMaterials { get; set; } = new List<JewelryMaterialResponse>();
 
         public string? MaterialStatus { get; set; }
+
+        public IList<ShortenJewelryResponse>? Jewelries { get; set; }
     }
 }
+

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JewelryShop.DTO.DTOs.JewelryMaterial;
+using JewelryShop.DTO.DTOs.Jewelry;
 
 namespace JewelryShop.DTO.DTOs.Material.Gem
 {
@@ -38,10 +39,12 @@ namespace JewelryShop.DTO.DTOs.Material.Gem
 
         public string? Sharp { get; set; }
 
-        public virtual ICollection<JewelryMaterialResponse> JewelryMaterials { get; set; } = new List<JewelryMaterialResponse>();
+        //public virtual ICollection<JewelryMaterialResponse> JewelryMaterials { get; set; } = new List<JewelryMaterialResponse>();
 
         public byte[]? MaterialImageData { get; set; }
 
         public byte[]? CertificateImageData { get; set; }
+
+        public ICollection<ShortenJewelryResponse>? Jewelries { get; set; } 
     }
 }
