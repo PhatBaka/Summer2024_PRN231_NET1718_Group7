@@ -37,7 +37,7 @@ namespace JewelryStoreUI.Pages.Gems
 				response.EnsureSuccessStatusCode();
 				var jsonString = await response.Content.ReadAsStringAsync();
 				var gemOData = JsonSerializer.Deserialize<GemOData>(jsonString);
-                GemData = gemOData.GemResponse;
+                GemData = gemOData.Value;
                 TotalCount = gemOData.Count;
             }
             catch (HttpRequestException e)

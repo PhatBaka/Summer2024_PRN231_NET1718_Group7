@@ -1,20 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using JewelryStoreUI.DTOs.JewelryMaterials;
 using System.Text.Json.Serialization;
 
 namespace JewelryStoreUI.DTOs.Gems
 {
-	public class GemOData
+	public class GemOData : ODataResponseBase<GemResponse>
 	{
-		[JsonPropertyName("@odata.context")]
-		public string? Context { get; set; }
 
-		[JsonPropertyName("value")]
-		public List<GemResponse>? GemResponse { get; set; }
-
-		[JsonPropertyName("@odata.count")]
-		public int Count { get; set; }
 	}
 
 	public class GemResponse
@@ -48,9 +40,5 @@ namespace JewelryStoreUI.DTOs.Gems
         public string? Color { get; set; }
 
         public string? Sharp { get; set; }
-
-        public virtual ICollection<JewelryMaterialResponse> JewelryMaterials { get; set; } = new List<JewelryMaterialResponse>();
-
-        // public virtual ICollection<MaterialPrice> MaterialPrices { get; set; } = new List<MaterialPrice>();
     }
 }

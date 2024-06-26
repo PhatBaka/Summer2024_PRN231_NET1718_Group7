@@ -4,6 +4,7 @@ using JewelryShop.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelryShop.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240626063647_RemoveJewelryMaterial")]
+    partial class RemoveJewelryMaterial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace JewelryShop.DAL.Migrations
 
                     b.HasIndex("MaterialsMaterialId");
 
-                    b.ToTable("JewelryMaterial", (string)null);
+                    b.ToTable("JewelryMaterial");
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.Account", b =>
@@ -157,7 +160,7 @@ namespace JewelryShop.DAL.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.ToTable("Image", (string)null);
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("JewelryShop.DAL.Models.Jewelry", b =>
@@ -166,9 +169,6 @@ namespace JewelryShop.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("JewelryID");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("GuaranteeDuration")
                         .HasColumnType("decimal(18,2)");
@@ -200,20 +200,11 @@ namespace JewelryShop.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("TotalGemPrice")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("TotalMetalPrice")
-                        .HasColumnType("money");
-
                     b.Property<decimal>("TotalWeight")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("money");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("JewelryId")
                         .HasName("PK__Jewelry__807031F553A60101");
@@ -272,9 +263,6 @@ namespace JewelryShop.DAL.Migrations
 
                     b.Property<string>("Sharp")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Weight")
                         .HasColumnType("decimal(18, 2)");

@@ -58,7 +58,7 @@ namespace JewelryShop.API.Controllers
                 orderDetail.UnitPrice = entity.UnitPrice;
                 orderDetail.TotalPrice = entity.UnitPrice * orderDetail.Quantity;
                 orderDetail.FinalPrice = orderDetail.TotalPrice;
-                createModel.TotalPrice += entity.SellPrice;
+                // createModel.TotalPrice += entity.SellPrice;
             }
             // discount o day
             var iddis = _orderDiscountService.UpdateDiscount(tiername, OrderDiscountCode, offerPercent, createModel.TotalPrice).Result;

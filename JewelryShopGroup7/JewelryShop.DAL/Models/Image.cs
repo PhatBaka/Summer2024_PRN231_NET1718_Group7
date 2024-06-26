@@ -15,7 +15,7 @@ namespace JewelryShop.DAL.Models
 
         public string? ImageName { get; set; }
 
-        public virtual ICollection<Jewelry> Jewelries { get; set; } = new List<Jewelry>();
+        //public virtual ICollection<Jewelry> Jewelries { get; set; } = new List<Jewelry>();
 
         //public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
     }

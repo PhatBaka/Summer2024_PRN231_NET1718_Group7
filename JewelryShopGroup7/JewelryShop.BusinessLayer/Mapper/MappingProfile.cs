@@ -5,6 +5,7 @@ using JewelryShop.DTO;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Account;
 using JewelryShop.DTO.DTOs.Guarantee;
+using JewelryShop.DTO.DTOs.Jewelry;
 using JewelryShop.DTO.DTOs.Material.Gem;
 using JewelryShop.DTO.DTOs.Material.Metal;
 using JewelryShop.DTO.Enums;
@@ -21,9 +22,12 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Customer, CustomerDTO>().ReverseMap();
             CreateMap<Guarantee, GuaranteeDTO>().ReverseMap();
             CreateMap<Guarantee, GuaranteeResponse>().ReverseMap();
-            CreateMap<JewelryMaterial, JewelryMaterialDTO>()
+            /*CreateMap<JewelryMaterial, JewelryMaterialDTO>()
                 .ForMember(x => x.Material, dest => dest.MapFrom(dest => dest.Material))
-                .ReverseMap();
+                .ReverseMap();*/
+            //CreateMap<JewelryMaterial, JewelryMaterialDTO>()
+                //.ForMember(x => x.Material, dest => dest.MapFrom(dest => dest.Material))
+                //.ReverseMap();
             //CreateMap<JewelryType, JewelryTypeDTO>().ReverseMap();
             CreateMap<Material, MaterialDTO>().ReverseMap();
             //CreateMap<MaterialPrice, MaterialPriceDTO>().ReverseMap();
@@ -61,7 +65,7 @@ namespace JewelryShop.BusinessLayer.Mapper
             #region OrderDetail
             CreateMap<OrderDetail,  OrderDetailDTO>()
                 .ForMember(x => x.Jewelry, opt => opt.MapFrom(dest => dest.Jewelry))
-                .ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
+                //.ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
                 .ReverseMap();
             CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
             #endregion
@@ -73,13 +77,28 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Material, CreateGemRequest>().ReverseMap();
             CreateMap<Material, UpdateGemRequest>().ReverseMap();
             CreateMap<Material, GemResponse>().ReverseMap();
-			#endregion
+            #endregion
 
-			#region Account
-			CreateMap<Account, CreateAccountRequest>().ReverseMap();
+            #region Account
+            CreateMap<Account, CreateAccountRequest>().ReverseMap();
 			CreateMap<Account, UpdateAccountRequest>().ReverseMap();
 			CreateMap<Account, AccountResponse>().ReverseMap();
-			#endregion
-		}
-	}
+            #endregion
+
+            #region Metal
+            CreateMap<Material, CreateMetalRequest>().ReverseMap();
+            CreateMap<Material, UpdateMetalRequest>().ReverseMap();
+            CreateMap<Material, MetalResponse>().ReverseMap();
+            #endregion
+
+            #region Jewelry
+            CreateMap<Jewelry, CreateJewelryRequest>().ReverseMap();
+            CreateMap<Jewelry, UpdateJewelryRequest>().ReverseMap();
+            CreateMap<Jewelry, JewelryResponse>().ReverseMap();
+            CreateMap<Jewelry, ShortenJewelryResponse>().ReverseMap();
+            #endregion
+
+            CreateMap<Material, ShortenMaterialResponse>().ReverseMap();
+        }
+    }
 }

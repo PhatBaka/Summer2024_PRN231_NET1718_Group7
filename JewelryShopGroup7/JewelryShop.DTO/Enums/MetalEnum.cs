@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace JewelryShop.DTO.Enums
 {
-    public enum JewelryType
+    public enum MetalEnum
     {
-        NOGEM,
-        HAVEGEM
+        gold,
+        palladium,
+        silver
     }
 }

@@ -13,7 +13,7 @@ namespace JewelryShop.DTO.DTOs.Material.Metal
 {
     public class CreateMetalRequest
     {
-        [Required]
+        [JsonIgnore]
         public string? Name { get; set; }
 
         [JsonIgnore]
