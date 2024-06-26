@@ -25,11 +25,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<JewelryMaterial> JewelryMaterials { get; set; }
 
-    //public virtual DbSet<JewelryType> JewelryTypes { get; set; }
-
     public virtual DbSet<Material> Materials { get; set; }
-
-    // public virtual DbSet<MaterialPrice> MaterialPrices { get; set; }
 
     public virtual DbSet<Offer> Offers { get; set; }
 
@@ -38,10 +34,6 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
     public virtual DbSet<OrderDiscount> OrderDiscounts { get; set; }
-
-    //public virtual DbSet<OrderType> OrderTypes { get; set; }
-
-    //public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<StoreDiscount> StoreDiscounts { get; set; }
 
@@ -137,9 +129,9 @@ public partial class AppDbContext : DbContext
             entity.ToTable("Jewelry");
 
             entity.Property(e => e.JewelryId)
-                //.HasDefaultValueSql("(newid())")
+                .HasDefaultValueSql("(newid())")
                 .HasColumnName("JewelryID");
-            //entity.Property(e => e.Barcode).HasMaxLength(255);
+            entity.Property(e => e.Barcode).HasMaxLength(255);
             entity.Property(e => e.ManufacturingFees).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Status).HasMaxLength(50);
 
@@ -206,9 +198,9 @@ public partial class AppDbContext : DbContext
         //    entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
         //    entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
 
-        //    //entity.HasOne(d => d.Material).WithMany(p => p.MaterialPrices)
-        //    //    .HasForeignKey(d => d.MaterialId)
-        //    //    .HasConstraintName("FK__MaterialP__Mater__31EC6D26");
+        //    entity.HasOne(d => d.Material).WithMany(p => p.MaterialPrices)
+        //        .HasForeignKey(d => d.MaterialId)
+        //        .HasConstraintName("FK__MaterialP__Mater__31EC6D26");
         //});
 
         modelBuilder.Entity<Offer>(entity =>

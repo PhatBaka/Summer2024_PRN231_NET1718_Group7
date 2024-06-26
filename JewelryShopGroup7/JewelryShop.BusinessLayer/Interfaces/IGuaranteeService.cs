@@ -5,6 +5,5 @@ namespace JewelryShop.BusinessLayer.Interfaces
 {
     public interface IGuaranteeService : IService<GuaranteeResponse,CreateGuaranteeRequest,UpdateGuaranteeRequest,GuaranteeFilter>
     {
-        public Task CreateofOrderAsync(GuaranteeDTO createModel, Guid id);
     }
 }

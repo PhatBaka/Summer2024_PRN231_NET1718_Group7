@@ -11,13 +11,11 @@ namespace JewelryShop.BusinessLayer.Services
     {
         private readonly IGuaranteeRepository _guaranteeRepository;
         private readonly IMapper _mapper;
-        private readonly IOrderDetailRepository _orderDetailRepository;
 
-        public GuaranteeService(IGuaranteeRepository guaranteeRepository, IMapper mapper, IOrderDetailRepository orderDetailRepository)
+        public GuaranteeService(IGuaranteeRepository guaranteeRepository, IMapper mapper)
         {
             _guaranteeRepository = guaranteeRepository;
             _mapper = mapper;
-            _orderDetailRepository = orderDetailRepository;
         }
 
         public async Task<Guid> CreateAsync(CreateGuaranteeRequest createModel)
@@ -70,13 +68,6 @@ namespace JewelryShop.BusinessLayer.Services
             {
                 throw new KeyNotFoundException("Guarantee not found.");
             }
-        }
-        public async Task CreateofOrderAsync(GuaranteeDTO createModel, Guid id)
-        {
-            Guarantee guarantee = _mapper.Map<Guarantee>(createModel);
-            var order = (await _orderDetailRepository.GetAsync(or => or.OrderDetailId == id)).FirstOrDefault();
-            order.Guarantees.Add(guarantee);
-            await _orderDetailRepository.UpdateAsync(order);
         }
     }
 }

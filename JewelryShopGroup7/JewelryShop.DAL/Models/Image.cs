@@ -11,12 +11,10 @@ namespace JewelryShop.DAL.Models
         public Guid ImageId { get; set; }
 
         [Required]
-        public byte[]? ImageData { get; set; }
-
-        public string? ImageName { get; set; }
+        public byte[] ImageData { get; set; }
 
         public virtual ICollection<Jewelry> Jewelries { get; set; } = new List<Jewelry>();
 
-        //public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
+        public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
     }
 }

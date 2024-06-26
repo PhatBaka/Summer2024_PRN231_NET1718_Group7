@@ -15,8 +15,8 @@ namespace JewelryShop.DTO.DTOs.JewelryMaterial
         public Guid MaterialId { get; set; }
 
         public decimal? Weight { get; set; }
-        //public JewelryResponse Jewelry { get; set; } = null!;
+        public JewelryResponse Jewelry { get; set; } = null!;
 
-        //public MaterialResponse Material { get; set; } = null!;
+        public MaterialResponse Material { get; set; } = null!;
     }
 }

@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace JewelryShop.DTO.DTOs;
+﻿namespace JewelryStoreUI.Pages.DTOs.StoreDiscount;
 
 public partial class StoreDiscountDTO
 {
-    [Key]
     public Guid? StoreDiscountId { get; set; }
 
     public string? DiscountCode { get; set; }

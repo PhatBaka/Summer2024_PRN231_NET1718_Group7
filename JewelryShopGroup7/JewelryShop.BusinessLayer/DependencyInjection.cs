@@ -23,8 +23,6 @@ public static class DependencyInjection
         services.AddScoped<IStoreDiscountService, StoreDiscountService>();
         services.AddScoped<ITierService, TierService>();
         services.AddScoped<IImageService, ImageService>();
-        services.AddScoped<IMetalService, MetalService>();
-        services.AddScoped<IGemService, GemService>();
 
         //Mapper
         services.AddAutoMapper(typeof(MappingProfile));
