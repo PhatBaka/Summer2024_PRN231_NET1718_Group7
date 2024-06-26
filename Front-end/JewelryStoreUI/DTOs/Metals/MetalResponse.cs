@@ -1,6 +1,11 @@
 ﻿namespace JewelryStoreUI.DTOs.Metals
 {
-    public class MetalResponse
+    public class MetalOData : ODataResponseBase<MetalResponse>
+    {
+
+    }
+
+    public class MetalResponse 
     {
         public Guid MaterialId { get; set; }
 
