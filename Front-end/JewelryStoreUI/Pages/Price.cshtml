@@ -1,8 +1,20 @@
 ﻿@page
 @using System.Globalization
+@using JewelryStoreUI.Enums
 @model JewelryStoreUI.Pages.PriceModel
 @{
-    Layout = "_PriceLayout";
+    if (HttpContext.Session.GetInt32("ROLE") == (int)RoleEnum.STAFF)
+    {
+        Layout = "_StaffLayout";
+    }
+    else if (HttpContext.Session.GetInt32("ROLE") == (int)RoleEnum.MANAGER)
+    {
+        Layout = "_ManagerLayout";
+    }
+    else
+    {
+        Layout = "_PriceLayout";
+    }
 }
 
 <style>

@@ -1,10 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using JewelryStoreUI.DTOs.JewelryMaterials;
+using System.Text.Json.Serialization;
 
 namespace JewelryStoreUI.DTOs.Gems
 {
-    public class GemResponse
+	public class GemOData
+	{
+		[JsonPropertyName("@odata.context")]
+		public string? Context { get; set; }
+
+		[JsonPropertyName("value")]
+		public List<GemResponse>? GemResponse { get; set; }
+
+		[JsonPropertyName("@odata.count")]
+		public int Count { get; set; }
+	}
+
+	public class GemResponse
     {
         public Guid MaterialId { get; set; }
 

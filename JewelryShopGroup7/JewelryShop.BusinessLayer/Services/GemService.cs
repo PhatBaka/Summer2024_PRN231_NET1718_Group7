@@ -57,7 +57,7 @@ namespace JewelryShop.BusinessLayer.Services
 
         public async Task<IEnumerable<GemResponse>> GetAllAsync()
         {
-            var gems = await _materialRepository.GetAllAsync();
+            var gems = _materialRepository.GetAllAsync().Result.Where(x => x.IsMetal == false);
             return _mapper.Map<IEnumerable<GemResponse>>(gems.ToList());
         }
 

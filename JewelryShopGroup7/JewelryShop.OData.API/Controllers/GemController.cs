@@ -1,4 +1,4 @@
-using JewelryShop.BusinessLayer.Interfaces;
+﻿using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -6,31 +6,32 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace JewelryShop.OData.Api.Controllers
 {
-    [Route("odata/MaterialOData")]
+    [Route("odata/GemOData")]
     [ApiController]
-    public class MaterialController : ODataController
+    public class GemController : ODataController
     {
-        private readonly IMaterialService _materialService;
+        private readonly IGemService _gemService;
 
-        public MaterialController(IMaterialService materialService)
+        public GemController(IGemService gemSerivce)
         {
-            _materialService = materialService;
+            _gemService = gemSerivce;
         }
 
         [HttpGet]
         [EnableQuery]
         public async Task<ActionResult<IEnumerable<MaterialDTO>>> GetAllAsync()
         {
-            var result = await _materialService.GetAllAsync();
+            var result = await _gemService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<MaterialDTO>> GetByIdAsync(Guid id)
         {
-            var result = await _materialService.GetByIdAsync(id);
+            var result = await _gemService.GetByIdAsync(id);
             if (result == null) return NotFound();
             return Ok(result);
         }
     }
 }
+
