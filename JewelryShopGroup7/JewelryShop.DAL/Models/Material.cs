@@ -17,6 +17,8 @@ public partial class Material
 
     public DateTime? CreatedDate { get; set; }
 
+    public DateTime? UpdatedDate { get; set; }
+
     // public string UnitType { get; set; }
 
     [Column(TypeName = "money")]
@@ -53,7 +55,9 @@ public partial class Material
 
     public string? Sharp { get; set; }
 
-    public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
+    // public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
+
+    public virtual ICollection<Jewelry> Jewelries { get; set; } = new List<Jewelry>();
 
     // public virtual ICollection<MaterialPrice> MaterialPrices { get; set; } = new List<MaterialPrice>();
 

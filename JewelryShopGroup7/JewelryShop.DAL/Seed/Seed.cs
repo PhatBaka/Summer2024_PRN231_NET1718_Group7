@@ -73,7 +73,7 @@ namespace JewelryShop.DAL.Seed
 
             foreach (var acc in accs)
             {
-                acc.ImageId = saveimg.Entity.ImageId;
+                //acc.ImageId = saveimg.Entity.ImageId;
                 await _context.Jewelries.AddAsync(acc);
             }
             await _context.SaveChangesAsync(); // save all jewelry items
