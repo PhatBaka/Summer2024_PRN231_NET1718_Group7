@@ -1,0 +1,36 @@
+﻿@page
+@model JewelryStoreUI.Pages.Offers.IndexModel
+@{
+}
+
+<h2>Offers</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>OfferId</th>
+            <th>OfferPercent</th>
+            <th>Constraints</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Offers)
+    {
+        <tr>
+            <td>@item.OfferId</td>
+            <td>@item.OfferPercent</td>
+            <td>@item.Constraints</td>
+            <td>
+                <a asp-page="Details" asp-route-id="@item.OfferId">Details</a> |
+                <a asp-page="Edit" asp-route-id="@item.OfferId">Edit</a> |
+                <a asp-page="Delete" asp-route-id="@item.OfferId">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

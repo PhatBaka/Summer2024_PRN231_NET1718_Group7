@@ -71,6 +71,5 @@ static IEdmModel GetEdmModel()
     modelBuilder.EntitySet<OrderDetailResponse>("OrderDetailOData");
     modelBuilder.EntitySet<OrderResponse>("OrderOData");
     modelBuilder.EntitySet<StoreDiscountResponse>("StoreDiscountOData");
-    modelBuilder.EntitySet<TierResponse>("TierOData");
     return modelBuilder.GetEdmModel();
 }

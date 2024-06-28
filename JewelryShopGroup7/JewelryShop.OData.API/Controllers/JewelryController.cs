@@ -15,17 +15,14 @@ namespace JewelryShop.OData.Api.Controllers
     public class JewelryController : ODataController
     {
         private readonly IJewelryService _jewelryService;
-        private readonly IJewelryMaterialService _jewelryMaterialService;
         private readonly IMaterialService _materialService;
         private readonly IMapper _mapper;
 
         public JewelryController(IJewelryService jewelryService,
-                                    IJewelryMaterialService jewelryMaterialService,
                                     IMaterialService materialService,
                                     IMapper mapper)
         {
             _materialService = materialService;
-            _jewelryMaterialService = jewelryMaterialService;
             _jewelryService = jewelryService;
             _mapper = mapper;
         }
