@@ -12,8 +12,7 @@ using JewelryShop.DTO.Enums;
 namespace JewelryShop.DTO.DTOs.Material.Metal
 {
     public class CreateMetalRequest
-    {
-        [JsonIgnore]
+    { 
         public string? Name { get; set; }
 
         [JsonIgnore]

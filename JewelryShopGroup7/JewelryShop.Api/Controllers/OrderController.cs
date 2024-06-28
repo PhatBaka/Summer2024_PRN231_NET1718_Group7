@@ -31,12 +31,12 @@ namespace JewelryShop.API.Controllers
             _orderDiscountService = orderDiscountService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetAllAsync()
-        {
-            var result = await _orderService.GetAllAsync();
-            return Ok(result);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<OrderResponse>>> GetAllAsync()
+        //{
+        //    var result = await _orderService.GetAllAsync();
+        //    return Ok(result);
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderResponse>> GetByIdAsync(Guid id)

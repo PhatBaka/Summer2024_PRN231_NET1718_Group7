@@ -9,7 +9,6 @@ namespace JewelryShop.DTO.DTOs.OrderDetail
 {
     public class CreateOrderDetailRequest
     {
-        public Guid OrderId { get; set; }
         public Guid JewelryId { get; set; }
         public int Quantity { get; set; }
         [JsonIgnore]

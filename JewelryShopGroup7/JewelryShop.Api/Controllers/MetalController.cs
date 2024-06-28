@@ -34,10 +34,9 @@ namespace JewelryShop.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromQuery] MetalEnum metalEnum, [FromQuery] MaterialStatus materialStatus, [FromBody] CreateMetalRequest createModel)
+        public async Task<ActionResult<Guid>> CreateAsync([FromQuery] MaterialStatus materialStatus, [FromBody] CreateMetalRequest createModel)
         {
             createModel.MaterialStatus = materialStatus;
-            createModel.Name = metalEnum.ToString();
             var id = await _metalService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
