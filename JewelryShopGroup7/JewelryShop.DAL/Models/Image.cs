@@ -13,7 +13,7 @@ namespace JewelryShop.DAL.Models
         [Required]
         public byte[] ImageData { get; set; }
 
-        //public virtual ICollection<Jewelry> Jewelries { get; set; } = new List<Jewelry>();
+        public virtual ICollection<Jewelry> Jewelries { get; set; } = new List<Jewelry>();
 
         public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
     }

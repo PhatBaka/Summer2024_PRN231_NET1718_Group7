@@ -1,5 +1,6 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Material;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
@@ -19,14 +20,14 @@ namespace JewelryShop.OData.Api.Controllers
 
         [HttpGet]
         [EnableQuery]
-        public async Task<ActionResult<IEnumerable<MaterialDTO>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<MaterialResponse>>> GetAllAsync()
         {
             var result = await _materialService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<MaterialDTO>> GetByIdAsync(Guid id)
+        public async Task<ActionResult<MaterialResponse>> GetByIdAsync(Guid id)
         {
             var result = await _materialService.GetByIdAsync(id);
             if (result == null) return NotFound();

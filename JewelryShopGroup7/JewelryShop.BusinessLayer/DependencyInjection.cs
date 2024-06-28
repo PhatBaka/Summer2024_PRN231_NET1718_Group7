@@ -13,7 +13,7 @@ public static class DependencyInjection
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IGuaranteeService, GuaranteeService>();
-        //services.AddScoped<IJewelryMaterialService, JewelryMaterialService>();
+        services.AddScoped<IJewelryMaterialService, JewelryMaterialService>();
         services.AddScoped<IJewelryService, JewelryService>();
         services.AddScoped<IMaterialService, MaterialService>();
         services.AddScoped<IOfferService, OfferService>();

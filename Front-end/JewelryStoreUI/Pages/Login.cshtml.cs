@@ -11,11 +11,11 @@ namespace JewelryStoreUI.Pages
     public class LoginModel : PageModel
     {
         [BindProperty]
-        public LoginDTO Account { get; set; }
+        public LoginDTO LoginDTO { get; set; }
         [BindProperty]
         public ResponseResult<dynamic> ResponseResult { get; set; }
         private string url = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
-        public string? Message { get; set; }
+
 
         private void LoadData()
         {
@@ -32,7 +32,7 @@ namespace JewelryStoreUI.Pages
         {
             LoadData();
 
-            var json = JsonConvert.SerializeObject(Account);
+            var json = JsonConvert.SerializeObject(LoginDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
             using (var client = new HttpClient())
@@ -47,16 +47,12 @@ namespace JewelryStoreUI.Pages
                 HttpContext.Session.SetInt32("ROLE", (int)ResponseResult.Data.role);
                 if (ResponseResult.Data.role == RoleEnum.MANAGER)
                 {
-                    return RedirectToPage("Manager");
+                    return RedirectToPage("ManagerDashboard");
                 }
                 else if (ResponseResult.Data.role == RoleEnum.STAFF)
                 {
-                    return RedirectToPage("Staff");
+                    return RedirectToPage("StaffDashboard");
                 }
-            }
-            else if (ResponseResult.Result == false)
-            {
-                Message = ResponseResult.Message;
             }
             return Page();
         }

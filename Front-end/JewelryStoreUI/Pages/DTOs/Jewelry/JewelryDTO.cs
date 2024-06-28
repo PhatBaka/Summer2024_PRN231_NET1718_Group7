@@ -11,28 +11,21 @@ namespace JewelryStoreUI.Pages.DTOs.Jewelry
 
     public class CreateJewelryDTO
     {
-        [Required]
-        public Guid JewelryId { get; set; }
-
-        [Required]
-        public string? JewelryName { get; set; }
-
-        [Required]
-        public decimal ManufacturingFees { get; set; }
-
-        [Required]
-        public JewelryType? JewelryType { get; set; }
-
-        public decimal? GuaranteeDuration { get; set; }
-        public int? Quantity { get; set; }
-
-        public CategoryEnum? JewelryCategory { get; set; }
-
-        [Required]
-        public IFormFile? JewelryImageFile { get; set; }
-
-        [Required]
-        public IList<Guid>? MaterialIds { get; set; }
+        [Required(ErrorMessage = "Name is required")]
+        public string JewelryName { get; set; }
+        [Required(ErrorMessage = "Warranty is required")]
+        public int GuaranteeDuration { get; set; }
+        [Required(ErrorMessage = "Type is required")]
+        public JewelryType JewelryType { get; set; }
+        [Required(ErrorMessage = "Quantity is required")]
+        public int Quantity { get; set; }
+        [Required(ErrorMessage = "Markup percentage is required")]
+        public decimal MarkupPercentage { get; set; }
+        [Required(ErrorMessage = "Manufacturer Fee is required")]
+        public decimal ManufacturerFee { get; set; }
+        [Required(ErrorMessage = "Image is required")]
+        public IFormFile Image { get; set; }
+        public IList<CreateJewelryMeterialDTO> CreateJewelryMeterialDTOs { get; set; }
     }
 
     public class CreateJewelryMeterialDTO
