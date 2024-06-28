@@ -37,7 +37,20 @@ namespace JewelryShop.API.Controllers
             var id = await _guaranteeService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
-
+        [HttpPost("addtoorder")]
+        public async Task<ActionResult<Guid>> AddtoOrderAsync([FromBody] GuaranteeDTO createModel, Guid Orderid)
+        {
+            try
+            {
+                await _guaranteeService.CreateofOrderAsync(createModel, Orderid);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            
+        }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateGuaranteeRequest updateModel)
         {

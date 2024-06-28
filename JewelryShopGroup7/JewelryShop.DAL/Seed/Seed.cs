@@ -14,8 +14,9 @@ namespace JewelryShop.DAL.Seed
         public static async Task SeedAcc(AppDbContext _context)
         {
             if (await _context.Accounts.AnyAsync()) return;
+            var jew = _context.Jewelries;
             var orderdes = new List<OrderDetail>
-    {
+            {
         new OrderDetail
         {
             UnitPrice = 50,
@@ -24,6 +25,7 @@ namespace JewelryShop.DAL.Seed
             FinalPrice = 135,
             DiscountValue = 10,
             Quantity = 3,
+            Jewelry = jew.FirstOrDefault(),
             Guarantees = new List<Guarantee>()
         },
         new OrderDetail
@@ -33,24 +35,27 @@ namespace JewelryShop.DAL.Seed
             DiscountPrice = 20,
             FinalPrice = 180,
             DiscountValue = 10,
-            Quantity = 2
+            Quantity = 2,
+            Jewelry = jew.FirstOrDefault(),
+            Guarantees = new List<Guarantee>()
         } 
             };
             var accData = await File.ReadAllTextAsync("../JewelryShop.DAL/Seed/AccountSeed.json");
             var jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var accs = JsonSerializer.Deserialize<List<Account>>(accData, jsonOptions);
-
             foreach (var acc in accs)
             {
                 await _context.Accounts.AddAsync(acc);
-                var orders = acc.Orders;
                 await _context.SaveChangesAsync();
+                var orders = acc.Orders;
                 foreach (var or in orders)
                 {
                     or.OrderDetails = orderdes;
                     _context.Orders.Update(or);
                     await _context.SaveChangesAsync();
+     
                 }
+                
             }
         }
         public static async Task SeedJew(AppDbContext _context)
@@ -68,7 +73,7 @@ namespace JewelryShop.DAL.Seed
 
             foreach (var acc in accs)
             {
-                acc.ImageId = saveimg.Entity.ImageId;
+                //acc.ImageId = saveimg.Entity.ImageId;
                 await _context.Jewelries.AddAsync(acc);
             }
             await _context.SaveChangesAsync(); // save all jewelry items

@@ -13,7 +13,7 @@ public static class DependencyInjection
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IGuaranteeService, GuaranteeService>();
-        services.AddScoped<IJewelryMaterialService, JewelryMaterialService>();
+        //services.AddScoped<IJewelryMaterialService, JewelryMaterialService>();
         services.AddScoped<IJewelryService, JewelryService>();
         services.AddScoped<IMaterialService, MaterialService>();
         services.AddScoped<IOfferService, OfferService>();
@@ -23,6 +23,8 @@ public static class DependencyInjection
         services.AddScoped<IStoreDiscountService, StoreDiscountService>();
         services.AddScoped<ITierService, TierService>();
         services.AddScoped<IImageService, ImageService>();
+        services.AddScoped<IMetalService, MetalService>();
+        services.AddScoped<IGemService, GemService>();
 
         //Mapper
         services.AddAutoMapper(typeof(MappingProfile));

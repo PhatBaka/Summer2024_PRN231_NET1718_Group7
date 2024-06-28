@@ -20,6 +20,7 @@ namespace JewelryShop.BusinessLayer.Services
 
         public async Task<Guid> CreateAsync(CreateMaterialRequest createModel)
         {
+
             Material material = _mapper.Map<Material>(createModel);
             return await _materialRepository.AddAsync(material);
         }

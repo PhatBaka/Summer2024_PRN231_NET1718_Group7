@@ -13,17 +13,17 @@ namespace JewelryShop.API.Controllers
     public class JewelryController : ControllerBase
     {
         private readonly IJewelryService _jewelryService;
-        private readonly IJewelryMaterialService _jewelryMaterialService;
+        //private readonly IJewelryMaterialService _jewelryMaterialService;
         private readonly IMaterialService _materialService;
         private readonly IMapper _mapper;
 
         public JewelryController(IJewelryService jewelryService,
-                                    IJewelryMaterialService jewelryMaterialService,
+                                    //IJewelryMaterialService jewelryMaterialService,
                                     IMaterialService materialService,
                                     IMapper mapper)
         {
             _materialService = materialService;
-            _jewelryMaterialService = jewelryMaterialService;
+            //_jewelryMaterialService = jewelryMaterialService;
             _jewelryService = jewelryService;
             _mapper = mapper;
         }
@@ -44,29 +44,30 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateJewelryRequest createJewelryDTO)
+        public async Task<ActionResult<Guid>> CreateAsync([FromForm] CreateJewelryRequest createJewelryDTO)
         {
-            foreach (var material in createJewelryDTO.CreateJewelryMeterialRequests)
-            {
-                var entity = await _materialService.GetByIdAsync((Guid)material.MaterialId);
-                createJewelryDTO.TotalWeight += material.Weight;
-                createJewelryDTO.UnitPrice += material.Weight * entity.Price;
-            }
-            createJewelryDTO.UnitPrice += (decimal)createJewelryDTO.ManufacturingFees;
-            createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + (createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage / 100);
-            createJewelryDTO.Status = ObjectStatus.ACTIVE.ToString();
+            //foreach (var material in createJewelryDTO.CreateJewelryMeterialRequests)
+            //{
+            //    var entity = await _materialService.GetByIdAsync((Guid)material.MaterialId);
+            //    createJewelryDTO.TotalWeight += material.Weight;
+            //    // createJewelryDTO.UnitPrice += material.Weight * entity.Price;
+            //}
+            //createJewelryDTO.UnitPrice += (decimal)createJewelryDTO.ManufacturingFees;
+            //createJewelryDTO.SellPrice = createJewelryDTO.UnitPrice + (createJewelryDTO.UnitPrice * createJewelryDTO.MarkupPercentage / 100);
+            //createJewelryDTO.Status = ObjectStatus.ACTIVE.ToString();
+            //var id = await _jewelryService.CreateAsync(createJewelryDTO);
+            //foreach (var material in createJewelryDTO.CreateJewelryMeterialRequests)
+            //{
+            //    var weight = await _materialService.GetByIdAsync((Guid)material.MaterialId);
+            //    CreateJewelryMaterialRequest jewelryMaterialDTO = new CreateJewelryMaterialRequest()
+            //    {
+            //        JewelryId = id,
+            //        MaterialId = (Guid)material.MaterialId,
+            //        Weight = material.Weight,
+            //    };
+            //    await _jewelryMaterialService.CreateAsync(jewelryMaterialDTO);
+            //}
             var id = await _jewelryService.CreateAsync(createJewelryDTO);
-            foreach (var material in createJewelryDTO.CreateJewelryMeterialRequests)
-            {
-                var weight = await _materialService.GetByIdAsync((Guid)material.MaterialId);
-                CreateJewelryMaterialRequest jewelryMaterialDTO = new CreateJewelryMaterialRequest()
-                {
-                    JewelryId = id,
-                    MaterialId = (Guid)material.MaterialId,
-                    Weight = material.Weight,
-                };
-                await _jewelryMaterialService.CreateAsync(jewelryMaterialDTO);
-            }
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }
 

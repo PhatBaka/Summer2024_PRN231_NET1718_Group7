@@ -1,20 +1,13 @@
 ﻿using AutoMapper;
 using JewelryShop.BusinessLayer.Helpers;
 using JewelryShop.DAL.Models;
+using JewelryShop.DTO;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Account;
-using JewelryShop.DTO.DTOs.Customer;
-using JewelryShop.DTO.DTOs.Guarantee;
-using JewelryShop.DTO.DTOs.Image;
 using JewelryShop.DTO.DTOs.Jewelry;
-using JewelryShop.DTO.DTOs.JewelryMaterial;
 using JewelryShop.DTO.DTOs.Material;
-using JewelryShop.DTO.DTOs.Offer;
-using JewelryShop.DTO.DTOs.Order;
-using JewelryShop.DTO.DTOs.OrderDetail;
-using JewelryShop.DTO.DTOs.OrderDiscount;
-using JewelryShop.DTO.DTOs.StoreDiscount;
-using JewelryShop.DTO.DTOs.Tier;
+using JewelryShop.DTO.DTOs.Material.Gem;
+using JewelryShop.DTO.DTOs.Material.Metal;
 using JewelryShop.DTO.Enums;
 
 namespace JewelryShop.BusinessLayer.Mapper
@@ -23,95 +16,85 @@ namespace JewelryShop.BusinessLayer.Mapper
     {
         public MappingProfile()
         {
-            #region account
-            CreateMap<Account, AccountResponse>()
-                    .ForMember(des => des.Role, src => src.MapFrom(src => EnumMapper<RoleEnum>.MapType(src.Role)));
-            CreateMap<CreateAccountRequest, Account>();
-            CreateMap<UpdateAccountRequest, Account>(); 
-            #endregion
-
-            #region customer
-            CreateMap<Customer, CustomerResponse>();
-            CreateMap<CreateCustomerRequest, Customer>();
-            CreateMap<UpdateCustomerRequest, Customer>(); 
-            #endregion
-
-            #region Guarantee
-            CreateMap<Guarantee, GuaranteeResponse>();
-            CreateMap<CreateGuaranteeRequest, Guarantee>();
-            CreateMap<UpdateGuaranteeRequest, Guarantee>(); 
-            #endregion
-
-            #region image
-            CreateMap<Image, ImageResponse>();
-            CreateMap<CreateImageRequest, Image>();
-            CreateMap<UpdateImageRequest, Image>(); 
-            #endregion
+            CreateMap<Account, AccountDTO>()
+                .ForMember(des => des.Role, src => src.MapFrom(src => EnumMapper<RoleEnum>.MapType(src.Role)))
+                .ReverseMap(); 
+            CreateMap<Customer, CustomerDTO>().ReverseMap();
+            CreateMap<Guarantee, GuaranteeDTO>().ReverseMap();
+            //CreateMap<JewelryMaterial, JewelryMaterialDTO>()
+                //.ForMember(x => x.Material, dest => dest.MapFrom(dest => dest.Material))
+                //.ReverseMap();
+            //CreateMap<JewelryType, JewelryTypeDTO>().ReverseMap();
+            CreateMap<Material, MaterialDTO>().ReverseMap();
+            //CreateMap<MaterialPrice, MaterialPriceDTO>().ReverseMap();
+            CreateMap<Offer, OfferDTO>().ReverseMap();
+            //CreateMap<Order, OrderDTO>().ReverseMap();
+            //CreateMap<OrderDetail, OrderDetailDTO>().ReverseMap();
+            CreateMap<OrderDiscount, OrderDiscountDTO>().ReverseMap();
+            //CreateMap<OrderType, OrderTypeDTO>().ReverseMap();
+            //CreateMap<Role, RoleDTO>().ReverseMap();
+            CreateMap<StoreDiscount, StoreDiscountDTO>().ReverseMap();
+            CreateMap<Tier, TierDTO>().ReverseMap();
 
             #region Jewelry
-            CreateMap<Jewelry, JewelryResponse>();
+            CreateMap<Jewelry, JewelryDTO>()
                 //.ForMember(x => x.TypeName, opt => opt.MapFrom(dest => dest.JewelryTypeNavigation.TypeName))
                 //.ForMember(x => x.ImageData, opt => opt.MapFrom(dest => dest.Image.ImageData))
-            CreateMap<UpdateJewelryRequest, Jewelry>();
-            CreateMap<CreateJewelryRequest, Jewelry>();
+                .ReverseMap();
+            CreateMap<JewelryDTO, CreateJewelryDTO>().ReverseMap();
+            CreateMap<JewelryDTO, UpdateJewelryDTO>().ReverseMap();
             #endregion
 
-            #region JewelryMaterial
-            CreateMap<JewelryMaterial, JewelryMaterialResponse>()
-                   .ForMember(x => x.Material, dest => dest.MapFrom(dest => dest.Material))
-                   .ReverseMap();
-            CreateMap<CreateJewelryMaterialRequest, JewelryMaterial>();
-            CreateMap<UpdateJewelryMaterialRequest, JewelryMaterial>(); 
-            #endregion
-
-
-            #region Material
-            CreateMap<Material, MaterialResponse>();
-            CreateMap<CreateMaterialRequest, Material>();
-            CreateMap<UpdateMaterialRequest, Material>(); 
-            #endregion
-
-            #region Offer
-            CreateMap<Offer, OfferResponse>();
-            CreateMap<CreateOfferRequest, Offer>();
-            CreateMap<UpdateOffterRequest, Offer>(); 
+            #region Image
+            CreateMap<Image, ImageDTO>().ReverseMap();
+            CreateMap<ImageDTO, CreateImageDTO>().ReverseMap();
+            CreateMap<ImageDTO, UpdateImageDTO>().ReverseMap();
             #endregion
 
             #region Order
-            CreateMap<Order, OrderResponse>()
-               // .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(dest => dest.Customer.PhoneNumber))
+            CreateMap<Order, OrderDTO>()
+                .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(dest => dest.Customer.PhoneNumber))
                 .ReverseMap();
-            CreateMap<CreateOrderRequest, Order>();
-            CreateMap<UpdateOrderRequest, Order>();
+            CreateMap<OrderDTO, CreateOrderDTO>().ReverseMap();
             #endregion
 
             #region OrderDetail
-            CreateMap<OrderDetail, OrderDetailResponse>()
+            CreateMap<OrderDetail,  OrderDetailDTO>()
                 .ForMember(x => x.Jewelry, opt => opt.MapFrom(dest => dest.Jewelry))
-                .ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
+                //.ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
                 .ReverseMap();
-            CreateMap<CreateOrderDetailRequest, OrderDetail>();
-            CreateMap<UpdateOrderDetailRequest, OrderDetail>();
+            CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
             #endregion
 
-            #region order discount
-            CreateMap<OrderDiscount, OrderDiscountResponse>();
-            CreateMap<CreateOrderDiscountRequest, OrderDiscount>();
-            CreateMap<UpdateOrderDiscountRequest, OrderDiscount>();
+            //CreateMap<MaterialDTO, GemDTO>().ReverseMap();
+            //CreateMap<MaterialDTO, MetalDTO>().ReverseMap();
+
+            #region Gem
+            CreateMap<Material, CreateGemRequest>().ReverseMap();
+            CreateMap<Material, UpdateGemRequest>().ReverseMap();
+            CreateMap<Material, GemResponse>().ReverseMap();
             #endregion
 
-            #region store discount
-            CreateMap<StoreDiscount, StoreDiscountResponse>();
-            CreateMap<CreateStoreDiscountRequest, StoreDiscount>();
-            CreateMap<UpdateStoreDiscountRequest, StoreDiscount>();
+            #region Account
+            CreateMap<Account, CreateAccountRequest>().ReverseMap();
+			CreateMap<Account, UpdateAccountRequest>().ReverseMap();
+			CreateMap<Account, AccountResponse>().ReverseMap();
             #endregion
 
-            #region tier
-            CreateMap<Tier, TierResponse>();
-            CreateMap<CreateTierRequest, Tier>();
-            CreateMap<UpdateTierRequest, Tier>(); 
+            #region Metal
+            CreateMap<Material, CreateMetalRequest>().ReverseMap();
+            CreateMap<Material, UpdateMetalRequest>().ReverseMap();
+            CreateMap<Material, MetalResponse>().ReverseMap();
             #endregion
 
+            #region Jewelry
+            CreateMap<Jewelry, CreateJewelryRequest>().ReverseMap();
+            CreateMap<Jewelry, UpdateJewelryRequest>().ReverseMap();
+            CreateMap<Jewelry, JewelryResponse>().ReverseMap();
+            CreateMap<Jewelry, ShortenJewelryResponse>().ReverseMap();
+            #endregion
+
+            CreateMap<Material, ShortenMaterialResponse>().ReverseMap();
         }
     }
 }
