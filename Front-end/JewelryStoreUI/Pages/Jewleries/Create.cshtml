@@ -1,22 +1,31 @@
 ﻿@page
 @model JewelryStoreUI.Pages.Jewleries.CreateModel
 @{
-    Layout = "_StaffLayout";
+    Layout = "_ManagerLayout";
     
 }
 
+<style>
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: middle;
+        border-top: 1px solid #ddd
+    }
+</style>
+    
 <section id="center" class="center_shop">
     <div class="container">
         <div class="row">
             <div class="center_shop_t clearfix">
                 <div class="col-sm-6">
-                    <div class="center_shop_tl clearfix">
-                        <h4 class="mgt">Create</h4>
+                    <div class="center_shop_tl clearfix d-flex align-items-center">
+                        <h4 class="mgt">NEW GEM</h4>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="center_shop_tr text-right clearfix">
-                        <h6 class="col_2">You are here: <a href="#">Home</a> / Create</h6>
+                        <h6 class="col_2">You are here: <a asp-asp-page="Gems/Index">Home</a> / Gem</h6>
                     </div>
                 </div>
             </div>
@@ -24,299 +33,72 @@
     </div>
 </section>
 
-<form method="post" id="materialForm" enctype="multipart/form-data">
-    <section id="checkout" class="clearfix">
-        <div class="container">
-            <div class="collcet_1r clearfix">
-                @foreach (var result in Model.MaterialList)
-                {
-                    <div class="col-sm-4 space_left">
-                        <div class="feature_2im clearfix" style="width: 355px; height: 300px;">
-                            <div class="feature_2im1 clearfix">
-                                <a href="detail.html">
-                                    <img src="data:image/png;base64, @result.Base64" alt="Red dot" style="width: 355px; height: 300px;" />
-                                </a>
-                            </div>
-                            <div class="feature_2im4 clearfix">
-                                <div class="col-sm-6 feature_2im4r space_right">
-                                    <ul>
-                                        <li>
-                                            <button type="button" onclick="addToTable('@result.Data.materialId',
-                                                                                    '@result.Data.name',
-                                                                                    '@result.Data.price',
-                                                                                    '@result.Data.unitType')">
-                                                <i class="fa fa-cart-plus"></i>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item_last text-center clearfix">
-                            <h4><a href="detail.html">@result.Data.jewelryName</a></h4>
-                            <h6>
-                                <span class="span_1 col_1 bold">@result.Data.name</span>
-                            </h6>
-                        </div>
-                    </div>
-                }
-            </div>
-            <div class="row">
-                <div class="checkout_1 clearfix">
-                    <div class="col-sm-12">
-                        <div class="checkout_1l1 clearfix">
-                            <div class="col-sm-3 space_left">
-                                <h5>Jewelry Name <span class="col_1">*</span></h5>
-                                <input class="form-control" type="text" asp-for="@Model.CreateJewelryDTO.JewelryName">
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Guarantee Duration <span class="col_1">*</span></h5>
-                                <input class="form-control" type="text" asp-for="@Model.CreateJewelryDTO.GuaranteeDuration">
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Quantity <span class="col_1">*</span></h5>
-                                <input class="form-control" type="text" asp-for="@Model.CreateJewelryDTO.Quantity">
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Jewelry Type <span class="col_1">*</span></h5>
-                                <select class="form-control" asp-for="@Model.CreateJewelryDTO.JewelryType">
-                                    <option>RING</option>
-                                    <option>BRACELET</option>
-                                    <option>EARRINGS</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Manufacturer Fee <span class="col_1">*</span></h5>
-                                <input class="form-control" id="manufacturerFee" type="number" asp-for="@Model.CreateJewelryDTO.ManufacturerFee">
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Markup Percentage <span class="col_1">*</span></h5>
-                                <input class="form-control" id="markupPercentage" type="number" asp-for="@Model.CreateJewelryDTO.MarkupPercentage">
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Total Material Price <span class="col_1">*</span></h5>
-                                <span class="form-control" id="grandTotal">@Model.TotalPrice</span>
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Total Original <span class="col_1">*</span></h5>
-                                <span class="form-control" id="totalPrice"></span>
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Total Markup <span class="col_1">*</span></h5>
-                                <span class="form-control" id="totalMarkup"></span>
-                            </div>
-                            <div class="col-sm-3 space_left">
-                                <h5>Sell Price <span class="col_1">*</span></h5>
-                                <span class="form-control" id="sellPrice"></span>
-                            </div>
-                        </div>
-                    </div>
+<section id="center" class="center_shop">
+    <div class="container">
+        <div class="row">
+            <div class="center_shop_t clearfix">
+                <div class="center_shop_tl clearfix">
+                    <table class="table table-striped table-center">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Weight</th>
+                                <th>Clarity</th>
+                                <th>Color</th>
+                                <th>Purity</th>
+                                <th>Sharp</th>
+                                <th>Sell Price</th>
+                                <th>Buy Price</th>
+                                <th>Created Date</th>
+                                <th>Image</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var gem in Model.GemData)
+                            {
+                                <tr class="d-flex justify-content-center">
+                                    <td>@gem.Name</td>
+                                    <td>@gem.Weight</td>
+                                    <td>@gem.Clarity</td>
+                                    <td>@gem.Color</td>
+                                    <td>@gem.Purity</td>
+                                    <td>@gem.Sharp</td>
+                                    <td>@gem.SellPrice</td>
+                                    <td>@gem.BuyPrice</td>
+                                    <td>@gem.CreatedDate</td>
+                                    <td >
+                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(gem.MaterialImageData)" alt="@gem.Name" style="max-width: 100px; max-height: 100px;" />
+                                    </td>
+                                    <td>
+                                    <td>
+                                        <a class="button" asp-page="/Gems/Detail" asp-route-id="@gem.MaterialId">Details</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
                 </div>
+                <nav aria-label="Page navigation" class="d-flex justify-content-center">
+                    <ul class="pagination">
+                        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link" asp-page="./Index" asp-route-currentPage="@(Model.CurrentPage - 1)">Previous</a>
+                        </li>
+                        @for (int i = 1; i <= Math.Ceiling((double)Model.TotalCount / Model.PageSize); i++)
+                        {
+                            <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                                <a class="page-link" style="background-color:#dfb858" asp-page="./Index" asp-route-currentPage="@i">@i</a>
+                            </li>
+                        }
+                        <li class="page-item @(Model.CurrentPage == Math.Ceiling((double)Model.TotalCount / Model.PageSize) ? "disabled" : "")">
+                            <a class="page-link" asp-page="./Index" asp-route-currentPage="@(Model.CurrentPage + 1)">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+
             </div>
-            <div>
-                <table id="itemsTable">
-                    <thead>
-                        <tr>
-                            <th>Material ID</th>
-                            <th>Material Name</th>
-                            <th>Unit Price</th>
-                            <th>Weight</th>
-                            <th>Type</th>
-                            <th>Final Price</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Items will be added here -->
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <div class="container">
-                    <input type="file" id="uploadInput" accept="image/*" asp-for="@Model.CreateJewelryDTO.Image">
-                    <br>
-                    <div id="imageContainer"></div>
-                </div>
-            </div>
-            <h5><input type="submit" class="button" value="CREATE"></input></h5>
+
         </div>
-    </section>
-</form>
-
-<style>
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 10px;
-    }
-
-    img {
-        max-width: 355px;
-        max-height: 300px;
-        margin-top: 20px;
-    }
-</style>
-<script>
-    const grandTotalSpan = document.getElementById('grandTotal');
-    const observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            calculateGrandTotalWithMarkup();
-        });
-    });
-    const config = { attributes: true, childList: true, subtree: true };
-    observer.observe(grandTotalSpan, config);
-
-    let grandTotal = parseFloat(document.getElementById('grandTotal').textContent);
-    document.getElementById('grandTotal').addEventListener('change', function () {
-        calculateGrandTotalWithMarkup();
-    });
-
-    function addToTable(materialId, materialName, materialPrice, unitType) {
-        const table = document.getElementById('itemsTable').getElementsByTagName('tbody')[0];
-        let rowExists = false;
-
-        // Check if a row with the same material ID already exists
-        for (let i = 0, row; row = table.rows[i]; i++) {
-            if (row.cells[0].textContent === materialId) {
-                // Update the existing row
-                const weightInput = row.cells[3].querySelector('.weightInput');
-                const currentWeight = parseFloat(weightInput.value);
-                const newWeight = currentWeight + 1; // You can adjust this value as needed
-                const newTotalPrice = newWeight * materialPrice;
-
-                // Update weight and total price in the row
-                weightInput.value = newWeight.toFixed(2);
-                row.cells[5].textContent = newTotalPrice.toFixed(2);
-
-                rowExists = true;
-                break;
-            }
-        }
-
-        if (!rowExists) {
-            // Create a new row
-            const newRow = table.insertRow();
-
-            const cell1 = newRow.insertCell(0);
-            const cell2 = newRow.insertCell(1);
-            const cell3 = newRow.insertCell(2);
-            const cell4 = newRow.insertCell(3);
-            const cell5 = newRow.insertCell(4); 
-            const cell6 = newRow.insertCell(5); // Add a new cell for displaying total price
-            const cell7 = newRow.insertCell(6); // Add a new cell for displaying total price
-
-            cell1.textContent = materialId;
-            cell2.textContent = materialName;
-            cell3.textContent = materialPrice;
-            cell4.innerHTML = '<input type="text" class="weightInput" value="1" placeholder="Enter weight">';
-            cell5.innerHTML = unitType;
-            cell6.textContent = materialPrice;
-            cell7.innerHTML = '<button onclick="removeRow(this)">Remove</button>';
-
-            // Listen for input/change events on the weight input field
-            const weightInput = cell4.querySelector('.weightInput');
-            weightInput.addEventListener('input', function () {
-                calculateRowTotal(newRow);
-            });
-        }
-
-        // Recalculate grand total
-        calculateGrandTotal();
-    }
-
-    function calculateRowTotal(row) {
-        const materialPrice = parseFloat(row.cells[2].textContent);
-        const weight = parseFloat(row.cells[3].querySelector('.weightInput').value);
-        const totalPrice = weight * materialPrice;
-
-        // Update the total price cell content
-        row.cells[5].textContent = totalPrice.toFixed(2);
-
-        // Recalculate grand total
-        calculateGrandTotal();
-    }
-
-    function calculateGrandTotal() {
-        let total = 0;
-        const table = document.getElementById('itemsTable').getElementsByTagName('tbody')[0];
-        for (let i = 0, row; row = table.rows[i]; i++) {
-            total += parseFloat(row.cells[5].textContent);
-        }
-        grandTotal = total.toFixed(2);
-        document.getElementById('grandTotal').textContent = grandTotal;
-    }
-
-    document.getElementById('manufacturerFee').addEventListener('input', function () {
-        calculateGrandTotalWithMarkup();
-    });
-
-    document.getElementById('markupPercentage').addEventListener('input', function () {
-        calculateGrandTotalWithMarkup();
-    });
-
-    function calculateGrandTotalWithMarkup() {
-        const manufacturerFee = parseFloat(document.getElementById('manufacturerFee').value);
-        const markupPercentage = parseFloat(document.getElementById('markupPercentage').value);
-
-        let totalWithmanufacturerFee = parseFloat(grandTotal) + parseFloat(manufacturerFee);
-        document.getElementById('totalPrice').textContent = totalWithmanufacturerFee;
-
-        let totalMarkup = parseFloat(totalWithmanufacturerFee) * parseFloat((markupPercentage) / 100);
-        document.getElementById('totalMarkup').textContent = totalMarkup;
-
-        let sellPrice = parseFloat(totalWithmanufacturerFee) + parseFloat(totalMarkup);
-        document.getElementById('sellPrice').textContent = sellPrice;
-    }
-
-    function removeRow(button) {
-        // Traverse the DOM to find the row associated with the button
-        const row = button.parentNode.parentNode;
-        // Remove the row from the table
-        row.parentNode.removeChild(row);
-        // Recalculate grand total
-        calculateGrandTotal();
-    }
-
-    document.getElementById('uploadInput').addEventListener('change', function (event) {
-        var file = event.target.files[0];
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            var imgElement = document.createElement('img');
-            imgElement.src = e.target.result;
-            document.getElementById('imageContainer').innerHTML = '';
-            document.getElementById('imageContainer').appendChild(imgElement);
-        }
-
-        reader.readAsDataURL(file);
-    });
-
-    document.getElementById('materialForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        getMaterialList();
-    });
-
-    function getMaterialList() {
-        const table = document.getElementById('itemsTable').getElementsByTagName('tbody')[0];
-        let materialList = [];
-
-        for (let i = 0, row; row = table.rows[i]; i++) {
-            const materialId = row.cells[0].textContent;
-            const weight = parseFloat(row.cells[3].querySelector('.weightInput').value);
-            materialList.push({ MaterialId: materialId, Weight: weight });
-        }
-
-        console.log(materialList);
-
-        const materialListInput = document.createElement('input');
-        materialListInput.type = 'hidden';
-        materialListInput.name = 'MaterialListJson';
-        materialListInput.value = JSON.stringify(materialList);
-
-        document.getElementById('materialForm').appendChild(materialListInput);
-        document.getElementById('materialForm').submit();
-    }
-</script>
+    </div>
+</section>

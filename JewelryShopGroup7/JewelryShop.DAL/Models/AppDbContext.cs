@@ -23,7 +23,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Jewelry> Jewelries { get; set; }
 
-    public virtual DbSet<JewelryMaterial> JewelryMaterials { get; set; }
+    //public virtual DbSet<JewelryMaterial> JewelryMaterials { get; set; }
 
     public virtual DbSet<Material> Materials { get; set; }
 
@@ -140,26 +140,26 @@ public partial class AppDbContext : DbContext
             //    .HasConstraintName("FK__Jewelry__Jewelry__38996AB5");
         });
 
-        modelBuilder.Entity<JewelryMaterial>(entity =>
-        {
-            entity.HasKey(e => new { e.JewelryId, e.MaterialId }).HasName("PK__JewelryM__EC2050C484ACE139");
+        //modelBuilder.Entity<JewelryMaterial>(entity =>
+        //{
+        //    entity.HasKey(e => new { e.JewelryId, e.MaterialId }).HasName("PK__JewelryM__EC2050C484ACE139");
 
-            entity.ToTable("JewelryMaterial");
+        //    entity.ToTable("JewelryMaterial");
 
-            entity.Property(e => e.JewelryId).HasColumnName("JewelryID");
-            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
-            entity.Property(e => e.Weight).HasColumnType("decimal(18, 2)");
+        //    entity.Property(e => e.JewelryId).HasColumnName("JewelryID");
+        //    entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+        //    //entity.Property(e => e.Weight).HasColumnType("decimal(18, 2)");
 
-            entity.HasOne(d => d.Jewelry).WithMany(p => p.JewelryMaterials)
-                .HasForeignKey(d => d.JewelryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__JewelryMa__Jewel__3B75D760");
+        //    entity.HasOne(d => d.Jewelry).WithMany(p => p.JewelryMaterials)
+        //        .HasForeignKey(d => d.JewelryId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK__JewelryMa__Jewel__3B75D760");
 
-            entity.HasOne(d => d.Material).WithMany(p => p.JewelryMaterials)
-                .HasForeignKey(d => d.MaterialId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__JewelryMa__Mater__3C69FB99");
-        });
+        //    entity.HasOne(d => d.Material).WithMany(p => p.JewelryMaterials)
+        //        .HasForeignKey(d => d.MaterialId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK__JewelryMa__Mater__3C69FB99");
+        //});
 
         //modelBuilder.Entity<JewelryType>(entity =>
         //{

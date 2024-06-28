@@ -8,8 +8,7 @@ namespace JewelryShop.DTO.Enums
 {
     public enum JewelryType
     {
-        RING,
-        BRACELET,
-        EARRINGS
+        NOGEM,
+        HAVEGEM
     }
 }
