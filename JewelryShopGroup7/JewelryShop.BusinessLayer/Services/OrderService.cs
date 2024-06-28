@@ -1,32 +1,59 @@
-using AutoMapper;
+﻿using AutoMapper;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DAL.Repositories.Interfaces;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Order;
+using JewelryShop.DTO.Enums;
 
 namespace JewelryShop.BusinessLayer.Services
 {
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IJewelryRepository _jewelryRepository;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
 
-        public OrderService(IOrderRepository orderRepository, IMapper mapper)
+        public OrderService(IOrderRepository orderRepository, 
+                            IJewelryRepository jewelryRepository,
+                            ICustomerRepository customerRepository,
+                            IAccountRepository accountRepository,
+                            IMapper mapper)
         {
+            _accountRepository = accountRepository;
+            _customerRepository = customerRepository;
+            _jewelryRepository = jewelryRepository;
             _orderRepository = orderRepository;
             _mapper = mapper;
         }
 
         public async Task<Guid> CreateAsync(CreateOrderRequest createModel)
         {
-            // cho nay tam code au
-            Order order = _mapper.Map<Order>(createModel);
-            foreach (var entity in order.OrderDetails)
+            foreach (var orderDetail in createModel.OrderDetails)
             {
-                entity.Jewelry = null;
+                var jewelry = _jewelryRepository.GetFirstOrDefaultAsync(x => x.JewelryId == orderDetail.JewelryId).Result;
+                // giá một sản phầm
+                orderDetail.UnitPrice = jewelry.UnitPrice;
+                // giá tính cả số lượng
+                orderDetail.TotalPrice = jewelry.UnitPrice;
+                // giá chiết khấu
+
+                // giá cuối cùng 
+                orderDetail.FinalPrice = jewelry.UnitPrice;
             }
-            return await _orderRepository.AddAsync(order);
+            Order order = _mapper.Map<Order>(createModel);
+            order.AccountId = _accountRepository.GetFirstOrDefaultAsync(x => x.AccountId == createModel.AccountId).Result.AccountId;
+            order.CustomerId = _customerRepository.GetFirstOrDefaultAsync(x => x.PhoneNumber == createModel.PhoneNumber).Result.CustomerId;
+            order.OrderDate = DateTime.Now;
+            order.Status = OrderStatus.DONE.ToString();
+            foreach (var jewelry in createModel.OrderDetails)
+            {
+
+            }
+            var orderId = await _orderRepository.AddAsync(order);
+            return orderId;
         }
 
         public async Task DeleteAsync(Guid id)

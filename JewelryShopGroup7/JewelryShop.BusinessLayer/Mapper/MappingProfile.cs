@@ -9,6 +9,7 @@ using JewelryShop.DTO.DTOs.Material;
 using JewelryShop.DTO.DTOs.Material.Gem;
 using JewelryShop.DTO.DTOs.Material.Metal;
 using JewelryShop.DTO.DTOs.Order;
+using JewelryShop.DTO.DTOs.OrderDetail;
 using JewelryShop.DTO.Enums;
 
 namespace JewelryShop.BusinessLayer.Mapper
@@ -64,11 +65,13 @@ namespace JewelryShop.BusinessLayer.Mapper
             #endregion
 
             #region OrderDetail
-            CreateMap<OrderDetail,  OrderDetailDTO>()
-                .ForMember(x => x.Jewelry, opt => opt.MapFrom(dest => dest.Jewelry))
-                //.ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
-                .ReverseMap();
-            CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
+            //CreateMap<OrderDetail,  OrderDetailDTO>()
+            //    .ForMember(x => x.Jewelry, opt => opt.MapFrom(dest => dest.Jewelry))
+            //    //.ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
+            //    .ReverseMap();
+            //CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
+            CreateMap<OrderDetail, OrderDetailResponse>().ReverseMap();
+            CreateMap<OrderDetail, CreateOrderDetailRequest>().ReverseMap();
             #endregion
 
             //CreateMap<MaterialDTO, GemDTO>().ReverseMap();

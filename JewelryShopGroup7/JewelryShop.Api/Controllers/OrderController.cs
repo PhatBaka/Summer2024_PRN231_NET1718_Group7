@@ -4,6 +4,7 @@ using JewelryShop.DAL.Models;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Jewelry;
 using JewelryShop.DTO.DTOs.Order;
+using JewelryShop.DTO.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.API.Controllers
@@ -47,25 +48,26 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderRequest createModel, string? tiername, string? OrderDiscountCode, decimal? offerPercent)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderRequest createModel, string? tiername, string? OrderDiscountCode, decimal? offerPercent, OrderTypeEnum orderTypeEnum)
         {
-            createModel.TotalPrice = 0;
-            List<CreateJewelryRequest> jewelryDTOs = new List<CreateJewelryRequest>();
-            foreach (var item in createModel.OrderDetails)
-            {
-                var entity = await _jewelryService.GetByIdAsync((Guid)item.JewelryId);
-                var orderDetail = createModel.OrderDetails.First(x => x.JewelryId == entity.JewelryId);
-                orderDetail.UnitPrice = entity.UnitPrice;
-                orderDetail.TotalPrice = entity.UnitPrice * orderDetail.Quantity;
-                orderDetail.FinalPrice = orderDetail.TotalPrice;
-                // createModel.TotalPrice += entity.SellPrice;
-            }
-            // discount o day
-            var iddis = _orderDiscountService.UpdateDiscount(tiername, OrderDiscountCode, offerPercent, createModel.TotalPrice).Result;
-            var discount = _orderDiscountService.GetByIdAsync(iddis);
-            createModel.FinalPrice = createModel.TotalPrice - discount.Result.Value;
-            createModel.OrderDate = DateTime.Now;
-            createModel.OrderDiscountId = iddis;
+            //createModel.TotalPrice = 0;
+            //List<CreateJewelryRequest> jewelryDTOs = new List<CreateJewelryRequest>();
+            //foreach (var item in createModel.OrderDetails)
+            //{
+            //    var entity = await _jewelryService.GetByIdAsync((Guid)item.JewelryId);
+            //    var orderDetail = createModel.OrderDetails.First(x => x.JewelryId == entity.JewelryId);
+            //    orderDetail.UnitPrice = entity.UnitPrice;
+            //    orderDetail.TotalPrice = entity.UnitPrice * orderDetail.Quantity;
+            //    orderDetail.FinalPrice = orderDetail.TotalPrice;
+            //    // createModel.TotalPrice += entity.SellPrice;
+            //}
+            //// discount o day
+            //var iddis = _orderDiscountService.UpdateDiscount(tiername, OrderDiscountCode, offerPercent, createModel.TotalPrice).Result;
+            //var discount = _orderDiscountService.GetByIdAsync(iddis);
+            //createModel.FinalPrice = createModel.TotalPrice - discount.Result.Value;
+            //createModel.OrderDate = DateTime.Now;
+            //createModel.OrderDiscountId = iddis;
+            createModel.OrderType = orderTypeEnum.ToString();
             var id = await _orderService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
         }

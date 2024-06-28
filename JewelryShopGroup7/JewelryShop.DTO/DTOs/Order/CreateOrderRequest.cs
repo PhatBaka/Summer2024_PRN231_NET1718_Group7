@@ -26,14 +26,14 @@ namespace JewelryShop.DTO.DTOs.Order
         [JsonIgnore]
         public OrderStatus Status { get; set; }
 
-        public OrderTypeEnum OrderType { get; set; }
-
         [JsonIgnore]
         public Guid? OrderDiscountId { get; set; } = null;
 
         public Guid AccountId { get; set; }
 
         public string? PhoneNumber { get; set; }
+
+        public string? OrderType { get; set; }
 
         public List<CreateOrderDetailRequest> OrderDetails { get; set; }
     }

@@ -70,6 +70,8 @@ namespace JewelryStoreUI.Pages
                 }
                 else if (ResponseResult.Data.role == RoleEnum.STAFF)
                 {
+                    string id = ResponseResult.Data.accountId;
+                    HttpContext.Session.SetString("STAFFID", id);
                     return RedirectToPage("Staff");
                 }
             }
