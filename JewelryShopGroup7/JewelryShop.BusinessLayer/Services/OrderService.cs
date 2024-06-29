@@ -31,6 +31,7 @@ namespace JewelryShop.BusinessLayer.Services
 
         public async Task<Guid> CreateAsync(CreateOrderRequest createModel)
         {
+            decimal totalPrice = 0, discountPrice = 0, finalPrice = 0;
             foreach (var orderDetail in createModel.OrderDetails)
             {
                 var jewelry = _jewelryRepository.GetFirstOrDefaultAsync(x => x.JewelryId == orderDetail.JewelryId).Result;
@@ -42,12 +43,19 @@ namespace JewelryShop.BusinessLayer.Services
 
                 // giá cuối cùng 
                 orderDetail.FinalPrice = jewelry.UnitPrice;
+
+                totalPrice += jewelry.UnitPrice;
+                discountPrice += jewelry.UnitPrice;
+                finalPrice += jewelry.UnitPrice;
             }
             Order order = _mapper.Map<Order>(createModel);
             order.AccountId = _accountRepository.GetFirstOrDefaultAsync(x => x.AccountId == createModel.AccountId).Result.AccountId;
             order.CustomerId = _customerRepository.GetFirstOrDefaultAsync(x => x.PhoneNumber == createModel.PhoneNumber).Result.CustomerId;
             order.OrderDate = DateTime.Now;
             order.Status = OrderStatus.DONE.ToString();
+            order.FinalPrice = finalPrice;
+            order.DiscountPrice = discountPrice;
+            order.TotalPrice = totalPrice;
             foreach (var jewelry in createModel.OrderDetails)
             {
 

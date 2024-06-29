@@ -1,51 +1,39 @@
+using JewelryStoreUI.DTOs.Jewelries;
+using JewelryStoreUI.DTOs.OrderDetails;
+using JewelryStoreUI.DTOs.Orders;
+using JewelryStoreUI.Enums;
 using JewelryStoreUI.Pages.DTOs.OrderDetail;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace JewelryStoreUI.Pages.Orders
 {
     public class DetailModel : PageModel
     {
-        [BindProperty]
-        public IList<OrderDetailDTO> OrderDetails { get; set; } = new List<OrderDetailDTO>();
-        private string url = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
-        private string orderUrl;
-        private string imageUrl;
+        private readonly HttpClient _httpClient;
 
-        public DetailModel()
+        public DetailModel(HttpClient httpClient)
         {
-            imageUrl = $"{url}Image/";
-            orderUrl += $"{url}Order/";
+            _httpClient = httpClient;
         }
 
-        public async Task OnGetAsync(string orderId)
+        public OrderResponse Order { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            using (var client = new HttpClient())
+            var response = await _httpClient.GetAsync($"http://localhost:5233/odata/OrderOData/{id}");
+            if (response.IsSuccessStatusCode)
             {
-                var response = await client.GetAsync($"{orderUrl}{orderId}");
-                var result = await response.Content.ReadAsStringAsync();
-                var entities = JsonConvert.DeserializeObject<dynamic>(result);
-                foreach (var entity in entities.orderDetails)
-                {
-                    OrderDetails.Add(new()
-                    {
-                        Base64 = await GetImageAsync(entity.imageId),
-                        Data = entity
-                    });
-                }
+                var content = await response.Content.ReadAsStringAsync();
+                Order = JsonConvert.DeserializeObject<OrderResponse>(content);
+                return Page();
             }
-        }
-
-        public async Task<string> GetImageAsync(dynamic imageId)
-        {
-            using (var client = new HttpClient())
+            else
             {
-                var response = await client.GetAsync($"{imageUrl}{imageId}");
-                var result = await response.Content.ReadAsStringAsync();
-                var entity = JsonConvert.DeserializeObject<dynamic>(result);
-                byte[] imageData = Convert.FromBase64String((string)entity.imageData);
-                return Convert.ToBase64String(imageData);
+                // Handle error response
+                return NotFound();
             }
         }
     }

@@ -28,6 +28,7 @@ namespace JewelryStoreUI.Pages
 		public decimal UnitPrice { get; set; }
 		[BindProperty]
 		public byte[] Image { get; set; }
+        [BindProperty]
         public string PhoneNumber { get; set; }
 
 		public IList<JewelryCart> JewelryCarts { get; set; }
@@ -100,7 +101,7 @@ namespace JewelryStoreUI.Pages
             var orderRequest = new CreateOrderRequest
             {
                 AccountId = Guid.Parse(HttpContext.Session.GetString("STAFFID")),
-                PhoneNumber = "0933318204",
+                PhoneNumber = PhoneNumber,
                 OrderDetails = createOrderDetailRequests
             };
 
@@ -114,6 +115,7 @@ namespace JewelryStoreUI.Pages
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Order created successfully.");
+                    return RedirectToPage("Orders/Index");
                 }
                 else
                 {

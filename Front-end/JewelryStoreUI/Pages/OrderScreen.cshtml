@@ -134,6 +134,7 @@
                                         {
                                             <tr class="d-flex justify-content-center">
                                                 <td>@jewelry.Name</td>
+                                                <td></td>
                                                 <td>@jewelry.UnitPrice</td>
                                                 <td>@jewelry.DiscountPrice</td>
                                                 <td>@jewelry.FinalPrice</td>
@@ -150,12 +151,12 @@
                                 </tbody>
                             </table>
                         </div>
-						<div class="center_shop_1li1 clearfix">
-							<h5 class="mgt">PHONE NUMBER</h5>
-							<input asp-for="@Model.PhoneNumber" class="form-control" type="text">
-						</div>
                         <form method="post" asp-page-handler="CreateOrder">
-                            <h4 class="mgt"><input class="button" type="submit" value="Order" /></h4>
+						    <div class="center_shop_1li1 clearfix">
+							    <h5 class="mgt">PHONE NUMBER</h5>
+							    <input asp-for="@Model.PhoneNumber" class="form-control" type="text">
+						    </div>
+                                <h4 class="mgt"><input class="button" type="submit" value="Order" /></h4>
                         </form>
 					</div>
 				</div>
