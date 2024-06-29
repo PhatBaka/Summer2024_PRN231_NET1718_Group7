@@ -11,6 +11,8 @@ using JewelryShop.DTO.DTOs.Material.Gem;
 using JewelryShop.DTO.DTOs.Material.Metal;
 using JewelryShop.DTO.DTOs.Order;
 using JewelryShop.DTO.DTOs.OrderDetail;
+using JewelryShop.DTO.DTOs.OrderDiscount;
+using JewelryShop.DTO.DTOs.StoreDiscount;
 using JewelryShop.DTO.Enums;
 
 namespace JewelryShop.BusinessLayer.Mapper
@@ -112,6 +114,20 @@ namespace JewelryShop.BusinessLayer.Mapper
 
             #region Customer
             CreateMap<Customer, CustomerResponse>().ReverseMap();
+            #endregion
+
+            #region OrderDiscount
+            CreateMap<OrderDiscount, CreateOrderDiscountRequest>().ReverseMap();
+            CreateMap<OrderDiscount, UpdateOrderDiscountRequest>().ReverseMap();
+            CreateMap<OrderDiscount, OrderDiscountFilter>().ReverseMap();
+            CreateMap<OrderDiscount, OrderDiscountResponse>().ReverseMap();
+            #endregion
+
+            #region StoreDiscount
+            CreateMap<StoreDiscount, CreateStoreDiscountRequest>().ReverseMap();
+            CreateMap<StoreDiscount, UpdateStoreDiscountRequest>().ReverseMap();
+            CreateMap<StoreDiscount, StoreDiscountFilter>().ReverseMap();
+            CreateMap<StoreDiscount, StoreDiscountResponse>().ReverseMap();
             #endregion
         }
     }

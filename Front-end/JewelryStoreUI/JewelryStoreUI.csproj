@@ -8,7 +8,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DTOs\Discounts\Customers\" />
     <Folder Include="Models\Enums\" />
+    <Folder Include="Pages\Discounts\Customer\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\js\" />

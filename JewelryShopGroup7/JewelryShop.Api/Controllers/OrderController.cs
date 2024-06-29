@@ -48,7 +48,7 @@ namespace JewelryShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderRequest createModel, string? tiername, string? OrderDiscountCode, decimal? offerPercent, OrderTypeEnum orderTypeEnum)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateOrderRequest createModel, string? tiername, Guid? orderDiscountId, decimal? offerPercent, OrderTypeEnum orderTypeEnum)
         {
             //createModel.TotalPrice = 0;
             //List<CreateJewelryRequest> jewelryDTOs = new List<CreateJewelryRequest>();
@@ -67,6 +67,7 @@ namespace JewelryShop.API.Controllers
             //createModel.FinalPrice = createModel.TotalPrice - discount.Result.Value;
             //createModel.OrderDate = DateTime.Now;
             //createModel.OrderDiscountId = iddis;
+            createModel.OrderDiscountId = orderDiscountId;
             createModel.OrderType = orderTypeEnum.ToString();
             var id = await _orderService.CreateAsync(createModel);
             return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);

@@ -14,14 +14,17 @@ namespace JewelryShop.BusinessLayer.Services
         private readonly IJewelryRepository _jewelryRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
+        private readonly IOrderDiscountRepository _orderDiscountRepository;
         private readonly IMapper _mapper;
 
         public OrderService(IOrderRepository orderRepository, 
                             IJewelryRepository jewelryRepository,
                             ICustomerRepository customerRepository,
                             IAccountRepository accountRepository,
+                            IOrderDiscountRepository orderDiscountRepository,
                             IMapper mapper)
         {
+            _orderDiscountRepository = orderDiscountRepository;
             _accountRepository = accountRepository;
             _customerRepository = customerRepository;
             _jewelryRepository = jewelryRepository;
@@ -31,7 +34,8 @@ namespace JewelryShop.BusinessLayer.Services
 
         public async Task<Guid> CreateAsync(CreateOrderRequest createModel)
         {
-            decimal totalPrice = 0, discountPrice = 0, finalPrice = 0;
+            decimal totalPrice = 0;
+            var discount = _orderDiscountRepository.GetFirstOrDefaultAsync(x => x.OrderDiscountId == createModel.OrderDiscountId).Result;
             foreach (var orderDetail in createModel.OrderDetails)
             {
                 var jewelry = _jewelryRepository.GetFirstOrDefaultAsync(x => x.JewelryId == orderDetail.JewelryId).Result;
@@ -45,17 +49,15 @@ namespace JewelryShop.BusinessLayer.Services
                 orderDetail.FinalPrice = jewelry.UnitPrice;
 
                 totalPrice += jewelry.UnitPrice;
-                discountPrice += jewelry.UnitPrice;
-                finalPrice += jewelry.UnitPrice;
             }
             Order order = _mapper.Map<Order>(createModel);
             order.AccountId = _accountRepository.GetFirstOrDefaultAsync(x => x.AccountId == createModel.AccountId).Result.AccountId;
             order.CustomerId = _customerRepository.GetFirstOrDefaultAsync(x => x.PhoneNumber == createModel.PhoneNumber).Result.CustomerId;
             order.OrderDate = DateTime.Now;
             order.Status = OrderStatus.DONE.ToString();
-            order.FinalPrice = finalPrice;
-            order.DiscountPrice = discountPrice;
             order.TotalPrice = totalPrice;
+            order.DiscountPrice = totalPrice * discount.Value / 100;
+            order.FinalPrice = order.TotalPrice - order.DiscountPrice; ;
             foreach (var jewelry in createModel.OrderDetails)
             {
 

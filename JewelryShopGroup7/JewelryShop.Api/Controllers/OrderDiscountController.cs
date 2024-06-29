@@ -1,6 +1,7 @@
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.OrderDiscount;
+using JewelryShop.DTO.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JewelryShop.API.Controllers

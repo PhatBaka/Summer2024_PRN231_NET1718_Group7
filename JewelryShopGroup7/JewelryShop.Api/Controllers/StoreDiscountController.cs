@@ -65,5 +65,13 @@ namespace JewelryShop.API.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet("ByCode/{code}")]
+        public async Task<ActionResult<StoreDiscountResponse>> GetByCodeAsync(string code)
+        {
+            var result = _storeDiscountService.GetAllAsync().Result.FirstOrDefault(x => x.DiscountCode == code);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
     }
 }

@@ -1,0 +1,63 @@
+﻿@page
+@model JewelryStoreUI.Pages.Promotions.Store.CreateModel
+@{
+    Layout = "_ManagerLayout";
+}
+
+<section id="center" class="center_shop">
+    <div class="container">
+        <div class="row">
+            <div class="center_shop_t clearfix">
+                <div class="col-sm-6">
+                    <div class="center_shop_tl clearfix d-flex align-items-center">
+                        <h4 class="mgt">NEW GEM</h4>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="center_shop_tr text-right clearfix">
+                        <h6 class="col_2">You are here: <a asp-asp-page="Gems/Index">Home</a> / Gem</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<form method="post" enctype="multipart/form-data">
+    <section id="checkout" class="clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="checkout_1 clearfix">
+                    <div class="col-sm-8">
+                        <div class="checkout_1l1 clearfix">
+                            <div class="col-sm-6 space_left">
+                                <h5>Discount code <span class="col_1">*</span></h5>
+                                <input asp-for="@Model.StoreDiscount.DiscountCode" class="form-control" type="text">
+                            </div>
+                            <div class="col-sm-3 space_left">
+                                <h5>Discount amount <span class="col_1">*</span></h5>
+                                <input asp-for="@Model.StoreDiscount.DiscountAmount" class="form-control" type="number">
+                            </div>
+                            <div class="col-sm-3 space_left">
+                                <h5>Quantity <span class="col_1">*</span></h5>
+                                <input asp-for="@Model.StoreDiscount.RemainingUsage" class="form-control" type="number">
+                            </div>
+                        </div>
+                        <div class="checkout_1l1 clearfix">
+                            <div class="col-sm-6 space_left">
+                                <h5>Start Date <span class="col_1">*</span></h5>
+                                <input asp-for="StoreDiscount.StartDate" class="form-control" type="date">
+                            </div>
+                            <div class="col-sm-6 space_left">
+                                <h5>End Date <span class="col_1">*</span></h5>
+                                <input asp-for="StoreDiscount.EndDate" class="form-control" type="date">
+                            </div>
+                        </div>
+                        <div class="checkout_1l1 clearfix">
+                            <h4 class="mgt"><input class="button" type="submit" value="CREATE" /></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

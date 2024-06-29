@@ -1,16 +1,13 @@
-﻿using JewelryShop.DTO.DTOs.OrderDiscount;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JewelryStoreUI.DTOs.Discounts.Orders;
 
-namespace JewelryShop.DTO.DTOs.StoreDiscount
+namespace JewelryStoreUI.DTOs.Promotions.Stores
 {
+    public class StoreDiscountOData  : ODataResponseBase<StoreDiscountResponse>
+    {
+    }
+
     public class StoreDiscountResponse
     {
-        [Key]
         public Guid? StoreDiscountId { get; set; }
 
         public string? DiscountCode { get; set; }
