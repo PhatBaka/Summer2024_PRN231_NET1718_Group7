@@ -1,5 +1,6 @@
 ﻿using JewelryShop.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,18 @@ namespace JewelryShop.DAL.Seed
         {
             if (await _context.Accounts.AnyAsync()) return;
             var jew = _context.Jewelries;
+            var gua = new List<Guarantee>
+            {
+                new Guarantee {
+                DateReceive = DateTime.Now,
+
+                DateComplete = DateTime.Now,
+
+                DateBack = DateTime.Now,
+
+                Confirm = "true",
+                }
+            };
             var orderdes = new List<OrderDetail>
             {
         new OrderDetail
@@ -26,7 +39,7 @@ namespace JewelryShop.DAL.Seed
             DiscountValue = 10,
             Quantity = 3,
             Jewelry = jew.FirstOrDefault(),
-            Guarantees = new List<Guarantee>()
+            Guarantees = gua
         },
         new OrderDetail
         {
@@ -37,7 +50,7 @@ namespace JewelryShop.DAL.Seed
             DiscountValue = 10,
             Quantity = 2,
             Jewelry = jew.FirstOrDefault(),
-            Guarantees = new List<Guarantee>()
+            Guarantees = gua
         } 
             };
             var accData = await File.ReadAllTextAsync("../JewelryShop.DAL/Seed/AccountSeed.json");

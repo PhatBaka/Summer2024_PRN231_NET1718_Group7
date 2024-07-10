@@ -4,9 +4,9 @@ using JewelryShop.DAL.Models;
 using JewelryShop.DTO;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Account;
+using JewelryShop.DTO.DTOs.Guarantee;
 using JewelryShop.DTO.DTOs.Customer;
 using JewelryShop.DTO.DTOs.Jewelry;
-using JewelryShop.DTO.DTOs.Material;
 using JewelryShop.DTO.DTOs.Material.Gem;
 using JewelryShop.DTO.DTOs.Material.Metal;
 using JewelryShop.DTO.DTOs.Order;
@@ -24,6 +24,10 @@ namespace JewelryShop.BusinessLayer.Mapper
                 .ReverseMap(); 
             CreateMap<Customer, CustomerDTO>().ReverseMap();
             CreateMap<Guarantee, GuaranteeDTO>().ReverseMap();
+            CreateMap<Guarantee, GuaranteeResponse>().ReverseMap();
+            /*CreateMap<JewelryMaterial, JewelryMaterialDTO>()
+                .ForMember(x => x.Material, dest => dest.MapFrom(dest => dest.Material))
+                .ReverseMap();*/
             //CreateMap<JewelryMaterial, JewelryMaterialDTO>()
                 //.ForMember(x => x.Material, dest => dest.MapFrom(dest => dest.Material))
                 //.ReverseMap();
