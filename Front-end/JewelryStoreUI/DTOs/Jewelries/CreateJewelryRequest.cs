@@ -1,15 +1,9 @@
 ﻿using JewelryStoreUI.Enums;
-using JewelryStoreUI.Pages.Helpers;
 using System.ComponentModel.DataAnnotations;
 
-namespace JewelryStoreUI.Pages.DTOs.Jewelry
+namespace JewelryStoreUI.DTOs.Jewelries
 {
-    public class JewelryDTO : ResponseResult<dynamic>
-    {
-        public string Base64;
-    }
-
-    public class CreateJewelryDTO
+    public class CreateJewelryRequest
     {
         [Required]
         public Guid JewelryId { get; set; }
@@ -21,12 +15,13 @@ namespace JewelryStoreUI.Pages.DTOs.Jewelry
         public decimal ManufacturingFees { get; set; }
 
         [Required]
-        public JewelryCategory? JewelryType { get; set; }
+        public JewelryType? JewelryType { get; set; }
 
         public decimal? GuaranteeDuration { get; set; }
+
         public int? Quantity { get; set; }
 
-        public CategoryEnum? JewelryCategory { get; set; }
+        public JewelryCategory? JewelryCategory { get; set; }
 
         [Required]
         public IFormFile? JewelryImageFile { get; set; }
@@ -34,12 +29,4 @@ namespace JewelryStoreUI.Pages.DTOs.Jewelry
         [Required]
         public IList<Guid>? MaterialIds { get; set; }
     }
-
-    public class CreateJewelryMeterialDTO
-    {
-        public Guid? MaterialId { get; set; }
-
-        public decimal Weight { get; set; }
-    }
 }
-

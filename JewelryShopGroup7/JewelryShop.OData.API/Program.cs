@@ -4,6 +4,7 @@ using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Jewelry;
 using JewelryShop.DTO.DTOs.Material.Gem;
 using JewelryShop.DTO.DTOs.Material.Metal;
+using JewelryShop.DTO.DTOs.Order;
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
@@ -59,12 +60,13 @@ static IEdmModel GetEdmModel()
     modelBuilder.EntitySet<MaterialPriceDTO>("MaterialPriceOData");
     modelBuilder.EntitySet<OfferDTO>("OfferOData");
     modelBuilder.EntitySet<OrderDiscountDTO>("OrderDiscountOData");
-    modelBuilder.EntitySet<OrderDTO>("OrderOData");
+    //modelBuilder.EntitySet<OrderDTO>("OrderOData");
     modelBuilder.EntitySet<OrderTypeDTO>("OrderTypeOData");
     modelBuilder.EntitySet<StoreDiscountDTO>("StoreDiscountOData");
     modelBuilder.EntitySet<GemResponse>("GemOData");
     modelBuilder.EntitySet<MetalResponse>("MetalOData");
     modelBuilder.EntitySet<JewelryResponse>("JewelryOData");
+    modelBuilder.EntitySet<OrderResponse>("OrderOData");
     //modelBuilder.EntitySet<TierDTO>("TierOData");
     return modelBuilder.GetEdmModel();
 }

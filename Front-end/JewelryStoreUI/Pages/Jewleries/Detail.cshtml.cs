@@ -1,58 +1,47 @@
+using JewelryStoreUI.DTOs.Gems;
+using JewelryStoreUI.DTOs.Jewelries;
+using JewelryStoreUI.Enums;
 using JewelryStoreUI.Pages.DTOs.Jewelry;
 using JewelryStoreUI.Pages.DTOs.Material;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace JewelryStoreUI.Pages.Jewleries
 {
     public class DetailModel : PageModel
     {
-        [BindProperty]
-        public JewelryDTO JewelryDTO { get; set; }
-        public List<MaterialDTO> MaterialDTOs = new List<MaterialDTO>();
-        private string url = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
-        private string jewelryUrl;
-        private string imageUrl;
+        private readonly HttpClient _httpClient;
 
-        public DetailModel()
+        public DetailModel(HttpClient httpClient)
         {
-            jewelryUrl = url + "Jewelry/";
-            imageUrl = url + "Image/";
+            _httpClient = httpClient;
+            JewelryCategory = Enum.GetValues(typeof(JewelryCategory))
+                                 .Cast<JewelryCategory>()
+                                 .Select(e => new SelectListItem
+                                 {
+                                     Value = ((int)e).ToString(),
+                                     Text = e.ToString()
+                                 }).ToList();
         }
 
-        public async Task<string> GetImageAsync(dynamic imageId)
+        public JewelryResponse Jewelry { get; set; }
+        public List<SelectListItem>? JewelryCategory { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            using (var client = new HttpClient())
+            var response = await _httpClient.GetAsync($"http://localhost:5233/odata/JewelryOData/{id}");
+            if (response.IsSuccessStatusCode)
             {
-                var response = await client.GetAsync($"{imageUrl}{imageId}");
-                var result = await response.Content.ReadAsStringAsync();
-                var entity = JsonConvert.DeserializeObject<dynamic>(result);
-                byte[] imageData = Convert.FromBase64String((string)entity.imageData);
-                return Convert.ToBase64String(imageData);
+                var content = await response.Content.ReadAsStringAsync();
+                Jewelry = JsonConvert.DeserializeObject<JewelryResponse>(content);
+                return Page();
             }
-        }
-
-        public async Task OnGetAsync(string id)
-        {
-            using (var client = new HttpClient())
+            else
             {
-                var response = await client.GetAsync($"{jewelryUrl}{id}");
-                var result = await response.Content.ReadAsStringAsync();
-                var entity = JsonConvert.DeserializeObject<dynamic>(result);
-                JewelryDTO = new()
-                {
-                    Base64 = await GetImageAsync(entity.imageId),
-                    Data = entity
-                };
-                foreach (var material in JewelryDTO.Data.jewelryMaterials)
-                {
-                    MaterialDTOs.Add(new()
-                    {
-                        Data = material,
-                        Base64 = await GetImageAsync(material.material.imageId)
-                    });
-                }
+                // Handle error response
+                return NotFound();
             }
         }
     }

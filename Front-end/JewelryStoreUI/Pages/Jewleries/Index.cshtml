@@ -2,257 +2,99 @@
 @using JewelryStoreUI.Enums
 @model JewelryStoreUI.Pages.Jewleries.IndexModel
 @{
-    Layout = "_StaffLayout";
+    Layout = "_ManagerLayout";
 }
 
+<style>
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: middle;
+        border-top: 1px solid #ddd
+    }
+</style>
+
 <section id="center" class="center_shop">
-	<div class="container">
-		<div class="row">
-			<div class="center_shop_t clearfix">
-				<div class="col-sm-6">
-					<div class="center_shop_tl clearfix">
-						<h4 class="mgt">Product</h4>
-					</div>
-					<h5><a class="button" asp-page="/Jewleries/Create">CREATE</a></h5>
-				</div>
-				<div class="col-sm-6">
-					<div class="center_shop_tr text-right clearfix">
-						<h6 class="col_2">You are here: <a href="#">Home</a> / Jewelry</h6>
-					</div>
-				</div>
-			</div>
-			<div class="center_shop_1 clearfix">
-				<div class="col-sm-3">
-					<div class="center_shop_1l clearfix">
-						<div class="center_shop_1li clearfix">
-							<h5 class="mgt">CATEGORY</h5>
-							<div class="ziehharmonika">
-								<h3 data-prefix="★" class="active"> </h3
-									<a href="detail.html">Bangles</a>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">–</div>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">–</div>
-								</h3>
-								<div class="clickable" style="display: block;">
-									<ul>
-										<li><a href="detail.html">For Men</a></li>
-										<li><a href="detail.html">For Function</a></li>
-										<li><a href="detail.html">For Kids</a></li>
-										<li><a href="detail.html">For Women</a></li>
-									</ul>
-								</div>
-								<h3 data-prefix="★">
-									<a href="detail.html">Bracelets</a>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">+</div>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">+</div>
-								</h3>
-								<div class="clickable" style="">
-									<ul>
-										<li><a href="detail.html">For Men</a></li>
-										<li><a href="detail.html">For Function</a></li>
-										<li><a href="detail.html">For Kids</a></li>
-										<li><a href="detail.html">For Women</a></li>
-									</ul>
-								</div>
-								<h3 data-prefix="★" class="">
-									<a href="detail.html">Earrings</a>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">+</div>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">+</div>
-								</h3>
-								<div class="clickable" style="display: none;">
-									<ul>
-										<li><a href="detail.html">For Men</a></li>
-										<li><a href="detail.html">For Function</a></li>
-										<li><a href="detail.html">For Kids</a></li>
-										<li><a href="detail.html">For Women</a></li>
-									</ul>
-								</div>
-								<h3 data-prefix="★">
-									<a href="detail.html">Necklaces</a>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">+</div>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">+</div>
-								</h3>
-								<div class="clickable" style="">
-									<ul>
-										<li><a href="detail.html">For Men</a></li>
-										<li><a href="detail.html">For Function</a></li>
-										<li><a href="detail.html">For Kids</a></li>
-										<li><a href="detail.html">For Women</a></li>
-									</ul>
-								</div>
-								<h3 data-prefix="★" class="">
-									<a href="detail.html">Rings</a>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">+</div>
-									<div class="arrowDown"></div>
-									<div class="collapseIcon">+</div>
-								</h3>
-								<div class="clickable" style="display: none;">
-									<ul>
-										<li><a href="detail.html">For Men</a></li>
-										<li><a href="detail.html">For Function</a></li>
-										<li><a href="detail.html">For Kids</a></li>
-										<li><a href="detail.html">For Women</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="center_shop_1li1 clearfix">
-							<h5 class="mgt">NEWSLETTERS</h5>
-							<h6>Sign Up for Our Newsletter!</h6>
-							<input class="form-control" placeholder="Subscribe" type="text">
-							<h6><a class="button_1 mgt" href="detail.html">Subscribe</a></h6>
-						</div>
-						<div class="center_shop_1li1 clearfix">
-							<h5 class="mgt">ABOUT US</h5>
-							<div class="carousel slide" id="myCarousel1">
-								<div class="carousel-inner">
-									<div class="item active text-center mga">
-										<img class="img-circle" src="img/37.jpg" alt="abc">
-										<p>
-											Class Aptent Taciti Sociosqu Ad Litora Torquent Per Conubia Nostra, Per
-											Inceptos Himenaeos.
-										</p>
-										<h4 class="bold">Eget Nulla</h4>
-										<h6 class="col_2">Owner</h6>
-									</div><!-- /Slide1 -->
-									<div class="item text-center mga">
-										<img class="img-circle" src="img/38.jpg" alt="abc">
-										<p>
-											Class Aptent Taciti Sociosqu Ad Litora Torquent Per Conubia Nostra, Per
-											Inceptos Himenaeos.
-										</p>
-										<h4 class="bold">Lacinia Arcu </h4>
-										<h6 class="col_2">Manager</h6>
-									</div><!-- /Slide2 -->
-									<!-- /Slide3 -->
-								</div>
-								<nav>
-									<ul class="control-box pager">
-										<li>
-											<a data-slide="prev" href="#myCarousel1" class="">
-												<i class="glyphicon glyphicon-chevron-left"></i>
-											</a>
-										</li>
-										<li>
-											<a data-slide="next" href="#myCarousel1" class="">
-												<i class="glyphicon glyphicon-chevron-right"></i>
-											</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-9">
-					<div class="center_shop_1r clearfix">
-						<div class="center_product_1r2 clearfix">
-							<div class="col-sm-6">
-								<div class="center_product_1r2l clearfix">
-									<p class="mgt">Showing 1–9 of 10 results</p>
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="center_product_1r2r text-right clearfix">
-									<h5 class="mgt">SORT BY</h5>
-									<select class="form-control" id="subject" name="subject">
-										<option>Price, Low To High</option>
-										<option>Price, High To Low</option>
-										<option>Alphabetically, A-Z</option>
-										<option>Alphabetically, Z-A</option>
-										<option>Date, New To Old</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="collcet_1r clearfix">
-							@* code from hear*@
-							@foreach (var result in Model.ResponseResult)
-							{
-								<div class="col-sm-4 space_left">
-									<div class="feature_2im clearfix" style="width: 260px; height: 260px;">
-										<div class="feature_2im1 clearfix">
-											<a asp-page="/Jewelries/Detail" asp-route-orderId="@result.Data.jewelryId">
-												<img src="data:image/png;base64, @result.Base64" alt="Red dot" style="width: 260px; height: 260px;" />
-											</a>
-										</div>
-										<div class="feature_2im2 clearfix">
-											<h6 class="mgt"><a class="bg_1" href="detail.html">Featured</a></h6>
-											<h6 class="pull-right mgt"><a class="bg_4" href="detail.html">Sale</a></h6>
-										</div>
-										<div class="feature_2im4 clearfix">
-											<div class="col-sm-6 space_left">
-												<h6><a class="bg_3" href="detail.html">Popular</a></h6>
-											</div>
-											<div class="col-sm-6 feature_2im4r space_right" >
-												<ul>
-													<li>
-														@if (HttpContext.Session.GetInt32("ROLE") == (int) RoleEnum.STAFF)
-														{
-															<form id="addToCartForm-@result.Data.jewelryId" method="post">
-																<input type="hidden" name="handler" value="AddToCart" />
-																<input type="hidden" name="itemId" value="@result.Data.jewelryId" />
-																<!-- Use JavaScript to submit the form when anchor tag is clicked -->
-																<a href="#" onclick="submitAddToCartForm('@result.Data.jewelryId'); return false;">
-																	<i class="fa fa-shopping-cart"></i>
-																</a>
-															</form>
-														}
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="item_last text-center clearfix">
-										<h4><a href="detail.html">@result.Data.jewelryName</a></h4>
-										<h6>
-											<span class="span_1 col_1 bold">$14.64</span>
-											<span class="col_2 span_2">$16.30</span>
-											<span>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</span>
-										</h6>
-									</div>
-								</div>
-							}
-						 </div> 
-						<div class="product_1_last text-center clearfix">
-							<div class="col-sm-12">
-								<ul>
-									<li><a href="detail.html"><i class="fa fa-chevron-left"></i></a></li>
-									<li class="act"><a href="detail.html">1</a></li>
-									<li><a href="detail.html">2</a></li>
-									<li><a href="detail.html">3</a></li>
-									<li><a href="detail.html">4</a></li>
-									<li><a href="detail.html">5</a></li>
-									<li><a href="detail.html">6</a></li>
-									<li><a href="detail.html"><i class="fa fa-chevron-right"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="center_shop_t clearfix">
+                <div class="col-sm-6">
+                    <div class="center_shop_tl clearfix d-flex align-items-center">
+                        <h4 class="mgt"><a class="button" asp-page="/Jewleries/Create">CREATE</a></h4>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="center_shop_tr text-right clearfix">
+                        <h6 class="col_2">You are here: <a asp-asp-page="Jewleries/Index">Home</a> / Gem</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<script>
-	function submitAddToCartForm(jewelryId) {
-		console.log("Submitting form for jewelryId:", jewelryId);
-        document.getElementById('addToCartForm-' + jewelryId).submit();
-        return false;
-	}
-</script>
+<section id="center" class="center_shop">
+    <div class="container">
+        <div class="row">
+            <div class="center_shop_t clearfix">
+                <div class="center_shop_tl clearfix">
+                    <table class="table table-striped table-center">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Jewelry Type</th>
+                                <th>Total Weight</th>
+                                <th>Unit Price</th>
+                                <th>Category</th>
+                                <th>Created Date</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var jewelry in Model.JewelryData)
+                            {
+                                <tr class="d-flex justify-content-center">
+                                    <td>@jewelry.JewelryId</td>
+                                    <td>@jewelry.JewelryName</td>
+                                    <td>@jewelry.JewelryType</td>
+                                    <td>@jewelry.TotalWeight</td>
+                                    <td>@jewelry.UnitPrice</td>
+                                    <td>@jewelry.JewelryCategory</td>
+                                    <td>@jewelry.CreatedDate</td>
+                                    <td>
+                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(jewelry.JewelryImageData)" alt="@jewelry.JewelryName" style="max-width: 100px; max-height: 100px;" />
+                                    </td>
+                                    <td>
+                                    <td>
+                                        <a class="button" asp-page="/Jewleries/Detail" asp-route-id="@jewelry.JewelryId">Details</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="enquiry_1 text-center clearfix">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                                <a class="button" asp-page="./Index" asp-route-currentPage="@(Model.CurrentPage - 1)">Previous</a>
+                            </li>
+                            @for (int i = 1; i <= Math.Ceiling((double)Model.TotalCount / Model.PageSize); i++)
+                            {
+                                <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                                    <a class="button" style="background-color:#dfb858" asp-page="./Index" asp-route-currentPage="@i">@i</a>
+                                </li>
+                            }
+                            <li class="page-item @(Model.CurrentPage == Math.Ceiling((double)Model.TotalCount / Model.PageSize) ? "disabled" : "")">
+                                <a class="button" asp-page="./Index" asp-route-currentPage="@(Model.CurrentPage + 1)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

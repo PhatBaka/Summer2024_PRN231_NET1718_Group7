@@ -1,19 +1,18 @@
-﻿using JewelryShop.DTO.DTOs.Account;
-using JewelryShop.DTO.DTOs.Customer;
-using JewelryShop.DTO.DTOs.OrderDetail;
-using JewelryShop.DTO.Enums;
-using System;
-using System.Collections.Generic;
+﻿using JewelryStoreUI.DTOs.Accounts;
+using JewelryStoreUI.DTOs.Customers;
+using JewelryStoreUI.DTOs.OrderDetails;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace JewelryShop.DTO.DTOs.Order
+namespace JewelryStoreUI.DTOs.Orders
 {
+    public class OrderOData : ODataResponseBase<OrderResponse> 
+    { 
+    
+    }
+
+
     public class OrderResponse
     {
-        [Key]
         public Guid OrderId { get; set; }
 
         public DateTime? OrderDate { get; set; }

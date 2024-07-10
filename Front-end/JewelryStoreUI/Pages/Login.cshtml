@@ -36,7 +36,6 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="detail_14 clearfix">
-						<h2 class="mgt">Login</h2>
 						<form method="post">
 							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 							<div class="form-group">
@@ -52,11 +51,11 @@
 							<h4><input class="button" type="submit" value="Login" />
 						</form>
 					</div>
+					@if (Model.Message != null)
+					{
+						<p>@Model.Message</p>
+					}
 				</div>
-				@if (Model.Message != null)
-				{
-					<p>@Model.Message</p>
-				}
 			</div>
 		</div>
 	</div>

@@ -626,7 +626,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .feature_2im1 img {
-    min-height: 260px;
+    /*min-height: 260px;*/
 }
 
 .feature_2_last .btn-success {
@@ -761,8 +761,8 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .center_shop {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .center_shop_t {

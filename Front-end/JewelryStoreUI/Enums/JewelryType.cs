@@ -2,8 +2,7 @@
 {
     public enum JewelryType
     {
-        RING,
-        BRACELET,
-        EARRINGS
+        NOGEM,
+        HAVEGEM
     }
 }

@@ -5,9 +5,12 @@ using JewelryShop.DTO;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Account;
 using JewelryShop.DTO.DTOs.Guarantee;
+using JewelryShop.DTO.DTOs.Customer;
 using JewelryShop.DTO.DTOs.Jewelry;
 using JewelryShop.DTO.DTOs.Material.Gem;
 using JewelryShop.DTO.DTOs.Material.Metal;
+using JewelryShop.DTO.DTOs.Order;
+using JewelryShop.DTO.DTOs.OrderDetail;
 using JewelryShop.DTO.Enums;
 
 namespace JewelryShop.BusinessLayer.Mapper
@@ -56,18 +59,27 @@ namespace JewelryShop.BusinessLayer.Mapper
             #endregion
 
             #region Order
-            CreateMap<Order, OrderDTO>()
-                .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(dest => dest.Customer.PhoneNumber))
-                .ReverseMap();
-            CreateMap<OrderDTO, CreateOrderDTO>().ReverseMap();
+            //CreateMap<Order, OrderDTO>()
+            //    .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(dest => dest.Customer.PhoneNumber))
+            //    .ReverseMap();
+            //CreateMap<OrderDTO, CreateOrderDTO>().ReverseMap();
+            CreateMap<Order, OrderResponse>().ReverseMap();
+            CreateMap<Order, CreateOrderRequest>().ReverseMap();
+            CreateMap<Order, UpdateOrderRequest>().ReverseMap();
+            CreateMap<Order, OrderFilter>().ReverseMap();
             #endregion
 
             #region OrderDetail
-            CreateMap<OrderDetail,  OrderDetailDTO>()
-                .ForMember(x => x.Jewelry, opt => opt.MapFrom(dest => dest.Jewelry))
-                //.ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
+            //CreateMap<OrderDetail,  OrderDetailDTO>()
+            //    .ForMember(x => x.Jewelry, opt => opt.MapFrom(dest => dest.Jewelry))
+            //    //.ForMember(x => x.ImageId, opt => opt.MapFrom(dest => dest.Jewelry.ImageId))
+            //    .ReverseMap();
+            //CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
+            CreateMap<OrderDetail, OrderDetailResponse>()
+                .ForMember(x => x.JewelryImageData, opt => opt.MapFrom(dest => dest.Jewelry.JewelryImageData))
+                .ForMember(x => x.JewelryName, opt => opt.MapFrom(dest => dest.Jewelry.JewelryName))
                 .ReverseMap();
-            CreateMap<OrderDetailDTO, CreateOrderDetailDTO>().ReverseMap();
+            CreateMap<OrderDetail, CreateOrderDetailRequest>().ReverseMap();
             #endregion
 
             //CreateMap<MaterialDTO, GemDTO>().ReverseMap();
@@ -98,7 +110,13 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Jewelry, ShortenJewelryResponse>().ReverseMap();
             #endregion
 
+            #region Material
             CreateMap<Material, ShortenMaterialResponse>().ReverseMap();
+            #endregion
+
+            #region Customer
+            CreateMap<Customer, CustomerResponse>().ReverseMap();
+            #endregion
         }
     }
 }

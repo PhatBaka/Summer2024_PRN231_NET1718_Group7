@@ -1,12 +1,4 @@
-﻿using JewelryShop.DTO.DTOs.Jewelry;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JewelryShop.DTO.DTOs.OrderDetail
+﻿namespace JewelryStoreUI.DTOs.OrderDetails
 {
     public class OrderDetailResponse
     {
