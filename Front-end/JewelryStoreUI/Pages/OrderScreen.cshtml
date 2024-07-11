@@ -134,7 +134,11 @@
                                         {
                                             <tr class="d-flex justify-content-center">
                                                 <td>@jewelry.Name</td>
-                                                <td></td>
+                                                <td class="input-group r">
+                                                    @* <button type="button" class="btn btn-secondary btn-decrement" data-id="@jewelry.Id">-</button> *@
+                                                    <input type="number" value="@jewelry.Quantity" class="form-control quantity-input" data-id="@jewelry.Id" max="@jewelry.Quantity" min="1" />
+                                                    @* <button type="button" class="btn btn-secondary btn-increment" data-id="@jewelry.Id">+</button> *@
+                                                </td>
                                                 <td>@jewelry.UnitPrice</td>
                                                 <td>@jewelry.DiscountPrice</td>
                                                 <td>@jewelry.FinalPrice</td>
@@ -143,7 +147,10 @@
                                                 </td>
                                                 <td>
                                                 <td>
-                                                    <a class="button">Remove</a>
+                                                    <form method="post" asp-page-handler="RemoveFromCart">
+                                                        <input type="hidden" name="id" value="@jewelry.Id" />
+                                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         }
@@ -164,3 +171,36 @@
 		</div>
 	</div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-increment').forEach(button => {
+            button.addEventListener('click', function () {
+                const input = document.querySelector(`.quantity-input[data-id="${this.dataset.id}"]`);
+                const currentValue = parseInt(input.value);
+                input.value = currentValue + 1;
+            });
+        });
+
+        document.querySelectorAll('.btn-decrement').forEach(button => {
+            button.addEventListener('click', function () {
+                const input = document.querySelector(`.quantity-input[data-id="${this.dataset.id}"]`);
+                const currentValue = parseInt(input.value);
+                if (currentValue > 1) {
+                    input.value = currentValue - 1;
+                }
+            });
+        });
+
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            input.addEventListener('change', function () {
+                if (this.value < 1) {
+                    this.value = 1;
+                }
+                if (this.value > this.getAttribute('max')) {
+                    this.value = this.getAttribute('max');
+                }
+            });
+        });
+    });
+</script>
