@@ -30,8 +30,9 @@ namespace JewelryStoreUI.Pages
 		public byte[] Image { get; set; }
         [BindProperty]
         public string PhoneNumber { get; set; }
-
-		public IList<JewelryCart> JewelryCarts { get; set; }
+        [BindProperty]
+        public int Quantity { get; set; }
+        public IList<JewelryCart> JewelryCarts { get; set; }
         private string BaseUrl = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
         private string OrderUrl { get; set; }
 
@@ -67,21 +68,33 @@ namespace JewelryStoreUI.Pages
             }
         }
 
-		public async Task<IActionResult> OnPostAddToCartAsync()
-		{
-			await LoadJewelry(1);
+        public async Task<IActionResult> OnPostAddToCartAsync()
+        {
+            await LoadJewelry(1);
             LoadCart();
-			JewelryCarts ??= new List<JewelryCart>();
-			JewelryCarts.Add(new()
-			{
-				Name = JewelyName,
-				UnitPrice = UnitPrice,
-				MaterialImageData = Image,
-                Id = JewelryId
-            });
-			HttpContext.Session.SetObjectAsJson("MATERIALCART", JewelryCarts);
-			return Page();
-		}
+            JewelryCarts ??= new List<JewelryCart>();
+
+            var existingItem = JewelryCarts.FirstOrDefault(j => j.Id == JewelryId);
+            if (existingItem != null)
+            {
+                existingItem.Quantity++;
+            }
+            else
+            {
+                JewelryCarts.Add(new()
+                {
+                    Name = JewelyName,
+                    UnitPrice = UnitPrice,
+                    MaterialImageData = Image,
+                    Id = JewelryId,
+                    Quantity = 1
+                });
+            }
+
+            HttpContext.Session.SetObjectAsJson("MATERIALCART", JewelryCarts);
+            return Page();
+        }
+
 
         public void LoadCart() => JewelryCarts = HttpContext.Session.GetObjectFromJson<IList<JewelryCart>>("MATERIALCART");
 
@@ -93,6 +106,12 @@ namespace JewelryStoreUI.Pages
             // từ từ hanlde mua nhiều trang sức
             foreach(var item in JewelryCarts)
             {
+                var jewelryData = JewelryData.FirstOrDefault(j => j.JewelryId == item.Id);
+                if (jewelryData == null || item.Quantity <= 0 || item.Quantity > jewelryData.Quantity)
+                {
+                    ModelState.AddModelError(string.Empty, $"Invalid quantity for item: {item.Name}. Available quantity: {jewelryData?.Quantity ?? 0}");
+                    return Page();
+                }
                 createOrderDetailRequests.Add(new()
                 {
                     JewelryId = (Guid)item.Id,
@@ -125,5 +144,20 @@ namespace JewelryStoreUI.Pages
 
             return Page();
         }
-	}
+        public async Task<IActionResult> OnPostRemoveFromCartAsync(Guid id)
+        {
+            await LoadJewelry(1);
+            LoadCart();
+
+            var itemToRemove = JewelryCarts.FirstOrDefault(j => j.Id == id);
+            if (itemToRemove != null)
+            {
+                JewelryCarts.Remove(itemToRemove);
+                HttpContext.Session.SetObjectAsJson("MATERIALCART", JewelryCarts);
+            }
+
+            return Page();
+        }
+
+    }
 }
