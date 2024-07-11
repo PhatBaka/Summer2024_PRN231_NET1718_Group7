@@ -3,9 +3,14 @@ using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DAL.Models;
 using JewelryShop.DTO.DTOs;
 using JewelryShop.DTO.DTOs.Jewelry;
+using JewelryShop.DTO.DTOs.Material;
+using JewelryShop.DTO.DTOs.Material.Metal;
 using JewelryShop.DTO.DTOs.Order;
 using JewelryShop.DTO.Enums;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.Text.Json;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace JewelryShop.API.Controllers
 {
@@ -17,19 +22,24 @@ namespace JewelryShop.API.Controllers
         private readonly IOrderService _orderService;
         private readonly IJewelryService _jewelryService;
         private readonly IOrderDiscountService _orderDiscountService;
+        private readonly IMaterialService _materialService;
         private readonly IMapper _mapper;
-
+        private readonly HttpClient _httpClient;
         public OrderController(IOrderService orderService,
                                 IJewelryService jewelryService,
                                 IOrderDetailService orderDetailService,
                                 IMapper mapper,
-                                IOrderDiscountService orderDiscountService)
+                                IOrderDiscountService orderDiscountService,
+                                IMaterialService materialService,
+                                HttpClient httpClient)
         {
             _orderDetailService = orderDetailService;
             _orderService = orderService;
             _jewelryService = jewelryService;
             _mapper = mapper;
             _orderDiscountService = orderDiscountService;
+            _materialService = materialService;
+            _httpClient = httpClient;
         }
 
         //[HttpGet]
@@ -99,5 +109,55 @@ namespace JewelryShop.API.Controllers
                 return NotFound();
             }
         }
-    }
+        [HttpPost("UpdateMaterialadd")]
+        public async Task<ActionResult<Guid>> UpdateMaterialAsync(string Type)
+        {
+            try
+            {
+                        var mate = await _materialService.GetAllAsync();
+
+                        var upmate = new MaterialResponse();
+                        /*var upmate = mate.OrderByDescending(m => m.CreatedDate)
+                                 .FirstOrDefault(m => m.Name == Type);*/
+                if (upmate.CreatedDate != DateTime.Now || upmate.ToString().IsNullOrEmpty())
+                {
+                    var apiUrl = $"https://api.metals.dev/v1/metal/spot?api_key=06AIPD6FBNZWBELRKZDA430LRKZDA&metal={Type}&currency=USD";
+                    var response = await _httpClient.GetAsync(apiUrl);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        var metalResponse = JsonSerializer.Deserialize<PriceResponse>(content);
+                        if (metalResponse != null)
+                        {
+                            try
+                            {
+                                CreatePriceDTO createPriceDTO = new CreatePriceDTO();
+                                createPriceDTO.CreatedDate = DateTime.Now;
+                                createPriceDTO.CurrentPrice = metalResponse.Rate.Price;
+                                createPriceDTO.BuyPrice = metalResponse.Rate.Ask;
+                                createPriceDTO.SellPrice = metalResponse.Rate.Bid;
+                                createPriceDTO.IsMetal = true;
+                                createPriceDTO.Weight = 1;
+                                createPriceDTO.Name = Type;
+
+                                _materialService.CreateMaAsync(createPriceDTO);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
+                        }
+                    }
+                }
+                           
+                 
+                return NoContent();
+
+            }
+            catch {
+                return NotFound();
+            }
+        }
+
+        }
 }

@@ -16,7 +16,8 @@ namespace JewelryStoreUI.Pages
 		private readonly IConfiguration _configuration;
 
 		public string? JewelryURL { get; private set; }
-		public IList<JewelryResponse> JewelryData { get; private set; }
+        public string? MaterialURL { get; private set; }
+        public IList<JewelryResponse> JewelryData { get; private set; }
 		public int CurrentPage { get; set; } = 1;
 		public int PageSize { get; set; } = 10;
 		public int TotalCount { get; set; }
@@ -35,7 +36,8 @@ namespace JewelryStoreUI.Pages
         public IList<JewelryCart> JewelryCarts { get; set; }
         private string BaseUrl = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("API_URL").Value;
         private string OrderUrl { get; set; }
-
+        [BindProperty]
+        public ICollection<ShortenMaterialResponse>? Materials { get; set; }
         public OrderScreenModel(HttpClient httpClient, IConfiguration configuration)
 		{
 			_httpClient = httpClient;
@@ -73,7 +75,7 @@ namespace JewelryStoreUI.Pages
             await LoadJewelry(1);
             LoadCart();
             JewelryCarts ??= new List<JewelryCart>();
-
+            MaterialURL = BaseUrl + "Order";
             var existingItem = JewelryCarts.FirstOrDefault(j => j.Id == JewelryId);
             if (existingItem != null)
             {
@@ -90,7 +92,28 @@ namespace JewelryStoreUI.Pages
                     Quantity = 1
                 });
             }
+            if(Materials != null || Materials.Any())
+            {
+                foreach (var item in Materials)
+                {
+                    if (item.Name != null)
+                    {
+                        using (var client = new HttpClient())
+                        {
+                            var response = await client.PostAsJsonAsync($"{MaterialURL}/UpdateMaterialadd", item.Name);
 
+                            if (!response.IsSuccessStatusCode)
+                            {
+                                // Log the error response details for debugging
+                                var errorContent = await response.Content.ReadAsStringAsync();
+                                // Optionally log this to a file or monitoring system
+                                System.Diagnostics.Debug.WriteLine($"Error: {response.StatusCode}, Content: {errorContent}");
+                                return StatusCode((int)response.StatusCode, response.ReasonPhrase);
+                            }
+                        }
+                    }
+                }
+            }
             HttpContext.Session.SetObjectAsJson("MATERIALCART", JewelryCarts);
             return Page();
         }
