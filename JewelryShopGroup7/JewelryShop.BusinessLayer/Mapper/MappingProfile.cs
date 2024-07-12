@@ -25,6 +25,9 @@ namespace JewelryShop.BusinessLayer.Mapper
             CreateMap<Customer, CustomerDTO>().ReverseMap();
             CreateMap<Guarantee, GuaranteeDTO>().ReverseMap();
             CreateMap<Guarantee, GuaranteeResponse>().ReverseMap();
+            CreateMap<Guarantee, CreateGuaranteeRequest>().ReverseMap();
+            CreateMap<Guarantee, UpdateGuaranteeRequest>().ReverseMap();
+
             /*CreateMap<JewelryMaterial, JewelryMaterialDTO>()
                 .ForMember(x => x.Material, dest => dest.MapFrom(dest => dest.Material))
                 .ReverseMap();*/
