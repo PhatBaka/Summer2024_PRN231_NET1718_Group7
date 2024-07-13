@@ -8,9 +8,9 @@
 
 <h1>Index</h1>
 
-<form method="post" asp-page-handler="CreateOrder" onsubmit="return confirm('Are you sure you want to create a new guarantee?');">
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -33,7 +33,6 @@
                 @Html.DisplayNameFor(model => model.Guarantee[0].OrderDetail)
             </th> *@
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -51,28 +50,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Confirm)
             </td>
-                <td>
-                    @if (item.Confirm == "CREATE")
-                    {
-                        <form method="post" asp-page-handler="UpdateOrder" class="d-inline">
-                            <input type="hidden" name="GuaranteeId" value="@item.GuaranteeId" />
-                            <input type="hidden" name="NewStatus" value="CREATE" />
-                            <button type="submit" class="btn btn-primary">Get Back</button>
-                        </form>
-                    }
-                    else if (item.Confirm == "ONGOING")
-                    {
-                        <form method="post" asp-page-handler="UpdateOrder" class="d-inline">
-                            <input type="hidden" name="GuaranteeId" value="@item.GuaranteeId" />
-                            <input type="hidden" name="NewStatus" value="ONGOING" />
-                            <button type="submit" class="btn btn-primary">Return User</button>
-                        </form>
-                    }
-                    else if (item.Confirm == "FINISH")
-                    {
-                        @* <span>@item.Confirm</span> *@
-                    }
-                </td>
            @*  <td>
                 @Html.DisplayFor(modelItem => item.Data.Account.Role)
             </td>
@@ -80,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Data.OrderDetail.OrderDetailId)
             </td> *@
             <td>
-                @* <a asp-page="./Edit" asp-route-id="@item.GuaranteeId">Edit</a>  *@|
+                <a asp-page="./Edit" asp-route-id="@item.GuaranteeId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.GuaranteeId">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.GuaranteeId">Delete</a>
             </td>

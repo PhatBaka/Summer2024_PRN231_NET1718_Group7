@@ -35,13 +35,6 @@ namespace JewelryStoreUI.Pages.Jewleries
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
                 var JewelryOData = JsonSerializer.Deserialize<JewelryOData>(jsonString);
-                /*foreach(var i in JewelryOData.Value)
-                {
-                    if (i.Quantity != 0)
-                    {
-                        JewelryData.Add(i);
-                    }
-                }*/
                 JewelryData = JewelryOData.Value;
                 TotalCount = JewelryOData.Count;
             }
