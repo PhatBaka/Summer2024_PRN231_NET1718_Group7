@@ -25,6 +25,12 @@ namespace JewelryShop.BusinessLayer.Services
             return await _materialRepository.AddAsync(material);
         }
 
+        public async Task<Guid> CreateMaAsync(CreatePriceDTO createModel)
+        {
+            Material material = _mapper.Map<Material>(createModel);
+            return await _materialRepository.AddAsync(material);
+        }
+
         public async Task DeleteAsync(Guid id)
         {
             try
@@ -45,6 +51,12 @@ namespace JewelryShop.BusinessLayer.Services
             }
         }
 
+        public async Task<MaterialResponse> findAsync(string type)
+        {
+            var material = (await _materialRepository.GetAsync(m => m.Name == type)).FirstOrDefault();
+            return _mapper.Map<MaterialResponse>(material);
+        }
+
         public async Task<IEnumerable<MaterialResponse>> GetAllAsync()
         {
             var materials = await _materialRepository.GetAllAsync();
@@ -58,6 +70,20 @@ namespace JewelryShop.BusinessLayer.Services
         }
 
         public async Task UpdateAsync(Guid id, UpdateMaterialRequest updateModel)
+        {
+            var material = (await _materialRepository.GetAsync(m => m.MaterialId == id)).FirstOrDefault();
+            if (material != null)
+            {
+                var updateMaterial = _mapper.Map(updateModel, material);
+                await _materialRepository.UpdateAsync(updateMaterial);
+            }
+            else
+            {
+                throw new KeyNotFoundException("Material not found.");
+            }
+        }
+
+        public async Task UpdateMaAsync(Guid id, MaterialResponse updateModel)
         {
             var material = (await _materialRepository.GetAsync(m => m.MaterialId == id)).FirstOrDefault();
             if (material != null)

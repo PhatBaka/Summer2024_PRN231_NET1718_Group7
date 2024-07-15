@@ -60,7 +60,7 @@ namespace JewelryShop.DTO.DTOs.Material
 
         public string? Sharp { get; set; }
 
-        public virtual ICollection<JewelryMaterialResponse> Jewelries { get; set; } = new List<JewelryMaterialResponse>();
+        public virtual ICollection<JewelryMaterialResponse>? Jewelries { get; set; } = new List<JewelryMaterialResponse>();
 
         public string? MaterialStatus { get; set; }
     }
