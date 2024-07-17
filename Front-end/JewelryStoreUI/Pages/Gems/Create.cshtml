@@ -31,7 +31,7 @@
                         <div class="checkout_1l1 clearfix">
                             <div class="col-sm-8 space_left">
                                 <h5>Gem name <span class="col_1">*</span></h5>
-                                <input asp-for="@Model.Gem.Name" class="form-control" type="text">
+                                <select asp-for="@Model.Gem.Name" class="form-control" asp-items="Model.GemOptions"></select>
                             </div>
                             <div class="col-sm-2 space_left">
                                 <h5>Sell price <span class="col_1">*</span></h5>

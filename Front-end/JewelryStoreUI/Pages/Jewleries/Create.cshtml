@@ -384,14 +384,34 @@
                             </div>
                         </div>
                         <div class="checkout_1l1 clearfix">
-                            <div class="col-sm-6 space_left">
+                            <div class="col-sm-4 space_left">
                                 <h5>Clarity <span class="col_1">*</span></h5>
                                 <select asp-for="@Model.CreateJewelryRequest.JewelryCategory" class="form-control" asp-items="Model.JewelryOptions"></select>
                             </div>
-                            <div class="col-sm-6 space_left">
+                            <div class="col-sm-4 space_left">
                                 <h5>Warranty <span class="col_1">*</span></h5>
                                 <input asp-for="@Model.CreateJewelryRequest.GuaranteeDuration" class="form-control" type="number">
                             </div>
+                            @{
+                                var haveGem = false;
+                            }
+                            @if (Model.MaterialCarts != null && Model.MaterialCarts.Count > 0)
+                            {
+                                @foreach (var material in Model.MaterialCarts)
+                                {
+                                    if ((bool) !material.IsMetal)
+                                    {
+                                        haveGem = true;
+                                    }
+                                }
+                            }
+                            @if (!haveGem)
+                            {
+                                <div class="col-sm-4 space_left">
+                                    <h5>Quantity <span class="col_1">*</span></h5>
+                                    <input asp-for="@Model.CreateJewelryRequest.GuaranteeDuration" class="form-control" type="number">
+                                </div>
+                            }
                             <div class="checkout_1l1 clearfix">
                                 <h4 class="mgt"><input class="button" type="submit" value="CREATE" /></h4>
                             </div>

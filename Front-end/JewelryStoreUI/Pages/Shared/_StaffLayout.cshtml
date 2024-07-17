@@ -48,7 +48,16 @@
                     <ul class="nav navbar-nav nav_m">
                         <li><a class="m_tag active_tab" asp-page="ManagarDashboard">Home</a></li>
                         <li><a class="m_tag" asp-page="/Jewleries/Index">Jewelry</a></li>
-                        <li><a class="m_tag" asp-page="/Orders/Index">Order</a></li>
+                        <li class="dropdown">
+                            <a class="m_tag active_tab" href="#" data-toggle="dropdown" role="button"
+                               aria-expanded="false">Order<span class="caret"></span></a>
+                            <ul class="dropdown-menu drop_3" role="menu">
+                                <li><a asp-page="Orders/Sell/Create">Sell</a></li>
+                                <li><a asp-page="Orders/Buy/Create">Buy</a></li>
+                                <li><a asp-page="Orders/Exchange/Create">Exchange</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="m_tag" asp-page="/Login">Jewelry</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

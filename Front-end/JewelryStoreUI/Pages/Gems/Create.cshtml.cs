@@ -25,6 +25,8 @@ namespace JewelryStoreUI.Pages.Gems
 
         public List<SelectListItem>? ClarityOptions { get; set; }
 
+        public List<SelectListItem>? GemOptions { get; set; }
+
         public string GemURl { get; set; }
 
         public CreateModel(HttpClient httpClient, IConfiguration configuration)
@@ -37,6 +39,13 @@ namespace JewelryStoreUI.Pages.Gems
                                  .Select(e => new SelectListItem
                                  {
                                      Value = ((int)e).ToString(),
+                                     Text = e.ToString()
+                                 }).ToList();
+            GemOptions = Enum.GetValues(typeof(GemType))
+                                .Cast<GemType>()
+                                 .Select(e => new SelectListItem
+                                 {
+                                     Value = e.ToString(),
                                      Text = e.ToString()
                                  }).ToList();
         }

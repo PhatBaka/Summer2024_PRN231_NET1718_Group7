@@ -29,12 +29,19 @@ namespace JewelryShop.BusinessLayer.Services
 
         public async Task<Guid> CreateAsync(CreateJewelryRequest createModel)
         {
+            bool haveGem = false;
             decimal totalWeight = 0;
             Jewelry jewelry = _mapper.Map<Jewelry>(createModel);
             jewelry.Status = ObjectStatus.ACTIVE.ToString();
             foreach (var materialId in createModel.MaterialIds)
             {
                 var material = await _materialRepository.GetFirstOrDefaultAsync(x => x.MaterialId == materialId);
+
+                if (!material.IsMetal)
+                {
+                    haveGem = true;
+                }
+
                 totalWeight += material.Weight;
                 // nếu là kim loại thì nhân tiền bán ra với cân nặng
                 if (material.IsMetal)
@@ -51,6 +58,7 @@ namespace JewelryShop.BusinessLayer.Services
             jewelry.TotalWeight = totalWeight;
             jewelry.UnitPrice = jewelry.MaterialPrice + createModel.ManufacturingFees;
             jewelry.CreatedDate = DateTime.Now;
+            jewelry.JewelryType = haveGem ? JewelryType.HAVEGEM.ToString() : JewelryType.NOGEM.ToString();
             jewelry.JewelryImageData = await FileHelper.ConvertToByteArrayAsync(createModel.JewelryImageFile);
             return await _jewelryRepository.AddAsync(jewelry);
         }
