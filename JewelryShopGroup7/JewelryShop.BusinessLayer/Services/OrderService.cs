@@ -58,7 +58,23 @@ namespace JewelryShop.BusinessLayer.Services
             order.TotalPrice = totalPrice;
             foreach (var jewelry in createModel.OrderDetails)
             {
-
+                var dbJewlry = _jewelryRepository.GetFirstOrDefaultAsync(x => x.JewelryId.Equals(jewelry.JewelryId));
+                if (dbJewlry != null)
+                {
+                    if(jewelry.Quantity > dbJewlry.Result.Quantity)
+                    {
+                        throw new ArgumentException("Số lượng không phù hợp");
+                    }
+                }
+            }
+            foreach (var jewelry in createModel.OrderDetails)
+            {
+                var dbJewlry = _jewelryRepository.GetFirstOrDefaultAsync(x => x.JewelryId.Equals(jewelry.JewelryId));
+                if (dbJewlry != null)
+                {
+                        dbJewlry.Result.Quantity -= jewelry.Quantity;
+                        await _jewelryRepository.UpdateAsync(dbJewlry.Result);
+                }
             }
             var orderId = await _orderRepository.AddAsync(order);
             return orderId;
