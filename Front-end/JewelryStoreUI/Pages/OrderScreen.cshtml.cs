@@ -3,6 +3,7 @@ using JewelryStoreUI.DTOs.Jewelries;
 using JewelryStoreUI.DTOs.OrderDetails;
 using JewelryStoreUI.DTOs.Orders;
 using JewelryStoreUI.Helpers;
+using JewelryStoreUI.Pages.DTOs.Cart;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text;
@@ -78,12 +79,18 @@ namespace JewelryStoreUI.Pages
             JewelryCarts ??= new List<JewelryCart>();
             MaterialURL = BaseUrl + "Order";
             var existingItem = JewelryCarts.FirstOrDefault(j => j.Id == JewelryId);
-            if (existingItem != null)
+           
+
+            if (existingItem != null && existingItem.Quantity < Quantity)
             {
                 if (existingItem.JewelryType.ToString() != "HAVEGEM")
                 {
                     existingItem.Quantity++;
                 }
+            }
+            else if (existingItem != null && existingItem.Quantity >= Quantity)
+            {
+                existingItem.Quantity = Quantity;
             }
             else
             {
@@ -93,7 +100,8 @@ namespace JewelryStoreUI.Pages
                     UnitPrice = UnitPrice,
                     MaterialImageData = Image,
                     Id = JewelryId,
-                    Quantity = 1
+                    Quantity = 1,
+                    MaxQuantity = Quantity
                 });
             }
             if(Materials != null || Materials.Any())
@@ -122,7 +130,19 @@ namespace JewelryStoreUI.Pages
             return Page();
         }
 
-
+        public async Task<IActionResult> OnPostUpdateCartAsync()
+        {
+            var updatedQuantity = int.Parse(Request.Form["updatedQuantity"]);
+            var jewelryId = Guid.Parse(Request.Form["updatedId"]);
+            await LoadJewelry(1);
+            LoadCart();
+            JewelryCarts ??= new List<JewelryCart>();
+            MaterialURL = BaseUrl + "Order";
+            var existingItem = JewelryCarts.FirstOrDefault(j => j.Id == jewelryId);
+                existingItem.Quantity = updatedQuantity;
+            HttpContext.Session.SetObjectAsJson("MATERIALCART", JewelryCarts);
+            return Page();
+        }
         public void LoadCart() => JewelryCarts = HttpContext.Session.GetObjectFromJson<IList<JewelryCart>>("MATERIALCART");
 
 		public async Task<IActionResult> OnPostCreateOrderAsync()
@@ -185,6 +205,7 @@ namespace JewelryStoreUI.Pages
 
             return Page();
         }
+
 
     }
 }
