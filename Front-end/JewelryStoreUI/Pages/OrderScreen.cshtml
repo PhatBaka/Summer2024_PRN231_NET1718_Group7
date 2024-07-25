@@ -137,9 +137,9 @@
                                             <tr class="d-flex justify-content-center">
                                                 <td>@jewelry.Name</td>
                                                 <td class="input-group r">
-                                                    @* <button type="button" class="btn btn-secondary btn-decrement" data-id="@jewelry.Id">-</button> *@
+                                                    <button type="button" class="btn btn-secondary btn-decrement" data-id="@jewelry.Id">-</button>
                                                     <input type="number" value="@jewelry.Quantity" class="form-control quantity-input" data-id="@jewelry.Id" max="@jewelry.MaxQuantity" min="1" />
-                                                    @* <button type="button" class="btn btn-secondary btn-increment" data-id="@jewelry.Id">+</button> *@
+                                                    <button type="button" class="btn btn-secondary btn-increment" data-id="@jewelry.Id">+</button>
                                                 </td>
                                                 <td>@jewelry.UnitPrice</td>
                                                 <td>@jewelry.DiscountPrice</td>
@@ -167,6 +167,11 @@
 						    </div>
                                 <h4 class="mgt"><input class="button" type="submit" value="Order" /></h4>
                         </form>
+                        <form asp-page-handler="UpdateCart" id="update-cart-form">
+                            <!-- other form fields -->
+                            <input type="hidden" id="updatedQuantity" name="updatedQuantity" />
+                            <input type="hidden" id="updatedId" name="updatedId" />
+                        </form>
 					</div>
 				</div>
 			</div>
@@ -176,33 +181,56 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        function updateSession(jewelryId, quantity) {
+            let cart = JSON.parse(localStorage.getItem('MATERIALCART')) || [];
+            const itemIndex = cart.findIndex(item => item.Id === jewelryId);
+
+            if (itemIndex !== -1) {
+                cart[itemIndex].Quantity = quantity;
+            } else {
+                cart.push({ Id: jewelryId, Quantity: quantity });
+            }
+
+            localStorage.setItem('MATERIALCART', JSON.stringify(cart));
+            console.log('Updated cart:', cart);
+            document.getElementById('updatedQuantity').value = quantity;
+            document.getElementById('updatedId').value = jewelryId;
+            document.getElementById('update-cart-form').submit();
+        }
+
+        function handleQuantityChange(button, change) {
+            const input = document.querySelector(`.quantity-input[data-id="${button.dataset.id}"]`);
+            let currentValue = parseInt(input.value);
+            const min = parseInt(input.getAttribute('min'));
+            const max = parseInt(input.getAttribute('max'));
+
+            currentValue = Math.max(min, Math.min(max, currentValue + change));
+            input.value = currentValue;
+            updateSession(button.dataset.id, currentValue);
+        }
+
         document.querySelectorAll('.btn-increment').forEach(button => {
             button.addEventListener('click', function () {
-                const input = document.querySelector(`.quantity-input[data-id="${this.dataset.id}"]`);
-                const currentValue = parseInt(input.value);
-                input.value = currentValue + 1;
+                handleQuantityChange(this, 1);
             });
         });
 
         document.querySelectorAll('.btn-decrement').forEach(button => {
             button.addEventListener('click', function () {
-                const input = document.querySelector(`.quantity-input[data-id="${this.dataset.id}"]`);
-                const currentValue = parseInt(input.value);
-                if (currentValue > 1) {
-                    input.value = currentValue - 1;
-                }
+                handleQuantityChange(this, -1);
             });
         });
 
         document.querySelectorAll('.quantity-input').forEach(input => {
             input.addEventListener('change', function () {
-                if (this.value < 1) {
-                    this.value = 1;
-                }
-                if (this.value > this.getAttribute('max')) {
-                    this.value = this.getAttribute('max');
-                }
+                const min = parseInt(this.getAttribute('min'));
+                const max = parseInt(this.getAttribute('max'));
+                let value = parseInt(this.value);
+                value = Math.max(min, Math.min(max, value));
+                this.value = value;
+                updateSession(this.dataset.id, value);
             });
         });
     });
+
 </script>

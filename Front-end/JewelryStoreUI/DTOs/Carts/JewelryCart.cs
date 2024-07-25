@@ -11,7 +11,7 @@ namespace JewelryStoreUI.DTOs.Carts
         public decimal UnitPrice { get; set; }
         public decimal DiscountPrice { get; set; }
         public decimal FinalPrice { get; set; }
-
+        public int MaxQuantity { get; set; }
         public JewelryType JewelryType { get; set; }
     }
 }
