@@ -102,7 +102,24 @@ namespace JewelryShop.BusinessLayer.Mapper
             #region Account
             CreateMap<Account, CreateAccountRequest>().ReverseMap();
 			CreateMap<Account, UpdateAccountRequest>().ReverseMap();
-			CreateMap<Account, AccountResponse>().ReverseMap();
+            CreateMap<Account, AccountResponse>()
+    .ForMember(dest => dest.Role, opt => opt.ConvertUsing((Account account) =>
+    {
+        try
+        {
+            var roleMapping = new Dictionary<string, RoleEnum>
+            {
+                ["0"] = RoleEnum.MANAGER,
+                ["1"] = RoleEnum.STAFF,
+            };
+            return roleMapping[account.Role];
+        }
+        catch (KeyNotFoundException)
+        {
+            throw new ArgumentException($"Unknown role: {account.Role}", nameof(account));
+        }
+    }))
+    .ReverseMap();
             #endregion
 
             #region Metal
