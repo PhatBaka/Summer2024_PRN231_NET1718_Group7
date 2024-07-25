@@ -60,6 +60,7 @@
                                                                     <input type="hidden" name="JewelyName" value="@jewelry.JewelryName" />
                                                                     <input type="hidden" name="UnitPrice" value="@jewelry.UnitPrice" />
                                                                     <input type="hidden" name="Materials" value="@jewelry.Materials" />
+                                                                    <input type="hidden" name="Quantity" value="@jewelry.Quantity"/>
                                                                     <input type="hidden" name="Image" value="@Convert.ToBase64String(jewelry.JewelryImageData)" />
                                                                     <i><button type="submit" class="fa fa-shopping-cart" /></i>
                                                                 </form>
@@ -137,7 +138,7 @@
                                                 <td>@jewelry.Name</td>
                                                 <td class="input-group r">
                                                     @* <button type="button" class="btn btn-secondary btn-decrement" data-id="@jewelry.Id">-</button> *@
-                                                    <input type="number" value="@jewelry.Quantity" class="form-control quantity-input" data-id="@jewelry.Id" max="@jewelry.Quantity" min="1" />
+                                                    <input type="number" value="@jewelry.Quantity" class="form-control quantity-input" data-id="@jewelry.Id" max="@jewelry.MaxQuantity" min="1" />
                                                     @* <button type="button" class="btn btn-secondary btn-increment" data-id="@jewelry.Id">+</button> *@
                                                 </td>
                                                 <td>@jewelry.UnitPrice</td>
