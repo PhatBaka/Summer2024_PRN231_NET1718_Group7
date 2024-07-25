@@ -17,6 +17,6 @@ namespace JewelryShop.DTO.DTOs.Account
 
         public string Status { get; set; }
 
-        public RoleEnum Role { get; set; }
+        public string? Role { get; set; }
     }
 }

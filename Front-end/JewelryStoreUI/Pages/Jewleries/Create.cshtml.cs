@@ -88,7 +88,7 @@ namespace JewelryStoreUI.Pages.Jewleries
             LoadCart();
             LoadPrice();
             await LoadGem(1);
-            
+       
             if (MaterialId == Guid.Empty)
             {
                 MetalCart metalItem = new MetalCart();
@@ -124,6 +124,7 @@ namespace JewelryStoreUI.Pages.Jewleries
                 MaterialCart metalItem = new MaterialCart();
                 metalItem.Name = Metal;
                 metalItem.IsMetal = true;
+
                 switch (metalItem.Name)
                 {
                     case "gold":
@@ -142,8 +143,21 @@ namespace JewelryStoreUI.Pages.Jewleries
                         metalItem.Weight = PalladiumWeight;
                         break;
                 }
+
                 MaterialCarts ??= new List<MaterialCart>();
-                MaterialCarts.Add(metalItem);
+                bool find = false;
+                foreach (var item in MaterialCarts)
+                {
+                    if (item.Name.Equals(metalItem.Name))
+                    {
+                        item.SellPrice += metalItem.SellPrice;
+                        item.Weight += metalItem.Weight;
+                        find = true;
+                    }
+                }
+                if (!find){
+                    MaterialCarts.Add(metalItem);
+                }
                 HttpContext.Session.SetObjectAsJson("MATERIALCART", MaterialCarts);
             }
             else
@@ -212,7 +226,16 @@ namespace JewelryStoreUI.Pages.Jewleries
             var cart = HttpContext.Session.GetObjectFromJson<IList<MaterialCart>>("MATERIALCART");
             var metalInCart = cart.Where(x => x.IsMetal == true);
             var gemInCart = cart.Where(x => x.IsMetal == false);
-            CreateJewelryRequest.JewelryType = JewelryType.HAVEGEM;
+
+            if (gemInCart != null && gemInCart.Count() > 0)
+            {
+                CreateJewelryRequest.JewelryType = JewelryType.HAVEGEM;
+                CreateJewelryRequest.Quantity = 1;
+            }
+            else
+            {
+                CreateJewelryRequest.JewelryType = JewelryType.NOGEM;
+            }
 
             if (metalInCart != null && metalInCart.Count() > 0)
             {
@@ -244,6 +267,7 @@ namespace JewelryStoreUI.Pages.Jewleries
                 content.Add(new StringContent(CreateJewelryRequest.JewelryName), nameof(CreateJewelryRequest.JewelryName));
                 content.Add(new StringContent(CreateJewelryRequest.ManufacturingFees.ToString()), nameof(CreateJewelryRequest.ManufacturingFees));
                 content.Add(new StringContent(CreateJewelryRequest.JewelryType.ToString()), nameof(CreateJewelryRequest.JewelryType));
+                content.Add(new StringContent(CreateJewelryRequest.Quantity.ToString()), nameof(CreateJewelryRequest.Quantity));
                 if (CreateJewelryRequest.GuaranteeDuration.HasValue)
                 {
                     content.Add(new StringContent(CreateJewelryRequest.GuaranteeDuration.ToString()), nameof(CreateJewelryRequest.GuaranteeDuration));

@@ -43,6 +43,7 @@ namespace JewelryShop.BusinessLayer.Services
 
                 // giá cuối cùng 
                 orderDetail.FinalPrice = jewelry.UnitPrice;
+                
 
                 totalPrice += jewelry.UnitPrice;
                 discountPrice += jewelry.UnitPrice;
