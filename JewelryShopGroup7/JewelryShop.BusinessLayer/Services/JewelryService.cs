@@ -78,7 +78,7 @@ namespace JewelryShop.BusinessLayer.Services
         public async Task<IEnumerable<JewelryResponse>> GetAllAsync()
         {
             var jewelries = await _jewelryRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<JewelryResponse>>(jewelries.ToList());
+            return _mapper.Map<IEnumerable<JewelryResponse>>(jewelries.ToList().Where(x => x.Quantity >0));
         }
 
         public async Task<JewelryResponse> GetByIdAsync(Guid id)

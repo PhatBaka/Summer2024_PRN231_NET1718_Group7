@@ -1,6 +1,7 @@
 using AutoMapper;
 using JewelryShop.BusinessLayer.Interfaces;
 using JewelryShop.DTO.DTOs;
+using JewelryShop.DTO.DTOs.Jewelry;
 using JewelryShop.DTO.DTOs.Order;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
