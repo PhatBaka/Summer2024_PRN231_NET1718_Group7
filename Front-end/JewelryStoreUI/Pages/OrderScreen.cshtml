@@ -10,6 +10,11 @@
 						.ToList();
 }
 
+@if(Model.Message != null)
+{
+    <h2 style=""></h2>
+}
+
 <section id="center" class="center_shop">
     <div class="container">
         <div class="row">
@@ -30,7 +35,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="center_shop_1 clearfix">
-				<div class="col-sm-7">
+				<div class="col-sm-6">
 					<div class="center_shop_1r clearfix">
                         @foreach (var jewelryChunk in jewelryChunks)
                         {
@@ -41,7 +46,10 @@
                                         <div class="collcet_1r clearfix">
                                             <div class="feature_2im clearfix">
                                                 <div class="feature_2im1 clearfix">
-                                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(jewelry.JewelryImageData)" alt="@jewelry.JewelryName" width="200px" height="150px" />
+                                                    @if (jewelry.JewelryImageData != null)
+                                                    {
+                                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(jewelry.JewelryImageData)" alt="@jewelry.JewelryName" width="200px" height="150px" />
+                                                    }
                                                 </div>
                                                 <div class="feature_2im4 clearfix">
                                                     <h6><a class="bg_3" href="detail.html">@jewelry.UnitPrice.ToString("F2")</a></h6>
@@ -78,7 +86,7 @@
                         }
 					</div>
 				</div>
-				<div class="col-sm-5">
+				<div class="col-sm-6">
 					<div class="center_shop_1l clearfix">
 						@* <div class="center_shop_1li clearfix">
 							<h5 class="mgt">NO GEM CART</h5>
@@ -142,7 +150,10 @@
                                                 </td>
                                                 <td>@jewelry.UnitPrice</td>
                                                 <td>@jewelry.DiscountPrice</td>
-                                                <td>@jewelry.FinalPrice</td>
+                                                @{
+                                                    var finalPrice = jewelry.UnitPrice;
+                                                }
+                                                <td>@finalPrice</td>
                                                 <td>
                                                     <img src="data:image/jpeg;base64,@Convert.ToBase64String(jewelry.MaterialImageData)" style="max-width: 100px; max-height: 100px;" />
                                                 </td>
@@ -152,12 +163,23 @@
                                                         <input type="hidden" name="id" value="@jewelry.Id" />
                                                         <button type="submit" class="btn btn-danger">Remove</button>
                                                     </form>
+                                                <td>
+                                                    <a asp-page="/Jewleries/Detail" asp-route-id="@jewelry.Id">Details</a>
+                                                </td>
                                                 </td>
                                             </tr>
                                         }
                                     }
                                 </tbody>
                             </table>
+                            @{
+                                decimal grandTotal = 0;
+                                if (Model.JewelryCarts != null && Model.JewelryCarts.Count > 0)
+                                {
+                                    grandTotal = Model.JewelryCarts.Sum(x => x.UnitPrice);
+                                }
+                            }
+                            <h5>Total Price: @grandTotal</h5>
                         </div>
                         <form method="post" asp-page-handler="CreateOrder">
 						    <div class="center_shop_1li1 clearfix">
