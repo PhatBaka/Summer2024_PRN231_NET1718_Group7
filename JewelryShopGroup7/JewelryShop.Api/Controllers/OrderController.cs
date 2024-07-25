@@ -77,9 +77,16 @@ namespace JewelryShop.API.Controllers
             //createModel.FinalPrice = createModel.TotalPrice - discount.Result.Value;
             //createModel.OrderDate = DateTime.Now;
             //createModel.OrderDiscountId = iddis;
-            createModel.OrderType = orderTypeEnum.ToString();
-            var id = await _orderService.CreateAsync(createModel);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
+            try
+            {
+                createModel.OrderType = orderTypeEnum.ToString();
+                var id = await _orderService.CreateAsync(createModel);
+                return CreatedAtAction(nameof(GetByIdAsync), new { id }, id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]

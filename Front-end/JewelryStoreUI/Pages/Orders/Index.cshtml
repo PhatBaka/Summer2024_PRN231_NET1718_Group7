@@ -18,7 +18,7 @@
             <div class="center_shop_t clearfix">
                 <div class="col-sm-6">
                     <div class="center_shop_tl clearfix d-flex align-items-center">
-                        <h4 class="mgt"><a class="button" asp-page="/Jewleries/Create">CREATE</a></h4>
+                        <h4 class="mgt"><a class="button" asp-page="/OrderScreen">CREATE</a></h4>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -50,19 +50,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var order in Model.OrderData)
+                            @if (Model.OrderData != null)
                             {
-                                <tr class="d-flex justify-content-center">
-                                    <td>@order.OrderDate</td>
-                                    <td>@order.TotalPrice</td>
-                                    <td>@order.DiscountPrice</td>
-                                    <td>@order.FinalPrice</td>
-                                    <td>@order.Customer.PhoneNumber</td>
-                                    <td>@order.OrderType</td>
-                                    <td>
-                                        <a class="button" asp-page="/Orders/Detail" asp-route-id="@order.OrderId">Details</a>
-                                    </td>
-                                </tr>
+                                @foreach (var order in Model.OrderData)
+                                {
+                                    <tr class="d-flex justify-content-center">
+                                        <td>@order.OrderDate</td>
+                                        <td>@order.TotalPrice</td>
+                                        <td>@order.DiscountPrice</td>
+                                        <td>@order.FinalPrice</td>
+                                        <td>@order.Customer.PhoneNumber</td>
+                                        <td>@order.OrderType</td>
+                                        <td>
+                                            <a class="button" asp-page="/Orders/Detail" asp-route-id="@order.OrderId">Details</a>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>

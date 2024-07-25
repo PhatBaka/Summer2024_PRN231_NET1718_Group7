@@ -39,6 +39,7 @@ namespace JewelryStoreUI.Pages
         private string OrderUrl { get; set; }
         [BindProperty]
         public ICollection<ShortenMaterialResponse>? Materials { get; set; }
+        public string Message { get; set; }
         public OrderScreenModel(HttpClient httpClient, IConfiguration configuration)
 		{
 			_httpClient = httpClient;
@@ -62,7 +63,7 @@ namespace JewelryStoreUI.Pages
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
                 var JewelryOData = JsonSerializer.Deserialize<JewelryOData>(jsonString);
-                JewelryData = JewelryOData.Value;
+                JewelryData = JewelryOData.Value.Where(x => x.Quantity > 0).ToList();
                 TotalCount = JewelryOData.Count;
             }
             catch (HttpRequestException e)
@@ -82,8 +83,10 @@ namespace JewelryStoreUI.Pages
 
             if (existingItem != null && existingItem.Quantity < Quantity)
             {
-                System.Diagnostics.Debug.WriteLine($"Existing Item ID: {existingItem.Id}, Existing Quantity: {existingItem.Quantity}");
-                existingItem.Quantity++;
+                if (existingItem.JewelryType.ToString() != "HAVEGEM")
+                {
+                    existingItem.Quantity++;
+                }
             }
             else if (existingItem != null && existingItem.Quantity >= Quantity)
             {
@@ -147,11 +150,10 @@ namespace JewelryStoreUI.Pages
             await LoadJewelry(1);
             LoadCart();
             List<CreateOrderDetailRequest> createOrderDetailRequests = new List<CreateOrderDetailRequest>();
-            // từ từ hanlde mua nhiều trang sức
             foreach(var item in JewelryCarts)
             {
                 var jewelryData = JewelryData.FirstOrDefault(j => j.JewelryId == item.Id);
-                if (jewelryData == null || item.Quantity <= 0 || item.Quantity > jewelryData.Quantity)
+                if (jewelryData == null || item.Quantity > jewelryData.Quantity)
                 {
                     ModelState.AddModelError(string.Empty, $"Invalid quantity for item: {item.Name}. Available quantity: {jewelryData?.Quantity ?? 0}");
                     return Page();
@@ -159,6 +161,7 @@ namespace JewelryStoreUI.Pages
                 createOrderDetailRequests.Add(new()
                 {
                     JewelryId = (Guid)item.Id,
+                    Quantity = item.Quantity
                 });
             }
             var orderRequest = new CreateOrderRequest

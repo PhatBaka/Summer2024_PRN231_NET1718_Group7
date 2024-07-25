@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace JewelryStoreUI.Pages
 {
-    public class LogooutModel : PageModel
+    public class LogoutModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            HttpContext.Session.Clear();
+            return RedirectToPage("Login");
         }
     }
 }

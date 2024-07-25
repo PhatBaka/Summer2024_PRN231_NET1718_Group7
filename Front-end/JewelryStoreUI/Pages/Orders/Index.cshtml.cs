@@ -26,7 +26,7 @@ namespace JewelryStoreUI.Pages.Orders
         public async Task OnGetAsync(int currentPage = 1)
         {
             var baseUrl = _configuration.GetSection("API_ODATA_URL").Value;
-            OrderURL = $"{baseUrl}OrderOData?$count=true&$top={PageSize}&$skip={(CurrentPage - 1) * PageSize}";
+            OrderURL = "http://localhost:5233/odata/OrderOData";
             CurrentPage = currentPage;
             try
             {
